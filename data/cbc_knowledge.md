@@ -1,0 +1,199 @@
+## Club Overview & Heritage
+**The Coral Beach & Tennis Club** is one of Bermuda's most treasured private destinations on the South Shore. Spread across 26 acres of lush sub-tropical grounds in Paget Parish, this sanctuary of casual elegance has been home to generations of families celebrating life's best moments.
+
+### Historic Legacy
+- **Family Stewardship**: Land owned by the Smith family for **ten generations** since Captain Christopher Smith sailed from England aboard the Return in 1624
+- **"Old Farm" Building**: Oldest surviving structure predating 1650, with original coral stone walls
+- **1626 Survey**: Captain Richard Norwood's first Bermuda survey marked this land with a cannon symbol
+- **1920s Heritage**: Operated as beloved cottage colony for local families  
+- **1948 Opening**: Club formally opened in present form as private club
+- **Architecture**: Classic Bermudian style with whitewashed roofs, hand-crafted coral stone walls, and oleander blossoms
+
+### Location & Access
+- **Address**: 34 South Road, Paget Parish, Bermuda PG 04
+- **Size**: 26 acres of pristine grounds with quarter-mile private pink-sand beach
+- **Access**: Members have priority; non-members by member introduction or approved reciprocal clubs with confirmed availability
+
+## Front Desk & General
+- Hours: 7:00 AM – 11:00 PM.
+- From rooms: Dial "206".
+- Lost & Found: At front desk.
+
+## Transportation
+- Airport transfers: ~$80 each way incl. service; arrange in advance.
+- Island taxis: Book via front desk; for peak times, schedule a day ahead.
+
+## Accommodations: A Home by the Sea
+Designed as private sanctuaries nestled among the gardens and clubhouse wings, all accommodations feature Bermudian charm positioned to capture sea breezes and sunrise light.
+
+### Cottages
+- **9 Individually Designed Cottages** nestled among gardens
+- **Layouts**: 1-5 bedrooms (ideal for romantic escapes or family gatherings)
+- **Features**: Fireplaces, living rooms, dining rooms, unique floor plans
+- **Setting**: Private garden locations for maximum privacy
+
+### Clubhouse Accommodations  
+- **Guest Rooms**: ~30 cheerful rooms in clubhouse wings with private terraces and panoramic ocean views
+- **Suites**: 5 spacious suites with separate living rooms and either garden or grand ocean terraces
+- **Views**: All positioned for optimal ocean vistas and natural light
+
+### Member Benefits
+- **Priority Booking**: Members receive booking priority
+- **Rate Reduction**: 15% discount on room rates for members
+
+## Check-in / Check-out
+- Check-in: Flexible; enjoy property if early.
+- Check-out: 12:00 PM.
+  - Until 2:59 PM: no charge if no incoming guest.
+  - After 3:00 PM: half-night rate.
+
+## Alonso – The Club's Resident Parrot
+**Meet Alonso**, the much-loved resident Amazon parrot at Coral Beach & Tennis Club! She's a charming part of the club experience and the club's unofficial feathered ambassador.
+
+**Where to Find Alonso**:
+- **Main Lounge**: Her favorite spot, a welcoming space with sweeping ocean views, grand piano, and cozy fireplace
+- **Around the Club**: Sometimes steps outside to stretch her wings and enjoy the fresh sea breeze
+
+**About Alonso**:
+- **Personality**: Friendly, full of character, and curious about visitors
+- **Recognition**: Featured in Town & Country magazine
+- **Guest Favorite**: Enjoyed by guests and members for many years
+- **Role**: Charming greeter who adds personality to the club atmosphere
+
+*Perfect response for guests asking "Who's that bird in the lounge?" or "Does the Club have a mascot?"*
+
+## Pets & Accessibility
+- Pets welcome; leash required.
+- Elevator to Longtail Terrace level; beach terrace not elevator-accessible.
+
+## Dining, Traditions & Celebrations
+Dining experiences range from formal dinners on the Longtail Terrace with ocean backdrop to barefoot afternoons at the Frozen Hut, preserving traditions while celebrating the island's bounty.
+
+### Dining Venues & Hours (Typical Summer)
+- **Longtail Terrace** (Breakfast): 7:30–10:00 AM | Elegant dining with sweeping ocean views
+- **Beach Terrace** (Lunch): 12:00–3:00 PM | Casual beachside dining
+- **Frozen Hut**: 11:00 AM–5:00 PM | Casual beach bar atmosphere
+- **Jolly Trolly**: 12:00–3:00 PM | Beach food service
+- **Room Service**: Breakfast 8:00–10:00 AM; Lunch 12:00–3:00 PM; Dinner 6:30–9:00 PM
+- **Afternoon Tea**: 4:00–5:00 PM daily | Cherished ritual
+
+### Dining Traditions
+- **Dress Code**: Thursday & Saturday evenings require jackets for gentlemen
+- **Reservations**: Via app or front desk
+- **Dietary Accommodations**: Available with advance notice
+- **Takeout Policy**: Not allowed; in-room dining available
+
+### Venue Highlights
+- **Club House Bar**: Convivial atmosphere leading to terraces
+- **Main Lounge**: Welcoming space with sweeping ocean views, grand piano, cozy fireplace, and home to Alonso the parrot
+- **Longtail Terrace**: Formal dining with panoramic ocean views
+- **Beach Terrace**: Casual dining steps from pink sand
+- **Wedding Venue**: Wedding Lawn accommodates up to 300 guests
+
+## Signature Weekly Events (Summer)
+- **Tuesday**: Family Beach BBQ & Bonfire (~6–9 PM)
+- **Thursday**: Seafood Buffet (6:30–9 PM)  
+- **Sunday**: Family Night (6:30–8:30 PM)
+- **Monthly**: Curry Night (last Wednesday, 6:30–8:30 PM)
+- **Special Events**: Holiday celebrations, wine tastings, themed dinners
+- **Manager's Cocktail Party**: ~6–7 PM
+> For exact times, use live Club Calendar helper.
+
+## August at Coral Beach - Micro-Reply
+*For ultra-quick responses to "What's on tonight?" or "Any events today?"*
+
+"Tonight at Coral Beach, enjoy dinner on the terrace and our summer favourites — weekly events include the Tuesday Family Beach BBQ, Thursday Seafood Buffet, and Sunday Family Night, plus this month's specials like Fish & Chip Night (Aug 15), Taco Tuesday (Aug 19), Spanish Night (Aug 22) and Curry Night (Aug 27). Yoga runs mornings, beach service is 10–6, and our August spa special is available daily."
+
+## August at Coral Beach - Quick Summary
+*For immediate, friendly responses about current August activities*
+
+"This August, Coral Beach & Tennis Club is alive with summer traditions and special events. Most mornings start with yoga on the lawn from 9–10 am, followed by Beach Terrace lunch from noon to 3 pm and afternoon tea from 4–5 pm. Evenings bring a mix of elegant dining and relaxed family gatherings — from Tuesday Family Beach BBQs and Thursday Seafood Buffets to Sunday Family Nights. Special themed evenings this month include Fish & Chip Night on August 15, Taco Tuesday on the 19th, Spanish Night on the 22nd, and Curry Night on the 27th. On August 22nd, join our private snorkelling charter aboard the Wyuna. Beach services run daily from 10 am to 6 pm, with food from the Jolly Trolly noon to 3 pm and bar service 11 am to 5 pm. Our August spa special — a foot scrub, hand massage, and face/scalp massage — is $110, available 9 am to 5 pm daily. Advance booking is encouraged for dining, spa, and guest passes during peak times."
+
+## August Seasonal Highlights (Detailed)
+**Daily Activities**:
+- **Morning Yoga**: 9–10 AM on the lawn
+- **Beach Terrace Lunch**: Noon–3 PM  
+- **Afternoon Tea**: 4–5 PM daily (cherished ritual)
+- **Beach Services**: 10 AM–6 PM (umbrellas, loungers)
+- **Jolly Trolly Food**: Noon–3 PM on beach
+- **Beach Bar**: 11 AM–5 PM
+
+**August Themed Evenings**:
+- Fish & Chip Night (August 15)
+- Taco Tuesday (August 19)  
+- Spanish Night (August 22)
+- Curry Night (August 27)
+
+**Special August Events**:
+- **Snorkelling Charter**: Private trip aboard the Wyuna (August 22)
+- **Weekly Traditions**: Tuesday Family Beach BBQ, Thursday Seafood Buffet, Sunday Family Night
+
+**August Spa Special**: 
+- Foot scrub + hand massage + face/scalp massage: $110
+- Available daily 9 AM–5 PM (advance booking encouraged)
+
+## Tennis Heritage & Facilities
+**Historic Tennis Legacy**: Bermuda played a pivotal role introducing tennis to North America when Mary Ewing Outerbridge brought the sport from the island to Staten Island Cricket Club in 1875. Coral Beach is one of only two Bermuda clubs with voting rights on the USTA executive board.
+
+### Tennis Timeline
+- **1939**: First clay courts established
+- **1940**: Inaugural Coral Beach Invitation (ILTF North American Circuit)
+- **Notable Champions**: W. Donald McNeill (1940), Gracyn Wheeler (1940), Vic Seixas (1952), Louise Brough (1953), Stephen Alger (1979)
+- **1993-2008**: Hosted XL Bermuda Open (ATP Challenger, $100,000 prize money)
+- **ATP Winners**: Mikael Pernfors (1993), MaliVai Washington (1996), Hernán Gumy (1998-99), Kei Nishikori (2008 - later US Open finalist)
+
+### Current Tennis Facilities
+- **8 Championship Har-Tru Clay Courts** (3 lit for evening play)
+- **Dress Code**: "90% white" attire tradition
+- **Tennis Shop**: Babolat, Sofibella, Nike brands | Phone: +1 (441) 239-7216 | tennis@coralbeach.bm
+- **Programs**: Year-round clinics, socials, lessons, junior development, adult strategy sessions
+
+## Sports & Recreation
+### Racquet Sports
+- **Tennis**: 8 championship clay courts (3 lit); book via app/front desk
+- **Squash**: 2 courts available
+- **Pickleball**: 8 dedicated courts
+- **Beach Tennis**: Available on beach
+
+### Other Activities
+- **Classic Games**: Croquet, bocce ball
+- **Basketball**: Practice court available
+- **Golf**: 18-hole putting green
+- **Beach**: Quarter-mile private pink sand, snorkelling gear, beach volleyball
+- **Swimming**: Ocean plus dedicated pool
+- **Gym**: 6 AM – 9 PM, fully equipped fitness center
+- **Spa**: 9 AM – 6 PM | European-style facials, massages, body wraps, salon services | Phone: +1 (441) 239-7222 | spa@coralbeach.bm
+- **Wellness**: Group yoga, cardio classes, personal training
+- **Beach Services**: 10 AM – 6 PM, umbrellas, food service, Frozen Hut
+
+## Bermuda Essentials
+- Time zone: AST (UTC−4), no daylight saving.
+- Weather: Mild winters (~17°C), warm summers (~27°C).
+- Currency: Bermuda Dollar (BMD), pegged 1:1 to USD.
+- Transport: Driving is on the left; scooters/mopeds common.
+- Attractions: Crystal Caves, Horseshoe Bay, St. George's UNESCO site.
+
+## Essential Contact Information
+**Main Address**: 34 South Road, Paget Parish, Bermuda PG 04  
+**Mailing Address**: P.O. Box WK 536, Warwick WKBX
+
+**Phone Numbers**:
+- **Main**: +1 (441) 236-2233
+- **Toll Free**: 888-300-7349  
+- **Spa**: +1 (441) 239-7222
+- **Tennis Shop**: +1 (441) 239-7216
+
+**Email Contacts**:
+- **Reservations**: reservations@coralbeach.bm
+- **Spa**: spa@coralbeach.bm  
+- **Tennis**: tennis@coralbeach.bm
+
+**Website**: www.coralbeachclub.com
+- Sections: Accommodation, Dining, Tennis, Membership, Contact
+
+## Live Info Integrations
+Danni can pull:
+- Current Bermuda time
+- Bermuda weather forecast
+- Top 10 Royal Gazette headlines
+- Today's Club events from the live calendar
