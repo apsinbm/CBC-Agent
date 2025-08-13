@@ -1,0 +1,300 @@
+# Coral Beach & Tennis Club Accommodations Data
+# Source of truth for all accommodation information
+# Last updated: 2025-08-13
+
+property:
+  size: "26 acres"
+  gardens: "Manicured sub-tropical gardens"
+  beach: "Quarter-mile private pink sand beach"
+  coastline: "One of Bermuda's most beautiful natural coastlines"
+  priority_note: "Coral Beach and Tennis Club members are given priority in room selection"
+
+inventory:
+  cottages: 9
+  rooms_reported:
+    earlier: 26
+    later: 31
+    note: "Discrepancy in source documentation; please confirm with Reception for exact count"
+  suites: 5
+  total_units_approximate: 45
+
+cottages:
+  - name: "Bay Grape"
+    bedrooms: 2
+    bedrooms_min: 2
+    bedrooms_max: 2
+    per_bedroom_flexible: true
+    bed_options: ["King", "Two Twins"]
+    bathrooms: "Ensuite for each bedroom"
+    living_dining: true
+    kitchen: true
+    fireplace: true
+    washer_dryer: true
+    dining_capacity: 6
+    view: "Enchanting garden views"
+    location: "Just off the Wedding Lawn"
+    special_features: ["Large living room", "Separate dining area"]
+    
+  - name: "Enchanted Trifle"
+    bedrooms: 1
+    bedrooms_min: 1
+    bedrooms_max: 1
+    per_bedroom_flexible: true
+    bed_options: ["King", "Two Twins"]
+    bathrooms: "Full bath with jacuzzi tub and standing shower"
+    living_dining: true
+    kitchen: false
+    fireplace: false
+    washer_dryer: false
+    view: "Beautifully manicured garden"
+    location: "Close to the spa"
+    special_features: ["Charming porch", "Spacious lounge separate from bedroom", "Jacuzzi tub"]
+    
+  - name: "High Tidings"
+    bedrooms: 4
+    bedrooms_min: 4
+    bedrooms_max: 4
+    floors: 2
+    per_bedroom_flexible: true
+    bed_options: ["King", "Two Twins"]
+    bathrooms: "Ensuite for each bedroom"
+    living_dining: true
+    kitchen: true
+    fireplace: true
+    washer_dryer: false
+    view: "Property views"
+    location: "East side above Wedding Lawn, short walk to beach path"
+    special_features: ["Two floors", "Spacious living area", "Large kitchen", "Dining table"]
+    
+  - name: "Wheelhouse"
+    bedrooms: 3
+    bedrooms_min: 3
+    bedrooms_max: 4
+    optional_bedroom: true
+    per_bedroom_flexible: true
+    bed_options: ["King", "Two Twins"]
+    bathrooms: "Ensuite for each bedroom"
+    living_dining: true
+    kitchen: true
+    fireplace: true
+    washer_dryer: true
+    view: "Tennis court views"
+    location: "On the croquet lawn, short walk to clubhouse and beach"
+    special_features: ["Beautiful porch with lounge chairs", "Optional 4th bedroom", "Large lounge area"]
+    
+  - name: "Breakers"
+    bedrooms: 2
+    bedrooms_min: 2
+    bedrooms_max: 3
+    flexible_configuration: true
+    per_bedroom_flexible: true
+    bed_options: ["King", "Two Twins"]
+    bathrooms: "Ensuite for each bedroom"
+    living_dining: true
+    kitchen: true
+    fireplace: true
+    washer_dryer: false
+    view: "Stunning south shore ocean views"
+    location: "Close to cliffs overlooking beach"
+    special_features: ["Flat screen television", "Spectacular ocean views", "Flexible 2-3 bedroom configuration"]
+    
+  - name: "Surfsong"
+    bedrooms: 3
+    bedrooms_min: 3
+    bedrooms_max: 5
+    floors: 2
+    flexible_configuration: true
+    per_bedroom_flexible: true
+    bed_options: ["King", "Two Twins"]
+    bathrooms: "Ensuite for each bedroom"
+    living_dining: true
+    kitchen: true
+    fireplace: true
+    washer_dryer: false
+    view: "Breathtaking ocean views"
+    location: "Situated on cliffs above private beach"
+    special_features: ["Largest cottage", "Two floors", "Large living area", "Can accommodate up to 5 bedrooms"]
+    
+  - name: "Stowaways"
+    bedrooms: 2
+    bedrooms_min: 2
+    bedrooms_max: 3
+    flexible_configuration: true
+    per_bedroom_flexible: true
+    bed_options: ["King", "Two Twins"]
+    bathrooms: "Ensuite for each bedroom"
+    living_dining: true
+    kitchen: true
+    fireplace: true
+    washer_dryer: true
+    view: "Stunning water views"
+    location: "East side with quick beach access via small path"
+    special_features: ["Large kitchen", "Quaint living room", "Flat screen television", "Tucked away location"]
+    
+  - name: "Skerries"
+    bedrooms: 2
+    bedrooms_min: 2
+    bedrooms_max: 2
+    floors: 2
+    per_bedroom_flexible: true
+    bed_options: ["King", "Two Twins"]
+    bathrooms: "Ensuite for each bedroom"
+    living_dining: true
+    kitchen: true
+    fireplace: true
+    washer_dryer: false
+    view: "Ocean views"
+    location: "Overlooking ocean with stairs directly to private beach"
+    special_features: ["Two floors", "Direct beach access", "Spacious living area", "Flat screen television"]
+
+  - name: "Crow's Nest"
+    bedrooms: null
+    note: "Mentioned in rates but no description provided; confirm details with Reservations"
+
+suites:
+  - name: "Noontide Sun"
+    bedrooms: 1
+    living_room: true
+    dining_area: false
+    view: "Ocean-facing bedroom windows"
+    terrace: "Private terrace"
+    bathroom: "Large bath with tub"
+    location: "Centrally located between beach and clubhouse"
+    special_features: ["Dressing area", "Pastel decor"]
+    
+  - name: "Barefoot Way"
+    bedrooms: 1
+    living_room: true
+    dining_area: true
+    view: "Ocean views"
+    terrace: "Private terrace with ocean views"
+    bathroom: "Luxury ensuite"
+    location: "Closest to ocean, steps to beach"
+    special_features: ["Bright decor", "Large master bedroom"]
+    
+  - name: "One Bedroom Suite"
+    bedrooms: 1
+    living_room: true
+    dining_area: true
+    view: "Ocean views"
+    terrace: "Private ocean terrace"
+    bathroom: "Ensuite"
+    bed_options: ["King"]
+    special_features: ["Separate living room with TV"]
+    
+  - name: "Two Bedroom Suite"
+    bedrooms: 2
+    living_room: true
+    dining_area: true
+    view: "Ocean views"
+    terrace: "Private ocean terrace"
+    bathroom: "Ensuite bathrooms"
+    special_features: ["Newly renovated", "Bright colors", "Family friendly", "Separate living room with TV"]
+
+rooms:
+  - category: "Standard Room"
+    view: "Ocean view"
+    bathroom: "Private bath"
+    outdoor_space: "Balcony"
+    bed_options: ["King", "Two Twins"]
+    amenities: ["TV", "Wi-Fi"]
+    
+  - category: "Superior Room"
+    view: "Ocean view"
+    bathroom: "Private bath"
+    outdoor_space: "Walk-out terrace"
+    bed_options: ["King", "Two Twins"]
+    amenities: ["TV", "Wi-Fi"]
+    special_features: ["More spacious than Standard"]
+    
+  - category: "Deluxe Room"
+    view: "Ocean view"
+    bathroom: "Private bath"
+    outdoor_space: "Large terrace with lounge furniture"
+    bed_options: ["King"]
+    amenities: ["TV", "Wi-Fi"]
+    special_features: ["Large and bright", "Premium terrace"]
+
+policies:
+  member_priority: "Coral Beach and Tennis Club members are given priority in room selection"
+  
+  non_member_admission:
+    requirements:
+      - "Introduction by a Coral Beach member"
+      - "OR through a pre-approved reciprocal club"
+    process: "Written introductions can be sent to Club Secretary"
+    secretary_email: "secretary@coralbeach.bm"
+    
+  online_booking:
+    members: "Members can log in to make online bookings for rooms and suites"
+    cottages: "Cottage availability and rates via Reservations team"
+    non_members: "Must submit request with introduction/reciprocal club verification"
+    
+  cancellation:
+    deposit: "All reservations require deposit equal to 2 nights' stay at booking"
+    refund_policy: "Deposits non-refundable within 2 weeks of arrival"
+    admin_fee: "10% administration fee applies to all cancellations from booking to 2 weeks before arrival"
+    changes: "10% fee applies to changes after checkout"
+    deposit_application: "Deposit applied to first and last night of stay"
+    
+  taxes:
+    hotel_occupancy: "7.25%"
+    tourism: "4.5%"
+    service: "12.5%"
+    note: "Tax rates subject to change"
+
+rates_2025:
+  publish_in_answers: false
+  disclaimer: "Rates subject to change; contact Reservations for current availability and rates"
+  note: "All rates include daily breakfast. Member rates available with 15% discount."
+  
+  seasons:
+    peak:
+      dates: "May 1 - October 31"
+      note: "High season rates"
+    shoulder:
+      dates: "March 1 - April 30, November 1 - December 20"
+      note: "Moderate season rates"
+    value:
+      dates: "January 5 - February 28, December 21 - January 4"
+      note: "Value season rates"
+      
+  # Note: Actual rate tables stored but marked do-not-publish
+  # Rates vary by: cottage/suite/room type, season, member vs non-member
+  # Contact Reservations at reservations@coralbeach.bm for current rates
+
+contacts:
+  reservations:
+    email: "reservations@coralbeach.bm"
+    phone: "+1 (441) 239-7201"
+    toll_free: "888-300-7349"
+  secretary:
+    email: "secretary@coralbeach.bm"
+    purpose: "Written introductions for non-members"
+
+search_helpers:
+  family_friendly:
+    - "Surfsong (3-5 bedrooms)"
+    - "High Tidings (4 bedrooms)"
+    - "Wheelhouse (3-4 bedrooms)"
+    - "Two Bedroom Suite"
+  ocean_views:
+    - "Breakers"
+    - "Surfsong"
+    - "Skerries"
+    - "Stowaways"
+    - "Barefoot Way"
+    - "All Rooms"
+    - "All Suites"
+  direct_beach_access:
+    - "Skerries (stairs to beach)"
+    - "Barefoot Way (steps to beach)"
+    - "Stowaways (quick path)"
+  near_amenities:
+    - "Enchanted Trifle (near spa)"
+    - "Wheelhouse (near clubhouse)"
+    - "Noontide Sun (between beach and clubhouse)"
+  privacy_focused:
+    - "Stowaways (tucked away)"
+    - "Enchanted Trifle (garden privacy)"
+    - "Bay Grape (garden setting)"

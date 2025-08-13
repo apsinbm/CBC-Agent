@@ -1,0 +1,122 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: cbc-analytics-db
+    environment:
+      POSTGRES_DB: cbc_analytics
+      POSTGRES_USER: cbc
+      POSTGRES_PASSWORD: cbc_analytics_2024
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./scripts/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U cbc"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Redis for caching and rate limiting
+  redis:
+    image: redis:7-alpine
+    container_name: cbc-analytics-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes
+
+  # FastAPI Ingest API
+  ingest-api:
+    build:
+      context: ./packages/ingest-api
+      dockerfile: Dockerfile
+    container_name: cbc-analytics-ingest
+    environment:
+      DATABASE_URL: postgresql+asyncpg://cbc:cbc_analytics_2024@postgres:5432/cbc_analytics
+      REDIS_URL: redis://redis:6379
+      ENVIRONMENT: development
+      ALLOWED_HOSTS: "*"
+      CORS_ORIGINS: "http://localhost:3000,http://localhost:3001"
+      HMAC_SECRET: "${HMAC_SECRET:-change-me-in-production}"
+      IP_SALT: "${IP_SALT:-rotate-quarterly}"
+      COLLECT_PII: "false"
+      STORE_RAW_IP: "false"
+      SOURCE_APP: "CBC-Agent"
+    ports:
+      - "8001:8001"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    volumes:
+      - ./packages/shared:/app/packages/shared:ro
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8001 --reload
+
+  # Admin UI (Next.js)
+  admin-ui:
+    build:
+      context: ./packages/admin-ui
+      dockerfile: Dockerfile
+    container_name: cbc-analytics-admin
+    environment:
+      NODE_ENV: development
+      NEXT_PUBLIC_API_URL: http://localhost:8001
+      DATABASE_URL: postgresql://cbc:cbc_analytics_2024@postgres:5432/cbc_analytics
+    ports:
+      - "3001:3000"
+    depends_on:
+      - ingest-api
+    volumes:
+      - ./packages/admin-ui:/app
+      - /app/node_modules
+      - /app/.next
+    command: npm run dev
+
+  # dbt for analytics transformations
+  dbt:
+    build:
+      context: ./packages/analytics-dbt
+      dockerfile: Dockerfile
+    container_name: cbc-analytics-dbt
+    environment:
+      DBT_PROFILES_DIR: /dbt
+      DATABASE_HOST: postgres
+      DATABASE_PORT: 5432
+      DATABASE_NAME: cbc_analytics
+      DATABASE_USER: cbc
+      DATABASE_PASSWORD: cbc_analytics_2024
+    volumes:
+      - ./packages/analytics-dbt:/dbt
+    depends_on:
+      postgres:
+        condition: service_healthy
+    command: ["dbt", "run", "--profiles-dir", "/dbt"]
+
+  # pgAdmin for database management (optional)
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: cbc-analytics-pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@cbc.bm
+      PGADMIN_DEFAULT_PASSWORD: admin
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    ports:
+      - "5050:80"
+    depends_on:
+      - postgres
+    profiles:
+      - debug
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  default:
+    name: cbc-analytics-network

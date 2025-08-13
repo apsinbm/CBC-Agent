@@ -4,6 +4,8 @@ import { useState, useRef, useEffect } from 'react'
 import ChatWindow from '@/components/ChatWindow'
 import ChatInput from '@/components/ChatInput'
 import TypingIndicator from '@/components/TypingIndicator'
+import ActionBar from '@/components/ActionBar'
+import HandoffModal from '@/components/HandoffModal'
 
 interface Message {
   id: string
@@ -18,11 +20,13 @@ export default function Home() {
     {
       id: '1',
       role: 'assistant',
-      content: 'Good day—this is Danni. How may I help with your stay?',
+      content: 'Good day—this is Alonso. How may I help with your stay?',
     },
   ])
   const [isTyping, setIsTyping] = useState(false)
   const [inputValue, setInputValue] = useState('')
+  const [showHandoffModal, setShowHandoffModal] = useState(false)
+  const [lastUserMessage, setLastUserMessage] = useState('')
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const renderTimeoutRef = useRef<NodeJS.Timeout | null>(null)
 
@@ -51,7 +55,6 @@ export default function Home() {
           ? { ...msg, visibleContent: fullContent, isRendering: false }
           : msg
       ))
-      setIsTyping(false)
       return
     }
 
@@ -88,7 +91,6 @@ export default function Home() {
             ? { ...msg, visibleContent: fullContent, isRendering: false }
             : msg
         ))
-        setIsTyping(false)
       }
     }
 
@@ -103,7 +105,6 @@ export default function Home() {
           ? { ...msg, visibleContent: fullContent, isRendering: false }
           : msg
       ))
-      setIsTyping(false)
     }
   }
 
@@ -136,6 +137,7 @@ export default function Home() {
     setMessages((prev) => [...prev, userMessage])
     setInputValue('')
     setIsTyping(true)
+    setLastUserMessage(message) // Store for potential handoff
 
     // Start timing for minimum 1-second delay
     const startTime = Date.now()
@@ -160,14 +162,25 @@ export default function Home() {
 
       const data = await response.json()
 
+      // Check if response has low confidence (for handoff prompt)
+      const showHandoffPrompt = data.confidence && data.confidence < 0.5
+
+      let assistantContent = data.reply
+      if (showHandoffPrompt && !assistantContent.includes('Reception team')) {
+        assistantContent += '\n\nWould you like our Reception team to follow up with you directly about this?'
+      }
+
       const assistantMessage: Message = {
         id: (Date.now() + 1).toString(),
         role: 'assistant',
-        content: data.reply,
+        content: assistantContent,
         isRendering: true,
         visibleContent: '',
       }
 
+      // Stop typing indicator before rendering starts
+      setIsTyping(false)
+      
       // Add message immediately and start progressive rendering
       setMessages((prev) => [...prev, assistantMessage])
       
@@ -188,6 +201,9 @@ export default function Home() {
         visibleContent: '',
       }
       
+      // Stop typing indicator before rendering starts
+      setIsTyping(false)
+      
       // Add error message immediately and start progressive rendering
       setMessages((prev) => [...prev, errorMessage])
       
@@ -203,15 +219,32 @@ export default function Home() {
 
   return (
     <main className="flex min-h-screen bg-gradient-to-br from-cbc-sand/20 to-neutral-50">
-      <div className="container mx-auto max-w-4xl p-4">
-        <div className="flex flex-col h-[calc(100vh-2rem)] bg-white rounded-2xl shadow-xl overflow-hidden">
-          <header className="bg-gradient-to-r from-cbc-blue to-blue-700 text-white p-6">
-            <h1 className="text-white font-bold">Coral Beach & Tennis Club</h1>
-            <p className="text-white">Guest Assistant Danni at your service</p>
+      <div className="container mx-auto max-w-6xl p-2 sm:p-4">
+        <div className="flex flex-col h-[100vh] sm:h-[calc(100vh-2rem)] bg-white sm:rounded-2xl shadow-xl overflow-hidden">
+          <header className="bg-gradient-to-r from-cbc-blue to-blue-700 text-white py-0.5 px-3 sm:py-0.5 sm:px-6">
+            <div className="flex justify-between items-center">
+              <div className="min-w-0 flex-1">
+                <h1 className="text-white font-bold text-[17.6px] sm:text-[19.8px] lg:text-[22px] truncate">Coral Beach & Tennis Club</h1>
+                <p className="text-white text-[13.2px] sm:text-[15.4px] opacity-90 font-semibold truncate">Guest Assistant Alonso at your service</p>
+              </div>
+              <a 
+                href="https://www.coralbeachclub.com/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="mr-3"
+                aria-label="Visit Coral Beach Club website"
+              >
+                <img 
+                  src="/Bird-CBC2.png" 
+                  alt="CBC Logo" 
+                  className="h-[45.4px] sm:h-[64.8px] w-auto object-contain hover:opacity-90 transition-opacity"
+                />
+              </a>
+            </div>
           </header>
 
           <ChatWindow messages={messages} isTyping={isTyping} />
-          {(isTyping || messages.some(msg => msg.isRendering)) && <TypingIndicator />}
+          {isTyping && <TypingIndicator />}
           <div ref={messagesEndRef} />
 
           <ChatInput
@@ -220,8 +253,25 @@ export default function Home() {
             onSend={handleSendMessage}
             disabled={isTyping}
           />
+          
+          <ActionBar />
         </div>
       </div>
+      
+      {/* Handoff Modal */}
+      <HandoffModal
+        isOpen={showHandoffModal}
+        onClose={() => setShowHandoffModal(false)}
+        lastMessage={lastUserMessage}
+        transcript={messages}
+        onSuccess={() => {
+          setMessages(prev => [...prev, {
+            id: Date.now().toString(),
+            role: 'assistant',
+            content: "I've sent your inquiry to our Reception team. They'll follow up with you soon."
+          }])
+        }}
+      />
     </main>
   )
 }

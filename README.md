@@ -1,6 +1,6 @@
 # CBC-Agent - Coral Beach & Tennis Club Concierge
 
-A modern, AI-powered chatbot for the Coral Beach & Tennis Club, built with Next.js 15 and Claude AI. Features Danni, the club's virtual concierge assistant with comprehensive knowledge of club facilities, services, and policies.
+A modern, AI-powered chatbot for the Coral Beach & Tennis Club, built with Next.js 15 and Claude AI. Features Alonso, the club's Amazon parrot concierge assistant with comprehensive knowledge of club facilities, services, and policies.
 
 ## Features
 
@@ -35,6 +35,41 @@ npm run dev
 ```
 
 4. Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+## Developer UI/Indicators
+
+### Next.js Route Status Badge (Removed)
+
+The floating "Static route" badge with lightning bolt icon that appears in the bottom-left corner during development has been disabled for a cleaner development experience.
+
+**What was removed:**
+- Next.js development route status indicator
+- Shows caching status and route type information
+- Appears as a small floating badge in bottom-left
+
+**How it was disabled:**
+1. **Next.js Configuration** (`next.config.js`):
+   ```js
+   devIndicators: {
+     buildActivity: false,  // Disables the route status badge
+     buildActivityPosition: 'bottom-right',
+   }
+   ```
+
+2. **CSS Fail-safe** (`app/globals.css`):
+   - Comprehensive selectors targeting Next.js indicators
+   - Covers multiple versions and potential selectors
+   - Located at bottom of global styles file
+
+**To re-enable if needed:**
+- Set `buildActivity: true` in `next.config.js`
+- Comment out the CSS rules in `app/globals.css`
+- Restart the development server
+
+**Files modified:**
+- `next.config.js` - Main configuration
+- `app/globals.css` - CSS kill switch
+- `README.md` - This documentation
 
 ## Project Structure
 

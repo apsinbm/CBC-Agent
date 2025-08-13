@@ -5,11 +5,104 @@
 @layer base {
   html {
     @apply scroll-smooth;
+    /* Prevent zoom on iOS double tap */
+    touch-action: manipulation;
   }
   
   body {
     @apply bg-neutral-50 text-neutral-900;
+    /* Prevent overscroll bounce on iOS */
+    overscroll-behavior: none;
   }
+  
+  /* Allow text selection in chat messages and content */
+  .message-content, .chat-message, p, span, div {
+    -webkit-user-select: text;
+    -khtml-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+  }
+  
+  /* Enable text selection for input areas */
+  input, textarea, [contenteditable] {
+    -webkit-user-select: auto;
+    -khtml-user-select: auto;
+    -moz-user-select: auto;
+    -ms-user-select: auto;
+    user-select: auto;
+  }
+  
+  /* Disable selection only for UI elements */
+  button, .button, nav, .modal-backdrop {
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+}
+
+/* Hide Next.js Static Route Badge and Development Indicators - Comprehensive removal */
+[data-nextjs-route-announcer],
+[data-nextjs-static-indicator],
+[data-nextjs-build-indicator],
+[data-nextjs-dev-indicator],
+[data-nextjs-router-indicator],
+[data-nextjs-route-indicator],
+[data-nextjs-isr-indicator],
+[aria-live="assertive"],
+div[style*="bottom:1rem"][style*="left:1rem"],
+div[style*="bottom: 1rem"][style*="left: 1rem"],
+div[style*="bottom:16px"][style*="left:16px"],
+div[style*="bottom: 16px"][style*="left: 16px"],
+.__next-route-announcer__,
+.__next-build-indicator__,
+.__next-dev-indicator__,
+.__next-router-indicator__,
+/* Target the specific badge with lightning icon */
+div:has(svg[viewBox="0 0 24 24"]):has(path[d*="M13 2L3 14h9l-1 8 10-12h-9l1-8z"]),
+/* Target Next.js 15 specific indicators */
+div[data-nextjs-toast],
+div[class*="__next-build"],
+div[class*="__next-dev"],
+div[class*="__next-router"],
+div[class*="__next-static"],
+/* Target any element containing "Static route" text */
+div:has-text("Static route"),
+*:has-text("Static route"),
+/* Target floating badges in bottom-left corner */
+div[style*="position: fixed"][style*="bottom"][style*="left"][style*="z-index"],
+div[style*="position:fixed"][style*="bottom"][style*="left"][style*="z-index"],
+/* Target elements with specific positioning values */
+div[style*="bottom: 20px"][style*="left: 20px"],
+div[style*="bottom: 24px"][style*="left: 24px"],
+/* Additional Next.js 15+ selectors */
+[id*="__next-route-indicator"],
+[id*="__next-static-indicator"],
+.nextjs-portal,
+.nextjs-toast-errors,
+.nextjs-toast-errors-parent {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+}
+
+/* FAQ Search Input Specific Styling */
+.faq-search-input {
+  color: white !important;
+}
+
+.faq-search-input::placeholder {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.faq-search-input:focus {
+  color: white !important;
 }
 
 @layer utilities {
@@ -28,5 +121,38 @@
   
   .scrollbar-thin::-webkit-scrollbar-thumb {
     @apply bg-neutral-400 rounded-full hover:bg-neutral-500;
+  }
+  
+  /* Mobile-specific utilities */
+  .touch-manipulation {
+    touch-action: manipulation;
+  }
+  
+  /* Safari-specific fixes */
+  .webkit-appearance-none {
+    -webkit-appearance: none;
+  }
+  
+  /* Prevent iOS zoom on input focus */
+  .no-zoom {
+    font-size: 16px !important;
+  }
+  
+  /* Mobile-friendly tap target sizes */
+  .tap-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Hide scrollbar on mobile for cleaner look */
+  @media (max-width: 640px) {
+    .hide-scrollbar-mobile {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    
+    .hide-scrollbar-mobile::-webkit-scrollbar {
+      display: none;
+    }
   }
 }

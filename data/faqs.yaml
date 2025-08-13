@@ -1,0 +1,464 @@
+# Coral Beach & Tennis Club FAQ Store
+# Generated from cbc_knowledge.md - Production Ready
+# Editor: Add new FAQs under appropriate category. Keep answers concise and factual.
+
+categories:
+  - id: "membership-access"
+    title: "Membership & Access"
+    faqs:
+      - id: "guest-policy-overview"
+        q: "Can non-members visit Coral Beach & Tennis Club?"
+        a: "Yes, non-members are welcome when introduced by a member or through approved reciprocal clubs, subject to availability. Members receive booking priority and a 15% discount on room rates."
+        tags: ["membership", "access", "guests", "non-members", "reciprocal"]
+        updatedAt: "2025-08-13"
+      
+      - id: "guest-card-fee"
+        q: "What is the guest card fee for using club facilities?"
+        a: "The guest card fee is $50.00 per person, per day for non-resident guests using club facilities."
+        tags: ["guest card", "fees", "daily pass", "facilities", "pricing"]
+        updatedAt: "2025-08-13"
+      
+      - id: "member-benefits"
+        q: "What benefits do members receive?"
+        a: "Members receive booking priority for accommodations and a 15% discount on room rates. Members also have priority access to all club facilities and events."
+        tags: ["member benefits", "discounts", "priority", "perks"]
+        updatedAt: "2025-08-13"
+      
+      - id: "reciprocal-clubs"
+        q: "Which reciprocal clubs have agreements with Coral Beach?"
+        a: "We maintain reciprocal agreements with select private clubs worldwide. Please contact the front desk at +1 (441) 239-7201 for specific reciprocal club information and to verify your club's status."
+        tags: ["reciprocal", "partner clubs", "agreements", "international"]
+        updatedAt: "2025-08-13"
+      
+      - id: "membership-inquiry"
+        q: "How do I become a member?"
+        a: "Membership information is available through our Membership Director. Please contact the main number at +1 (441) 236-2233 for details about the application process."
+        tags: ["membership", "join", "application", "new member"]
+        updatedAt: "2025-08-13"
+      
+      - id: "front-desk-hours"
+        q: "What are the front desk hours?"
+        a: "The front desk is open from 7:00 AM to 11:00 PM daily. From your room, dial 206 to reach the front desk."
+        tags: ["front desk", "hours", "reception", "contact"]
+        updatedAt: "2025-08-13"
+      
+      - id: "club-location"
+        q: "Where is the club located?"
+        a: "We're located at 34 South Road, Paget Parish, Bermuda PG 04. The club spans 26 acres with a quarter-mile private pink-sand beach on Bermuda's South Shore."
+        tags: ["location", "address", "directions", "paget", "south shore"]
+        updatedAt: "2025-08-13"
+      
+      - id: "operating-status"
+        q: "Is the club open year-round?"
+        a: "Yes, Coral Beach & Tennis Club is open year-round, offering our full range of amenities and services throughout all seasons."
+        tags: ["hours", "year-round", "seasons", "availability"]
+        updatedAt: "2025-08-13"
+      
+      - id: "lost-and-found"
+        q: "Where is lost and found?"
+        a: "Lost and found items are kept at the front desk. Contact them at +1 (441) 239-7201 or visit in person."
+        tags: ["lost and found", "missing items", "front desk"]
+        updatedAt: "2025-08-13"
+
+  - id: "rooms-cottages"
+    title: "Rooms & Cottages"
+    faqs:
+      - id: "accommodation-types"
+        q: "What types of accommodations are available?"
+        a: "We offer 9 individually designed cottages (1-5 bedrooms), approximately 30 guest rooms in the clubhouse wings with ocean views, and 5 spacious suites with separate living rooms."
+        tags: ["rooms", "cottages", "suites", "accommodations", "lodging"]
+        updatedAt: "2025-08-13"
+      
+      - id: "check-in-time"
+        q: "What is check-in time?"
+        a: "Check-in is flexible - you're welcome to enjoy the property if you arrive early. Your room will be ready as soon as possible."
+        tags: ["check-in", "arrival", "early arrival", "flexible"]
+        updatedAt: "2025-08-13"
+      
+      - id: "check-out-policy"
+        q: "What is the check-out policy?"
+        a: "Check-out is 12:00 PM. Late check-out until 2:59 PM is complimentary if there's no incoming guest. After 3:00 PM incurs a half-night rate."
+        tags: ["check-out", "departure", "late checkout", "policy"]
+        updatedAt: "2025-08-13"
+      
+      - id: "cottage-features"
+        q: "What features do the cottages have?"
+        a: "Our 9 cottages feature fireplaces, living rooms, dining rooms, and unique floor plans. They're nestled in private garden locations for maximum privacy and range from 1-5 bedrooms."
+        tags: ["cottages", "amenities", "features", "privacy", "gardens"]
+        updatedAt: "2025-08-13"
+      
+      - id: "pets-allowed"
+        q: "Are pets allowed at the club?"
+        a: "Yes, pets are welcome! We require pets to be kept on a leash in public areas."
+        tags: ["pets", "dogs", "animals", "policy", "leash"]
+        updatedAt: "2025-08-13"
+      
+      - id: "room-service-hours"
+        q: "What are room service hours?"
+        a: "Room service is available for Breakfast 8:00-10:00 AM, Lunch 12:00-3:00 PM, and Dinner 6:30-9:00 PM."
+        tags: ["room service", "in-room dining", "hours", "meals"]
+        updatedAt: "2025-08-13"
+      
+      - id: "ocean-views"
+        q: "Do all rooms have ocean views?"
+        a: "Guest rooms in the clubhouse wings feature private terraces with panoramic ocean views. Suites offer either garden or grand ocean terraces. All accommodations are positioned for optimal natural light."
+        tags: ["ocean view", "views", "terrace", "balcony"]
+        updatedAt: "2025-08-13"
+      
+      - id: "wheelchair-access"
+        q: "Is the property wheelchair accessible?"
+        a: "We have an elevator to the Longtail Terrace level. Please note the beach terrace is not elevator-accessible. Contact us for specific accessibility needs."
+        tags: ["wheelchair", "accessibility", "elevator", "disabled access", "ada"]
+        updatedAt: "2025-08-13"
+      
+      - id: "reservation-contact"
+        q: "How do I make a reservation?"
+        a: "For reservations, email reservations@coralbeach.bm or call our toll-free number 888-300-7349. You can also contact the front desk at +1 (441) 239-7201."
+        tags: ["reservations", "booking", "contact", "email", "phone"]
+        updatedAt: "2025-08-13"
+
+  - id: "dining"
+    title: "Dining & Dress Code"
+    faqs:
+      - id: "dining-dress-code"
+        q: "What is the dress code for dining?"
+        a: "Resort attire is required in all dining areas; denim is not permitted. Gentlemen must wear jackets in the Main Dining Room on Thursday and Saturday evenings."
+        tags: ["dress code", "attire", "dining", "jacket", "denim", "clothing"]
+        updatedAt: "2025-08-13"
+      
+      - id: "breakfast-hours"
+        q: "What are breakfast hours and where is it served?"
+        a: "Breakfast is served on the Longtail Terrace from 7:30-10:00 AM, offering elegant dining with sweeping ocean views."
+        tags: ["breakfast", "hours", "longtail terrace", "morning", "dining"]
+        updatedAt: "2025-08-13"
+      
+      - id: "lunch-options"
+        q: "Where can I have lunch?"
+        a: "Lunch is served at the Beach Terrace from 12:00-3:00 PM for casual beachside dining. The Jolly Trolly also offers beach food service from noon to 3 PM."
+        tags: ["lunch", "beach terrace", "jolly trolly", "dining", "hours"]
+        updatedAt: "2025-08-13"
+      
+      - id: "afternoon-tea"
+        q: "Is afternoon tea available?"
+        a: "Yes! Afternoon tea is served daily from 4:00-5:00 PM and is complimentary. It's a cherished ritual at the club."
+        tags: ["afternoon tea", "tea time", "complimentary", "tradition", "daily"]
+        updatedAt: "2025-08-13"
+      
+      - id: "dietary-restrictions"
+        q: "Can you accommodate dietary restrictions?"
+        a: "Yes, we accommodate dietary restrictions with advance notice. Please inform us when making reservations."
+        tags: ["dietary", "allergies", "vegetarian", "vegan", "gluten-free", "special diet"]
+        updatedAt: "2025-08-13"
+      
+      - id: "takeout-policy"
+        q: "Can I get takeout from the restaurants?"
+        a: "Takeout is not allowed from our dining venues. However, in-room dining is available during service hours."
+        tags: ["takeout", "take away", "policy", "room service"]
+        updatedAt: "2025-08-13"
+      
+      - id: "beach-bar-hours"
+        q: "What are the beach bar hours?"
+        a: "The Frozen Hut beach bar is open from 11:00 AM to 5:00 PM, offering a casual beach bar atmosphere."
+        tags: ["beach bar", "frozen hut", "drinks", "hours", "beach"]
+        updatedAt: "2025-08-13"
+      
+      - id: "dining-reservations"
+        q: "How do I make dining reservations?"
+        a: "Dining reservations can be made via the club app or by contacting the front desk at +1 (441) 239-7201."
+        tags: ["reservations", "dining", "booking", "restaurant"]
+        updatedAt: "2025-08-13"
+      
+      - id: "special-events-dining"
+        q: "What special dining events are offered?"
+        a: "Weekly events include Tuesday Family Beach BBQ & Bonfire, Thursday Seafood Buffet, and Sunday Family Night. Monthly Curry Night is the last Wednesday of each month."
+        tags: ["special events", "bbq", "seafood buffet", "family night", "curry night"]
+        updatedAt: "2025-08-13"
+      
+      - id: "wedding-venue-capacity"
+        q: "Can the club host wedding receptions?"
+        a: "Yes! Our Wedding Lawn accommodates up to 300 guests with stunning ocean views. We offer complete wedding packages."
+        tags: ["wedding", "events", "capacity", "wedding lawn", "reception"]
+        updatedAt: "2025-08-13"
+
+  - id: "tennis-lawn-sports"
+    title: "Tennis & Lawn Sports"
+    faqs:
+      - id: "tennis-dress-code"
+        q: "What is the tennis dress code?"
+        a: "Tennis requires 90% white or cream-colored clothing. Clay court soles or non-aggressive sole treads are required on our courts - no aggressive treads allowed."
+        tags: ["tennis", "dress code", "whites", "attire", "shoes", "footwear"]
+        updatedAt: "2025-08-13"
+      
+      - id: "tennis-courts-count"
+        q: "How many tennis courts are there?"
+        a: "We have 8 championship Har-Tru clay courts, with 4 courts lit for evening play."
+        tags: ["tennis courts", "clay courts", "har-tru", "lights", "evening play"]
+        updatedAt: "2025-08-13"
+      
+      - id: "pickleball-facilities"
+        q: "Do you have pickleball courts?"
+        a: "Yes! We have 4 hard courts for pickleball. Any respectful sports attire is acceptable, and equipment is available at the Tennis Shop."
+        tags: ["pickleball", "courts", "sports", "equipment", "attire"]
+        updatedAt: "2025-08-13"
+      
+      - id: "squash-courts"
+        q: "What are the squash court requirements?"
+        a: "We have 2 squash courts. Any respectful sports attire is acceptable, but non-marking soles are required. Equipment is available at the Tennis Shop."
+        tags: ["squash", "courts", "non-marking soles", "shoes", "equipment"]
+        updatedAt: "2025-08-13"
+      
+      - id: "croquet-facilities"
+        q: "Is croquet available?"
+        a: "Yes, we have 1 croquet pitch on the lawns. Any respectful sports attire is acceptable, and equipment is available at the Clubhouse."
+        tags: ["croquet", "lawn sports", "equipment", "clubhouse"]
+        updatedAt: "2025-08-13"
+      
+      - id: "putting-green"
+        q: "Do you have a putting green?"
+        a: "Yes! We have an 18-hole putting green. Putters are available at the Clubhouse."
+        tags: ["golf", "putting green", "18 holes", "putters", "practice"]
+        updatedAt: "2025-08-13"
+      
+      - id: "court-booking"
+        q: "How do I book courts?"
+        a: "Book courts through this chatbot by selecting 'Book Courts & Lawn Sports', contact the front desk at +1 (441) 239-7201, or the Tennis Shop at +1 (441) 239-7216."
+        tags: ["booking", "reservations", "courts", "tennis", "sports"]
+        updatedAt: "2025-08-13"
+      
+      - id: "tennis-shop-brands"
+        q: "What equipment is available at the Tennis Shop?"
+        a: "The Tennis Shop carries Babolat, Sofibella, and Nike brands. Equipment and attire for all racquet sports are available. Contact: +1 (441) 239-7216 or tennis@coralbeach.bm."
+        tags: ["tennis shop", "equipment", "babolat", "nike", "sofibella", "attire"]
+        updatedAt: "2025-08-13"
+      
+      - id: "member-court-booking"
+        q: "Do members need to provide information when booking?"
+        a: "Members should provide their member number when booking. Guests from outside the club are welcome to book where permitted. There may be a fee for guests depending on the sport."
+        tags: ["member number", "booking", "guests", "fees", "courts"]
+        updatedAt: "2025-08-13"
+      
+      - id: "beach-sports"
+        q: "What beach sports are available?"
+        a: "We offer beach tennis, beach volleyball, and bocce ball. The beach also has snorkelling gear available."
+        tags: ["beach sports", "beach tennis", "volleyball", "bocce", "snorkelling"]
+        updatedAt: "2025-08-13"
+      
+      - id: "tennis-programs"
+        q: "What tennis programs are offered?"
+        a: "We offer year-round clinics, socials, lessons, junior development programs, and adult strategy sessions."
+        tags: ["tennis programs", "lessons", "clinics", "junior", "adult"]
+        updatedAt: "2025-08-13"
+
+  - id: "spa"
+    title: "Spa & Wellness"
+    faqs:
+      - id: "spa-hours"
+        q: "What are the spa hours?"
+        a: "The spa is open daily from 9:00 AM to 6:00 PM. Advance booking is encouraged, especially during peak season."
+        tags: ["spa", "hours", "wellness", "booking", "massage"]
+        updatedAt: "2025-08-13"
+      
+      - id: "spa-services"
+        q: "What spa services are available?"
+        a: "We offer European-style facials, massages, body wraps, and salon services. Contact the spa at +1 (441) 239-7222 or spa@coralbeach.bm."
+        tags: ["spa services", "massage", "facial", "body wraps", "salon", "treatments"]
+        updatedAt: "2025-08-13"
+      
+      - id: "august-spa-special"
+        q: "What is the current spa special?"
+        a: "Our August special includes a foot scrub, hand massage, and face/scalp massage for $110. Available daily 9 AM to 5 PM (advance booking encouraged)."
+        tags: ["spa special", "august", "promotion", "massage", "seasonal"]
+        updatedAt: "2025-08-13"
+      
+      - id: "gym-hours"
+        q: "What are the gym hours?"
+        a: "The fully equipped fitness center is open from 6:00 AM to 9:00 PM daily."
+        tags: ["gym", "fitness center", "hours", "workout", "exercise"]
+        updatedAt: "2025-08-13"
+      
+      - id: "yoga-classes"
+        q: "Are yoga classes available?"
+        a: "Yes! Morning yoga is offered on the lawn from 9:00-10:00 AM. We also offer group cardio classes and personal training."
+        tags: ["yoga", "classes", "morning", "lawn", "fitness", "wellness"]
+        updatedAt: "2025-08-13"
+      
+      - id: "spa-booking"
+        q: "How do I book spa treatments?"
+        a: "Book spa treatments by calling +1 (441) 239-7222 or emailing spa@coralbeach.bm. Advance booking is recommended."
+        tags: ["spa booking", "reservations", "appointments", "treatments"]
+        updatedAt: "2025-08-13"
+      
+      - id: "wellness-programs"
+        q: "What wellness programs are offered?"
+        a: "We offer group yoga, cardio classes, and personal training sessions. Check with the spa for current schedules."
+        tags: ["wellness", "fitness programs", "personal training", "classes"]
+        updatedAt: "2025-08-13"
+      
+      - id: "pool-facilities"
+        q: "Is there a swimming pool?"
+        a: "Yes, we have a dedicated pool in addition to ocean swimming at our quarter-mile private pink sand beach."
+        tags: ["pool", "swimming", "facilities", "beach", "ocean"]
+        updatedAt: "2025-08-13"
+
+  - id: "weddings-events"
+    title: "Weddings & Events"
+    faqs:
+      - id: "wedding-lawn-capacity"
+        q: "How many guests can the Wedding Lawn accommodate?"
+        a: "Our Wedding Lawn accommodates up to 300 guests with stunning ocean views."
+        tags: ["wedding", "capacity", "wedding lawn", "events", "ocean view"]
+        updatedAt: "2025-08-13"
+      
+      - id: "wedding-services"
+        q: "What wedding services are provided?"
+        a: "We offer complete wedding packages including catering, setup, and coordination. Our experienced events team provides full planning services."
+        tags: ["wedding services", "packages", "catering", "planning", "coordination"]
+        updatedAt: "2025-08-13"
+      
+      - id: "event-spaces"
+        q: "What event spaces are available?"
+        a: "We have the Wedding Lawn (300 guests), Main Lounge with ocean views, Longtail Terrace for formal dining, and Beach Terrace for casual events."
+        tags: ["event spaces", "venues", "capacity", "meetings", "functions"]
+        updatedAt: "2025-08-13"
+      
+      - id: "corporate-events"
+        q: "Can you host corporate events?"
+        a: "Yes, we provide full planning and coordination services for corporate events, with various venue options and catering services."
+        tags: ["corporate events", "business", "meetings", "conferences"]
+        updatedAt: "2025-08-13"
+      
+      - id: "event-planning"
+        q: "Do you have event planning services?"
+        a: "Yes, our experienced events team provides full planning and coordination services for weddings, celebrations, and corporate events."
+        tags: ["event planning", "coordinator", "services", "weddings", "parties"]
+        updatedAt: "2025-08-13"
+
+  - id: "getting-here"
+    title: "Getting Here & Transport"
+    faqs:
+      - id: "airport-transfer"
+        q: "How much are airport transfers?"
+        a: "Airport transfers are approximately $80 each way including service. Please arrange in advance through the front desk."
+        tags: ["airport", "transfer", "transportation", "taxi", "arrival"]
+        updatedAt: "2025-08-13"
+      
+      - id: "car-rental"
+        q: "Can I rent a car in Bermuda?"
+        a: "Visitors cannot rent cars in Bermuda. Options include taxis, scooter/moped rentals, electric microcars (Twizy), public buses, and the HITCH ride-sharing app."
+        tags: ["car rental", "transportation", "scooter", "moped", "twizy", "alternatives"]
+        updatedAt: "2025-08-13"
+      
+      - id: "taxi-booking"
+        q: "How do I book taxis?"
+        a: "Book island taxis through the front desk. For peak times, schedule a day ahead to ensure availability."
+        tags: ["taxi", "booking", "transportation", "front desk"]
+        updatedAt: "2025-08-13"
+      
+      - id: "club-address"
+        q: "What is the club's address?"
+        a: "34 South Road, Paget Parish, Bermuda PG 04. Mailing address: P.O. Box WK 536, Warwick WKBX."
+        tags: ["address", "location", "directions", "paget", "mailing"]
+        updatedAt: "2025-08-13"
+      
+      - id: "transportation-options"
+        q: "What transportation options are available in Bermuda?"
+        a: "Options include taxis, scooters/mopeds, electric microcars (Twizy), public buses (pink and blue), ferries, and the HITCH ride-sharing app."
+        tags: ["transportation", "getting around", "buses", "ferries", "scooters"]
+        updatedAt: "2025-08-13"
+      
+      - id: "driving-side"
+        q: "Which side of the road do you drive on in Bermuda?"
+        a: "Driving is on the left side in Bermuda, following British road rules."
+        tags: ["driving", "road rules", "left side", "british"]
+        updatedAt: "2025-08-13"
+
+  - id: "weather-seasons"
+    title: "Weather & Seasons"
+    faqs:
+      - id: "best-time-visit"
+        q: "What is the best time to visit Bermuda?"
+        a: "Peak season is May through mid-October (75-85°F). Bermuda enjoys mild winters (60-70°F) and warm summers (80-85°F) year-round."
+        tags: ["best time", "seasons", "climate"]
+        updatedAt: "2025-08-13"
+      
+      
+      - id: "hurricane-season"
+        q: "Should I worry about hurricanes?"
+        a: "Hurricane season runs June 1 to November 30, but direct hits are rare due to Bermuda's location. The club monitors weather closely and has comprehensive storm procedures."
+        tags: ["hurricane", "storm", "safety", "season"]
+        updatedAt: "2025-08-13"
+      
+      - id: "water-temperature"
+        q: "What is the ocean temperature?"
+        a: "Ocean temperatures range from high 60s°F in winter to 83°F in summer, perfect for swimming most of the year."
+        tags: ["water temperature", "ocean", "swimming", "beach", "sea"]
+        updatedAt: "2025-08-13"
+      
+      - id: "what-to-pack"
+        q: "What should I pack for my visit?"
+        a: "Pack resort attire (no denim in dining areas), whites/creams for tennis, swimwear, and a light jacket for evenings. Gentlemen need jackets for Thursday/Saturday dinners."
+        tags: ["packing", "clothing", "what to bring", "attire", "luggage"]
+        updatedAt: "2025-08-13"
+      
+      - id: "beach-season"
+        q: "When is beach season?"
+        a: "Our beach is enjoyable year-round! Peak swimming is May-October when water temps reach 75-83°F. Beach services run 10 AM-6 PM daily in season."
+        tags: ["beach", "swimming", "season", "water", "services"]
+        updatedAt: "2025-08-13"
+
+  - id: "policies-billing"
+    title: "Policies & Billing"
+    faqs:
+      - id: "payment-methods"
+        q: "What forms of payment are accepted?"
+        a: "We accept major credit cards and room charges for members. For billing inquiries, contact Accounts Receivable at the club."
+        tags: ["payment", "credit cards", "billing", "charges", "methods"]
+        updatedAt: "2025-08-13"
+      
+      - id: "cancellation-policy"
+        q: "What is the cancellation policy?"
+        a: "Cancellation policies vary by season and length of stay. Please contact reservations@coralbeach.bm for specific terms."
+        tags: ["cancellation", "policy", "refund", "terms", "booking"]
+        updatedAt: "2025-08-13"
+      
+      - id: "group-rates"
+        q: "Are group rates available?"
+        a: "Yes, we offer special rates for groups and extended stays. Contact our reservations team for a customized quote."
+        tags: ["group rates", "discounts", "bulk booking", "extended stay"]
+        updatedAt: "2025-08-13"
+      
+      - id: "billing-contact"
+        q: "Who do I contact for billing questions?"
+        a: "For billing inquiries, contact Accounts Receivable at Coral Beach & Tennis Club, 34 South Shore Road, Paget, Bermuda PG04."
+        tags: ["billing", "accounts", "invoices", "payment", "contact"]
+        updatedAt: "2025-08-13"
+      
+      - id: "member-discount"
+        q: "What discount do members receive on rooms?"
+        a: "Members receive a 15% discount on room rates plus booking priority for accommodations."
+        tags: ["member discount", "room rates", "benefits", "savings"]
+        updatedAt: "2025-08-13"
+      
+      - id: "reservation-requirements"
+        q: "What information do I need to make a reservation?"
+        a: "For reservations, we'll need your preferred dates, number of guests, accommodation preference, and contact information. Members should provide their member number."
+        tags: ["reservations", "booking", "requirements", "information"]
+        updatedAt: "2025-08-13"
+      
+      - id: "club-manager"
+        q: "Who is the club manager?"
+        a: "The Club Manager is Nik Bhola. For management inquiries, contact the main number at +1 (441) 236-2233."
+        tags: ["management", "club manager", "staff", "contact"]
+        updatedAt: "2025-08-13"
+      
+      - id: "contact-numbers"
+        q: "What are the main contact numbers?"
+        a: "Main: +1 (441) 236-2233, Front Desk: +1 (441) 239-7201, Toll Free: 888-300-7349, Spa: +1 (441) 239-7222, Tennis Shop: +1 (441) 239-7216."
+        tags: ["phone numbers", "contact", "telephone", "front desk", "spa", "tennis"]
+        updatedAt: "2025-08-13"
+      
+      - id: "email-contacts"
+        q: "What are the email addresses for different departments?"
+        a: "Reservations: reservations@coralbeach.bm, Spa: spa@coralbeach.bm, Tennis: tennis@coralbeach.bm."
+        tags: ["email", "contact", "reservations", "spa", "tennis"]
+        updatedAt: "2025-08-13"

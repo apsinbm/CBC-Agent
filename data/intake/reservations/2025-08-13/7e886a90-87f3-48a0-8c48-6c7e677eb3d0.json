@@ -1,0 +1,21 @@
+{
+  "id": "7e886a90-87f3-48a0-8c48-6c7e677eb3d0",
+  "fullName": "bob marley",
+  "email": "bobby.bm@marley.com",
+  "phone": "",
+  "countryCity": "",
+  "arrivalDate": "2025-08-15",
+  "departureDate": "2025-08-22",
+  "numberOfGuests": 4,
+  "partyBreakdown": "2 adults 2 kids",
+  "accommodationPreference": "Suites",
+  "budgetRange": "Flexible",
+  "airlineInfo": "",
+  "memberStatus": "",
+  "specialRequests": "",
+  "consent": true,
+  "consentTimestamp": "2025-08-13T02:00:56.078Z",
+  "createdAt": "2025-08-13T02:00:56.078Z",
+  "ipHash": "d722181ded2d8e74a362fbaa333a76809b8379cdb9d1feda01a193cb40163a2e",
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.5 Safari/605.1.15"
+}

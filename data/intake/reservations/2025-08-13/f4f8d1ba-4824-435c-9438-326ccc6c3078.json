@@ -1,0 +1,21 @@
+{
+  "id": "f4f8d1ba-4824-435c-9438-326ccc6c3078",
+  "fullName": "Patrick Singleton",
+  "email": "singleton33@yahoo.com",
+  "phone": "4417051547",
+  "countryCity": "Hamilton, Bermuda",
+  "arrivalDate": "2025-08-17",
+  "departureDate": "2025-08-24",
+  "numberOfGuests": 2,
+  "partyBreakdown": "2 adults to 2 children",
+  "accommodationPreference": "Main Club rooms",
+  "budgetRange": "Under $500/night",
+  "airlineInfo": "British Airways",
+  "memberStatus": "Member",
+  "specialRequests": "Baby Crib",
+  "consent": true,
+  "consentTimestamp": "2025-08-13T01:50:05.274Z",
+  "createdAt": "2025-08-13T01:50:05.274Z",
+  "ipHash": "d722181ded2d8e74a362fbaa333a76809b8379cdb9d1feda01a193cb40163a2e",
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.5 Safari/605.1.15"
+}

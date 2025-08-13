@@ -1,0 +1,19 @@
+{
+  "name": "@cbc-agent/shared",
+  "version": "1.0.0",
+  "description": "Shared schemas and types for CBC-Agent analytics",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "clean": "rm -rf dist"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "zod": "^3.22.0"
+  }
+}
