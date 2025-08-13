@@ -33,7 +33,7 @@ export default function ChatInput({
           value={value}
           onChange={(e) => onChange(e.target.value)}
           onKeyPress={handleKeyPress}
-          placeholder="Type your message..."
+          placeholder="Ask Alonso..."
           rows={1}
           style={{ backgroundColor: 'white', color: 'black' }}
           className="flex-1 resize-none rounded-xl border border-neutral-300 px-3 py-2 sm:px-4 sm:py-3 

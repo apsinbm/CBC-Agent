@@ -194,7 +194,7 @@ export default function DiningModal({ isOpen, onClose }: DiningModalProps) {
               type="text"
               value={formData.fullName}
               onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base no-zoom webkit-appearance-none"
+              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base no-zoom webkit-appearance-none bg-white text-black placeholder:text-gray-500 focus:bg-white focus:text-black"
               required
             />
           </div>
@@ -207,7 +207,7 @@ export default function DiningModal({ isOpen, onClose }: DiningModalProps) {
               type="email"
               value={formData.email}
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base no-zoom webkit-appearance-none"
+              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base no-zoom webkit-appearance-none bg-white text-black placeholder:text-gray-500 focus:bg-white focus:text-black"
               required
             />
           </div>
@@ -220,7 +220,7 @@ export default function DiningModal({ isOpen, onClose }: DiningModalProps) {
               type="tel"
               value={formData.phone}
               onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base no-zoom webkit-appearance-none"
+              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base no-zoom webkit-appearance-none bg-white text-black placeholder:text-gray-500 focus:bg-white focus:text-black"
             />
           </div>
 
@@ -232,7 +232,7 @@ export default function DiningModal({ isOpen, onClose }: DiningModalProps) {
               type="text"
               value={formData.memberRoomNumber}
               onChange={(e) => setFormData({ ...formData, memberRoomNumber: e.target.value })}
-              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base no-zoom webkit-appearance-none"
+              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base no-zoom webkit-appearance-none bg-white text-black placeholder:text-gray-500 focus:bg-white focus:text-black"
               placeholder="Member # or room/cottage name"
             />
           </div>
@@ -247,7 +247,7 @@ export default function DiningModal({ isOpen, onClose }: DiningModalProps) {
               max="20"
               value={formData.partySize}
               onChange={(e) => setFormData({ ...formData, partySize: e.target.value })}
-              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base no-zoom webkit-appearance-none"
+              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base no-zoom webkit-appearance-none bg-white text-black placeholder:text-gray-500 focus:bg-white focus:text-black"
               required
             />
           </div>
@@ -259,7 +259,7 @@ export default function DiningModal({ isOpen, onClose }: DiningModalProps) {
             <select
               value={formData.restaurant}
               onChange={(e) => setFormData({ ...formData, restaurant: e.target.value })}
-              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base no-zoom webkit-appearance-none"
+              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base no-zoom webkit-appearance-none bg-white text-black placeholder:text-gray-500 focus:bg-white focus:text-black"
               required
             >
               <option value="">Select restaurant...</option>
@@ -276,7 +276,7 @@ export default function DiningModal({ isOpen, onClose }: DiningModalProps) {
             <select
               value={formData.meal}
               onChange={(e) => setFormData({ ...formData, meal: e.target.value })}
-              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base no-zoom webkit-appearance-none"
+              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base no-zoom webkit-appearance-none bg-white text-black placeholder:text-gray-500 focus:bg-white focus:text-black"
               required
             >
               <option value="">Select meal...</option>
@@ -295,7 +295,7 @@ export default function DiningModal({ isOpen, onClose }: DiningModalProps) {
               value={formData.date}
               onChange={(e) => setFormData({ ...formData, date: e.target.value })}
               min={new Date().toISOString().split('T')[0]}
-              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base no-zoom webkit-appearance-none"
+              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base no-zoom webkit-appearance-none bg-white text-black placeholder:text-gray-500 focus:bg-white focus:text-black"
               required
             />
           </div>
@@ -308,7 +308,7 @@ export default function DiningModal({ isOpen, onClose }: DiningModalProps) {
               type="time"
               value={formData.time}
               onChange={(e) => setFormData({ ...formData, time: e.target.value })}
-              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base no-zoom webkit-appearance-none"
+              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base no-zoom webkit-appearance-none bg-white text-black placeholder:text-gray-500 focus:bg-white focus:text-black"
               required
             />
           </div>

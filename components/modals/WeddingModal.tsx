@@ -191,7 +191,7 @@ export default function WeddingModal({ isOpen, onClose }: WeddingModalProps) {
               type="text"
               value={formData.coupleNames}
               onChange={(e) => setFormData({ ...formData, coupleNames: e.target.value })}
-              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base no-zoom webkit-appearance-none"
+              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base no-zoom webkit-appearance-none bg-white text-black placeholder:text-gray-500 focus:bg-white focus:text-black"
               placeholder="Jane Smith & John Doe"
               required
             />
@@ -205,7 +205,7 @@ export default function WeddingModal({ isOpen, onClose }: WeddingModalProps) {
               type="email"
               value={formData.email}
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base no-zoom webkit-appearance-none"
+              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base no-zoom webkit-appearance-none bg-white text-black placeholder:text-gray-500 focus:bg-white focus:text-black"
               required
             />
           </div>
@@ -218,7 +218,7 @@ export default function WeddingModal({ isOpen, onClose }: WeddingModalProps) {
               type="tel"
               value={formData.phone}
               onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base no-zoom webkit-appearance-none"
+              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base no-zoom webkit-appearance-none bg-white text-black placeholder:text-gray-500 focus:bg-white focus:text-black"
             />
           </div>
 
@@ -230,7 +230,7 @@ export default function WeddingModal({ isOpen, onClose }: WeddingModalProps) {
               type="text"
               value={formData.guestCount}
               onChange={(e) => setFormData({ ...formData, guestCount: e.target.value })}
-              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base no-zoom webkit-appearance-none"
+              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base no-zoom webkit-appearance-none bg-white text-black placeholder:text-gray-500 focus:bg-white focus:text-black"
               placeholder="10-500 guests"
               required
             />
@@ -244,7 +244,7 @@ export default function WeddingModal({ isOpen, onClose }: WeddingModalProps) {
               type="text"
               value={formData.preferredSeason}
               onChange={(e) => setFormData({ ...formData, preferredSeason: e.target.value })}
-              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base no-zoom webkit-appearance-none"
+              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base no-zoom webkit-appearance-none bg-white text-black placeholder:text-gray-500 focus:bg-white focus:text-black"
               placeholder="Spring 2027 or specific date"
             />
           </div>
@@ -275,7 +275,7 @@ export default function WeddingModal({ isOpen, onClose }: WeddingModalProps) {
             <select
               value={formData.cateringStyle}
               onChange={(e) => setFormData({ ...formData, cateringStyle: e.target.value })}
-              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base no-zoom webkit-appearance-none"
+              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base no-zoom webkit-appearance-none bg-white text-black placeholder:text-gray-500 focus:bg-white focus:text-black"
             >
               <option value="">Select style...</option>
               {CATERING_STYLES.map(s => (
@@ -291,7 +291,7 @@ export default function WeddingModal({ isOpen, onClose }: WeddingModalProps) {
             <select
               value={formData.budgetBand}
               onChange={(e) => setFormData({ ...formData, budgetBand: e.target.value })}
-              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base no-zoom webkit-appearance-none"
+              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base no-zoom webkit-appearance-none bg-white text-black placeholder:text-gray-500 focus:bg-white focus:text-black"
             >
               <option value="">Select budget...</option>
               {BUDGET_BANDS.map(b => (
@@ -307,7 +307,7 @@ export default function WeddingModal({ isOpen, onClose }: WeddingModalProps) {
             <select
               value={formData.hasPlanner}
               onChange={(e) => setFormData({ ...formData, hasPlanner: e.target.value })}
-              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base no-zoom webkit-appearance-none"
+              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base no-zoom webkit-appearance-none bg-white text-black placeholder:text-gray-500 focus:bg-white focus:text-black"
             >
               <option value="">Select...</option>
               <option value="yes">Yes</option>
@@ -325,7 +325,7 @@ export default function WeddingModal({ isOpen, onClose }: WeddingModalProps) {
                 type="text"
                 value={formData.plannerName}
                 onChange={(e) => setFormData({ ...formData, plannerName: e.target.value })}
-                className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base no-zoom webkit-appearance-none"
+                className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base no-zoom webkit-appearance-none bg-white text-black placeholder:text-gray-500 focus:bg-white focus:text-black"
                 placeholder="Planner or company name"
               />
             </div>

@@ -263,7 +263,7 @@ export default function ReservationModal({ isOpen, onClose }: ReservationModalPr
                           type="text"
                           value={formData.fullName}
                           onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                          className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base sm:text-base no-zoom webkit-appearance-none"
+                          className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base sm:text-base no-zoom webkit-appearance-none bg-white text-black placeholder:text-gray-500 focus:bg-white focus:text-black"
                           placeholder="John Smith"
                         />
                       </div>
@@ -273,7 +273,7 @@ export default function ReservationModal({ isOpen, onClose }: ReservationModalPr
                           type="email"
                           value={formData.email}
                           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                          className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base sm:text-base no-zoom webkit-appearance-none"
+                          className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base sm:text-base no-zoom webkit-appearance-none bg-white text-black placeholder:text-gray-500 focus:bg-white focus:text-black"
                           placeholder="john@example.com"
                         />
                       </div>
@@ -283,7 +283,7 @@ export default function ReservationModal({ isOpen, onClose }: ReservationModalPr
                           type="tel"
                           value={formData.phone}
                           onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                          className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base sm:text-base no-zoom webkit-appearance-none"
+                          className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base sm:text-base no-zoom webkit-appearance-none bg-white text-black placeholder:text-gray-500 focus:bg-white focus:text-black"
                           placeholder="+1 234 567 8900"
                         />
                       </div>
@@ -293,7 +293,7 @@ export default function ReservationModal({ isOpen, onClose }: ReservationModalPr
                           type="text"
                           value={formData.countryCity}
                           onChange={(e) => setFormData({ ...formData, countryCity: e.target.value })}
-                          className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base sm:text-base no-zoom webkit-appearance-none"
+                          className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base sm:text-base no-zoom webkit-appearance-none bg-white text-black placeholder:text-gray-500 focus:bg-white focus:text-black"
                           placeholder="New York, USA"
                         />
                       </div>
@@ -302,7 +302,7 @@ export default function ReservationModal({ isOpen, onClose }: ReservationModalPr
                         <textarea
                           value={formData.bookingQuestion}
                           onChange={(e) => setFormData({ ...formData, bookingQuestion: e.target.value.slice(0, 3000) })}
-                          className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base sm:text-base no-zoom webkit-appearance-none"
+                          className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base sm:text-base no-zoom webkit-appearance-none bg-white text-black placeholder:text-gray-500 focus:bg-white focus:text-black"
                           rows={3}
                           placeholder="E.g., 'We&apos;re thinking mid-October for a long weekend. Do cottages sleep 4?'"
                         />
@@ -352,7 +352,7 @@ export default function ReservationModal({ isOpen, onClose }: ReservationModalPr
                             type="text"
                             value={formData.otherInterest}
                             onChange={(e) => setFormData({ ...formData, otherInterest: e.target.value })}
-                            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base sm:text-base no-zoom webkit-appearance-none"
+                            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base sm:text-base no-zoom webkit-appearance-none bg-white text-black placeholder:text-gray-500 focus:bg-white focus:text-black"
                             placeholder="Please specify..."
                           />
                         </div>
@@ -412,7 +412,7 @@ export default function ReservationModal({ isOpen, onClose }: ReservationModalPr
                             }}
                             min={new Date().toISOString().split('T')[0]}
                             disabled={formData.datesUndecided}
-                            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base sm:text-base no-zoom webkit-appearance-none"
+                            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base sm:text-base no-zoom webkit-appearance-none bg-white text-black placeholder:text-gray-500 focus:bg-white focus:text-black"
                           />
                         </div>
                         <div className="mt-4">
@@ -426,7 +426,7 @@ export default function ReservationModal({ isOpen, onClose }: ReservationModalPr
                             }}
                             min={formData.arrivalDate || new Date().toISOString().split('T')[0]}
                             disabled={formData.datesUndecided}
-                            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base sm:text-base no-zoom webkit-appearance-none"
+                            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base sm:text-base no-zoom webkit-appearance-none bg-white text-black placeholder:text-gray-500 focus:bg-white focus:text-black"
                           />
                           {dateError && (
                             <p className="text-xs text-red-600 mt-1">{dateError}</p>
@@ -457,7 +457,7 @@ export default function ReservationModal({ isOpen, onClose }: ReservationModalPr
                               setFormData({ ...formData, numberOfGuests: value });
                             }
                           }}
-                          className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base sm:text-base no-zoom webkit-appearance-none"
+                          className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base sm:text-base no-zoom webkit-appearance-none bg-white text-black placeholder:text-gray-500 focus:bg-white focus:text-black"
                           placeholder="1"
                         />
                         <p className="text-xs text-gray-500 mt-1">Maximum 12 guests</p>
@@ -468,7 +468,7 @@ export default function ReservationModal({ isOpen, onClose }: ReservationModalPr
                           type="text"
                           value={formData.partyBreakdown}
                           onChange={(e) => setFormData({ ...formData, partyBreakdown: e.target.value })}
-                          className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base sm:text-base no-zoom webkit-appearance-none"
+                          className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base sm:text-base no-zoom webkit-appearance-none bg-white text-black placeholder:text-gray-500 focus:bg-white focus:text-black"
                           placeholder="e.g., 2 adults, 2 children (ages 8 and 10)"
                         />
                       </div>
@@ -485,7 +485,7 @@ export default function ReservationModal({ isOpen, onClose }: ReservationModalPr
                         <select
                           value={formData.accommodationPreference}
                           onChange={(e) => setFormData({ ...formData, accommodationPreference: e.target.value })}
-                          className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base sm:text-base no-zoom webkit-appearance-none"
+                          className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base sm:text-base no-zoom webkit-appearance-none bg-white text-black placeholder:text-gray-500 focus:bg-white focus:text-black"
                         >
                           <option value="">Select preference...</option>
                           {ACCOMMODATION_OPTIONS.map(opt => (
@@ -498,7 +498,7 @@ export default function ReservationModal({ isOpen, onClose }: ReservationModalPr
                         <select
                           value={formData.budgetRange}
                           onChange={(e) => setFormData({ ...formData, budgetRange: e.target.value })}
-                          className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base sm:text-base no-zoom webkit-appearance-none"
+                          className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base sm:text-base no-zoom webkit-appearance-none bg-white text-black placeholder:text-gray-500 focus:bg-white focus:text-black"
                         >
                           <option value="">Select budget...</option>
                           {BUDGET_OPTIONS.map(opt => (
@@ -520,7 +520,7 @@ export default function ReservationModal({ isOpen, onClose }: ReservationModalPr
                           type="text"
                           value={formData.airlineInfo}
                           onChange={(e) => setFormData({ ...formData, airlineInfo: e.target.value })}
-                          className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base sm:text-base no-zoom webkit-appearance-none"
+                          className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base sm:text-base no-zoom webkit-appearance-none bg-white text-black placeholder:text-gray-500 focus:bg-white focus:text-black"
                           placeholder="e.g., American Airlines AA123, arriving 2:30pm"
                         />
                       </div>
@@ -530,7 +530,7 @@ export default function ReservationModal({ isOpen, onClose }: ReservationModalPr
                           type="text"
                           value={formData.memberStatus}
                           onChange={(e) => setFormData({ ...formData, memberStatus: e.target.value })}
-                          className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base sm:text-base no-zoom webkit-appearance-none"
+                          className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base sm:text-base no-zoom webkit-appearance-none bg-white text-black placeholder:text-gray-500 focus:bg-white focus:text-black"
                           placeholder="e.g., Guest of John Smith (Member)"
                         />
                       </div>
@@ -539,7 +539,7 @@ export default function ReservationModal({ isOpen, onClose }: ReservationModalPr
                         <textarea
                           value={formData.specialRequests}
                           onChange={(e) => setFormData({ ...formData, specialRequests: e.target.value })}
-                          className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base sm:text-base no-zoom webkit-appearance-none"
+                          className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base sm:text-base no-zoom webkit-appearance-none bg-white text-black placeholder:text-gray-500 focus:bg-white focus:text-black"
                           rows={3}
                           placeholder="Any special requirements..."
                         />

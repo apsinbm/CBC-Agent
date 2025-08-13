@@ -193,12 +193,36 @@ The following environment variables are configured in `.env.local`:
 ## Development Notes
 
 ### Recent Updates
-1. **Progressive Text Rendering System** - Implemented smart message display with natural pacing
-2. **Enhanced Knowledge Base** - Added comprehensive CBC history, tennis heritage, and Alonso the parrot
-3. **Multi-Tier Response System** - Micro-replies, quick summaries, and detailed information
-4. **Timestamp Removal Refactoring** - Completely removed message timestamps from UI
-5. **Time Response Enhancement** - Added natural time detection and Atlantic/Bermuda timezone
-6. **Dual Provider Implementation** - Integrated OpenAI as fallback for reliability
+1. **Complete Rebrand to "Alonso the Amazing Amazon Parrot"** (August 2025)
+   - Full repository-wide rename from "Danni" to "Alonso"  
+   - Enhanced system prompt with Amazing Amazon Parrot branding
+   - Updated chat input placeholder to "Ask Alonso..."
+   - Improved club personality and charm
+
+2. **Weather Service Overhaul** (August 2025)
+   - Comprehensive weather function diagnosis and enhancement
+   - Multi-provider architecture (Open-Meteo, WeatherKit, OpenWeather)
+   - JWT ES256 generation for Apple WeatherKit authentication
+   - Circuit breaker pattern with failure thresholds and automatic recovery
+   - Stale-while-revalidate caching strategy with 5-minute cache
+   - Exponential backoff retry logic with jitter
+   - Prometheus metrics collection and health check endpoints
+   - CLI smoke test tool for debugging weather issues
+   - Always-on time/weather context injection for AI memory persistence
+
+3. **Modal Form Field Styling Fix** (August 2025)
+   - Fixed black background issues in booking/reservation modals
+   - Applied consistent white backgrounds with black text across all forms
+   - Enhanced placeholder text contrast for better readability
+   - Updated 5 modal components: Courts & Lawn Sports, Weddings, Dining, Plan Your Stay, Spa
+
+4. **Previous Core Enhancements**
+   - Progressive Text Rendering System with smart message display
+   - Enhanced Knowledge Base with CBC history, tennis heritage, and Alonso the parrot
+   - Multi-Tier Response System (micro-replies, quick summaries, detailed information)
+   - Timestamp Removal Refactoring for cleaner UI
+   - Time Response Enhancement with Atlantic/Bermuda timezone
+   - Dual Provider Implementation (Claude + OpenAI fallback)
 
 ### Build Issues Resolution
 - Clear Next.js cache with `rm -rf .next` if encountering build errors

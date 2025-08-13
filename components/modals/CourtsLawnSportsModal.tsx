@@ -217,7 +217,7 @@ export default function CourtsLawnSportsModal({ isOpen, onClose }: CourtsLawnSpo
               type="text"
               value={formData.fullName}
               onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base no-zoom webkit-appearance-none"
+              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base no-zoom webkit-appearance-none bg-white text-black placeholder:text-gray-500 focus:bg-white focus:text-black"
               required
             />
           </div>
@@ -230,7 +230,7 @@ export default function CourtsLawnSportsModal({ isOpen, onClose }: CourtsLawnSpo
               type="email"
               value={formData.email}
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base no-zoom webkit-appearance-none"
+              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base no-zoom webkit-appearance-none bg-white text-black placeholder:text-gray-500 focus:bg-white focus:text-black"
               required
             />
           </div>
@@ -243,7 +243,7 @@ export default function CourtsLawnSportsModal({ isOpen, onClose }: CourtsLawnSpo
               type="tel"
               value={formData.phone}
               onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base no-zoom webkit-appearance-none"
+              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base no-zoom webkit-appearance-none bg-white text-black placeholder:text-gray-500 focus:bg-white focus:text-black"
             />
           </div>
 
@@ -255,7 +255,7 @@ export default function CourtsLawnSportsModal({ isOpen, onClose }: CourtsLawnSpo
               type="text"
               value={formData.memberNumber}
               onChange={(e) => setFormData({ ...formData, memberNumber: e.target.value })}
-              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base no-zoom webkit-appearance-none"
+              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base no-zoom webkit-appearance-none bg-white text-black placeholder:text-gray-500 focus:bg-white focus:text-black"
               placeholder="Optional for non-members"
             />
           </div>
@@ -267,7 +267,7 @@ export default function CourtsLawnSportsModal({ isOpen, onClose }: CourtsLawnSpo
             <select
               value={formData.sportType}
               onChange={(e) => setFormData({ ...formData, sportType: e.target.value })}
-              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base no-zoom webkit-appearance-none"
+              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base no-zoom webkit-appearance-none bg-white text-black placeholder:text-gray-500 focus:bg-white focus:text-black"
               required
             >
               <option value="">Select sport...</option>
@@ -284,7 +284,7 @@ export default function CourtsLawnSportsModal({ isOpen, onClose }: CourtsLawnSpo
             <select
               value={formData.requestType}
               onChange={(e) => setFormData({ ...formData, requestType: e.target.value })}
-              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base no-zoom webkit-appearance-none"
+              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base no-zoom webkit-appearance-none bg-white text-black placeholder:text-gray-500 focus:bg-white focus:text-black"
               required
             >
               <option value="">Select type...</option>
@@ -304,7 +304,7 @@ export default function CourtsLawnSportsModal({ isOpen, onClose }: CourtsLawnSpo
               max="8"
               value={formData.players}
               onChange={(e) => setFormData({ ...formData, players: e.target.value })}
-              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base no-zoom webkit-appearance-none"
+              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base no-zoom webkit-appearance-none bg-white text-black placeholder:text-gray-500 focus:bg-white focus:text-black"
               required
             />
           </div>
@@ -318,7 +318,7 @@ export default function CourtsLawnSportsModal({ isOpen, onClose }: CourtsLawnSpo
               value={formData.preferredDate}
               onChange={(e) => setFormData({ ...formData, preferredDate: e.target.value })}
               min={new Date().toISOString().split('T')[0]}
-              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base no-zoom webkit-appearance-none"
+              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base no-zoom webkit-appearance-none bg-white text-black placeholder:text-gray-500 focus:bg-white focus:text-black"
               required
             />
           </div>
@@ -331,7 +331,7 @@ export default function CourtsLawnSportsModal({ isOpen, onClose }: CourtsLawnSpo
               type="time"
               value={formData.preferredTime}
               onChange={(e) => setFormData({ ...formData, preferredTime: e.target.value })}
-              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base no-zoom webkit-appearance-none"
+              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base no-zoom webkit-appearance-none bg-white text-black placeholder:text-gray-500 focus:bg-white focus:text-black"
               required
             />
           </div>
@@ -344,7 +344,7 @@ export default function CourtsLawnSportsModal({ isOpen, onClose }: CourtsLawnSpo
               <select
                 value={formData.preferredSurface}
                 onChange={(e) => setFormData({ ...formData, preferredSurface: e.target.value })}
-                className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base no-zoom webkit-appearance-none"
+                className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base no-zoom webkit-appearance-none bg-white text-black placeholder:text-gray-500 focus:bg-white focus:text-black"
               >
                 <option value="">No preference...</option>
                 {TENNIS_SURFACES.map(s => (
@@ -363,7 +363,7 @@ export default function CourtsLawnSportsModal({ isOpen, onClose }: CourtsLawnSpo
                 type="text"
                 value={formData.proPreference}
                 onChange={(e) => setFormData({ ...formData, proPreference: e.target.value })}
-                className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base no-zoom webkit-appearance-none"
+                className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue text-base no-zoom webkit-appearance-none bg-white text-black placeholder:text-gray-500 focus:bg-white focus:text-black"
                 placeholder="Any available instructor or specific name..."
               />
             </div>
