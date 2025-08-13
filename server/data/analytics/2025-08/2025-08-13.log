@@ -215,3 +215,15 @@
 {"type":"CHAT_MESSAGE","timestamp":"2025-08-13T21:19:45.035Z","data":{"messageCount":1,"ipHash":"eff8e7ca506627fe","hour":18},"sessionId":"f830fbf0-80b4-4195-a9eb-d7fa0dde11dc"}
 {"type":"SEARCH_QUERY","timestamp":"2025-08-13T21:19:45.060Z","data":{"resultCount":1,"hasResults":true,"ipHash":"eff8e7ca506627fe","queryHash":"b23411f13aa2121b","hour":18},"sessionId":"f830fbf0-80b4-4195-a9eb-d7fa0dde11dc"}
 {"type":"FAQ_MISS","timestamp":"2025-08-13T21:19:45.060Z","data":{"topScore":0.3165626153884117,"ipHash":"eff8e7ca506627fe","hour":18},"sessionId":"f830fbf0-80b4-4195-a9eb-d7fa0dde11dc"}
+{"type":"SESSION_START","timestamp":"2025-08-13T21:21:44.395Z","data":{"userAgent":"web","platform":"chat","ipHash":"eff8e7ca506627fe","hour":18},"sessionId":"6dae97c9-93a6-4164-ab6d-a5a6dce72a06"}
+{"type":"PAGE_VIEW","timestamp":"2025-08-13T21:21:44.396Z","data":{"page":"/chat","referrer":"/chat","ipHash":"eff8e7ca506627fe","hour":18},"sessionId":"6dae97c9-93a6-4164-ab6d-a5a6dce72a06"}
+{"type":"USER_INTERACTION","timestamp":"2025-08-13T21:21:44.396Z","data":{"action":"chat_message","messageCount":1,"queryLength":18,"ipHash":"eff8e7ca506627fe","hour":18},"sessionId":"6dae97c9-93a6-4164-ab6d-a5a6dce72a06"}
+{"type":"CHAT_MESSAGE","timestamp":"2025-08-13T21:21:44.396Z","data":{"messageCount":1,"ipHash":"eff8e7ca506627fe","hour":18},"sessionId":"6dae97c9-93a6-4164-ab6d-a5a6dce72a06"}
+{"type":"SEARCH_QUERY","timestamp":"2025-08-13T21:21:44.428Z","data":{"resultCount":1,"hasResults":true,"ipHash":"eff8e7ca506627fe","queryHash":"98257ced99b8b943","hour":18},"sessionId":"6dae97c9-93a6-4164-ab6d-a5a6dce72a06"}
+{"type":"FAQ_MISS","timestamp":"2025-08-13T21:21:44.428Z","data":{"topScore":0.22725482606956093,"ipHash":"eff8e7ca506627fe","hour":18},"sessionId":"6dae97c9-93a6-4164-ab6d-a5a6dce72a06"}
+{"type":"SESSION_START","timestamp":"2025-08-13T21:27:36.104Z","data":{"userAgent":"web","platform":"chat","ipHash":"eff8e7ca506627fe","hour":18},"sessionId":"e5f8f388-1dfe-4348-8d64-0d4e19b36a3b"}
+{"type":"PAGE_VIEW","timestamp":"2025-08-13T21:27:36.104Z","data":{"page":"/chat","referrer":"/chat","ipHash":"eff8e7ca506627fe","hour":18},"sessionId":"e5f8f388-1dfe-4348-8d64-0d4e19b36a3b"}
+{"type":"USER_INTERACTION","timestamp":"2025-08-13T21:27:36.104Z","data":{"action":"chat_message","messageCount":1,"queryLength":5,"ipHash":"eff8e7ca506627fe","hour":18},"sessionId":"e5f8f388-1dfe-4348-8d64-0d4e19b36a3b"}
+{"type":"CHAT_MESSAGE","timestamp":"2025-08-13T21:27:36.105Z","data":{"messageCount":1,"ipHash":"eff8e7ca506627fe","hour":18},"sessionId":"e5f8f388-1dfe-4348-8d64-0d4e19b36a3b"}
+{"type":"SEARCH_QUERY","timestamp":"2025-08-13T21:27:36.119Z","data":{"resultCount":1,"hasResults":true,"ipHash":"eff8e7ca506627fe","queryHash":"2cf24dba5fb0a30e","hour":18},"sessionId":"e5f8f388-1dfe-4348-8d64-0d4e19b36a3b"}
+{"type":"FAQ_MISS","timestamp":"2025-08-13T21:27:36.119Z","data":{"topScore":0.39702817331308704,"ipHash":"eff8e7ca506627fe","hour":18},"sessionId":"e5f8f388-1dfe-4348-8d64-0d4e19b36a3b"}

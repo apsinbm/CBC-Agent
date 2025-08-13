@@ -1,6 +1,6 @@
 # CBC-Agent - Coral Beach & Tennis Club Concierge
 
-A modern, AI-powered chatbot for the Coral Beach & Tennis Club, built with Next.js 15 and Claude AI. Features Alonso, the club's Amazon parrot concierge assistant with comprehensive knowledge of club facilities, services, and policies.
+A modern, AI-powered chatbot for the Coral Beach & Tennis Club, built with Next.js 15 and Claude AI. Features Alonso the Amazing Amazon Parrot, the club's charming concierge assistant with comprehensive knowledge of club facilities, services, and policies.
 
 ## Features
 
