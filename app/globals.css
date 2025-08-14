@@ -105,6 +105,101 @@ div[style*="bottom: 24px"][style*="left: 24px"],
   color: white !important;
 }
 
+/* ===== FORCE LIGHT THEME FOR ALL INPUTS ===== */
+/* Single source of truth for input theming - prevents dark mode interference */
+@layer base {
+  /* Global input reset - force light theme */
+  input:not(.faq-search-input),
+  textarea:not(.faq-search-input),
+  select:not(.faq-search-input),
+  [type="text"],
+  [type="email"],
+  [type="tel"],
+  [type="number"],
+  [type="date"],
+  [type="time"],
+  [type="search"],
+  [type="url"],
+  [type="password"] {
+    background-color: white !important;
+    color: black !important;
+    -webkit-text-fill-color: black !important;
+    -webkit-background-clip: padding-box !important;
+  }
+  
+  /* Placeholder styling */
+  input:not(.faq-search-input)::placeholder,
+  textarea:not(.faq-search-input)::placeholder {
+    color: #6b7280 !important; /* gray-500 */
+    -webkit-text-fill-color: #6b7280 !important;
+    opacity: 1 !important;
+  }
+  
+  /* Focus state */
+  input:not(.faq-search-input):focus,
+  textarea:not(.faq-search-input):focus,
+  select:not(.faq-search-input):focus {
+    background-color: white !important;
+    color: black !important;
+    -webkit-text-fill-color: black !important;
+  }
+  
+  /* Disabled state */
+  input:not(.faq-search-input):disabled,
+  textarea:not(.faq-search-input):disabled,
+  select:not(.faq-search-input):disabled {
+    background-color: #f9fafb !important; /* gray-50 */
+    color: #6b7280 !important; /* gray-500 */
+    -webkit-text-fill-color: #6b7280 !important;
+    opacity: 1 !important;
+  }
+  
+  /* Autofill override */
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active,
+  textarea:-webkit-autofill,
+  select:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px white inset !important;
+    -webkit-text-fill-color: black !important;
+    background-color: white !important;
+    transition: background-color 5000s ease-in-out 0s;
+  }
+  
+  /* Date/time picker overrides */
+  input[type="date"]::-webkit-calendar-picker-indicator,
+  input[type="time"]::-webkit-calendar-picker-indicator {
+    filter: invert(0) !important;
+    opacity: 0.6;
+  }
+  
+  /* Select dropdown arrow */
+  select:not(.faq-search-input) {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3E%3C/svg%3E") !important;
+    background-position: right 0.5rem center !important;
+    background-repeat: no-repeat !important;
+    background-size: 1.5em 1.5em !important;
+    padding-right: 2.5rem !important;
+  }
+  
+  /* Prevent dark mode color scheme */
+  input, textarea, select {
+    color-scheme: light !important;
+  }
+  
+  /* Override any Tailwind dark: modifiers */
+  @media (prefers-color-scheme: dark) {
+    input:not(.faq-search-input),
+    textarea:not(.faq-search-input),
+    select:not(.faq-search-input) {
+      background-color: white !important;
+      color: black !important;
+      -webkit-text-fill-color: black !important;
+    }
+  }
+}
+
 @layer utilities {
   .scrollbar-thin {
     scrollbar-width: thin;

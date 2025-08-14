@@ -181,6 +181,105 @@ Time service endpoint:
 - Formatted for natural language responses
 - Used internally by chat endpoint for time queries
 
+## Operations
+
+### Environment Configuration
+
+#### Development
+```bash
+ANTHROPIC_API_KEY=sk-ant-api03-...
+NODE_ENV=development
+NEXT_PUBLIC_URL=http://localhost:3000
+EMAIL_DRY_RUN=true  # Prevents actual email sends during testing
+```
+
+#### Staging
+```bash
+ANTHROPIC_API_KEY=sk-ant-api03-...
+OPENAI_API_KEY=sk-... # Fallback provider
+NODE_ENV=production
+NEXT_PUBLIC_URL=https://staging.coralbeach.bm
+RATE_LIMIT_MAX=20
+EMAIL_DRY_RUN=true  # Safe testing with email logging only
+```
+
+#### Production
+```bash
+ANTHROPIC_API_KEY=sk-ant-api03-...
+OPENAI_API_KEY=sk-... # Fallback provider  
+NODE_ENV=production
+NEXT_PUBLIC_URL=https://coralbeach.bm
+RATE_LIMIT_MAX=10
+FAQ_ENABLED=true
+ALONSO_PERSONA_ENABLED=true
+EMAIL_DRY_RUN=false # Enable actual email delivery
+```
+
+### Running with Email Dry Run
+
+Set `EMAIL_DRY_RUN=true` to log email operations without sending:
+
+```bash
+EMAIL_DRY_RUN=true npm run dev
+```
+
+This will:
+- Log all email attempts to console
+- Skip actual SMTP delivery
+- Preserve form submission functionality
+- Safe for development and staging environments
+
+### Quick Self-Check Examples
+
+#### 1. Health Check
+```bash
+curl http://localhost:3000/api/health
+# Expected: {"status":"healthy","timestamp":"..."}
+```
+
+#### 2. Chat Endpoint
+```bash
+curl -X POST http://localhost:3000/api/chat \
+  -H "Content-Type: application/json" \
+  -d '{"messages":[{"role":"user","content":"Hello"}]}'
+# Expected: JSON response with reply field
+```
+
+#### 3. Rate Limit Test
+```bash
+# Send 15 rapid requests to trigger rate limiting
+for i in {1..15}; do
+  curl -X POST http://localhost:3000/api/chat \
+    -H "Content-Type: application/json" \
+    -d '{"messages":[{"role":"user","content":"test '$i'"}]}' &
+done
+# Expected: 429 responses after 10th request
+```
+
+#### 4. CORS Test
+```bash
+curl -H "Origin: https://malicious.com" \
+  http://localhost:3000/api/chat
+# Expected: No CORS headers for unauthorized origin
+```
+
+#### 5. Oversized Payload Test
+```bash
+curl -X POST http://localhost:3000/api/chat \
+  -H "Content-Type: application/json" \
+  -d '{"messages":[{"role":"user","content":"'$(head -c 200000 /dev/zero | tr '\0' 'A')'"}]}'
+# Expected: 400 error about request size
+```
+
+### Security Monitoring
+
+See `SECURITY_NOTES.md` for detailed security operational guidance including:
+- PII protection and masking
+- Rate limiting configuration
+- Domain allowlist management
+- Kill switch and maintenance mode
+- Content moderation policies
+
 ## Environment Variables
 
 The following environment variables are configured in `.env.local`:
@@ -228,3 +327,22 @@ The following environment variables are configured in `.env.local`:
 - Clear Next.js cache with `rm -rf .next` if encountering build errors
 - Restart dev server after major TypeScript interface changes
 - Verify environment variables are properly configured
+
+### Pre-commit Hooks (Optional)
+
+To enable automatic linting and type checking before commits:
+
+```bash
+# Install Husky for git hooks
+npm install --save-dev husky
+npx husky init
+
+# Add pre-commit hook
+echo "npm run lint && npx tsc --noEmit" > .husky/pre-commit
+chmod +x .husky/pre-commit
+```
+
+This will automatically run linting and TypeScript checks before each commit, catching:
+- Security rule violations (console.log of objects, eval usage)
+- TypeScript errors and any types
+- Code style inconsistencies

@@ -1,3 +1,53 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": "next/core-web-vitals",
+  "rules": {
+    // Security and reliability rules
+    "no-console": ["warn", { "allow": ["warn", "error"] }],
+    "no-eval": "error",
+    "no-implied-eval": "error",
+    "no-new-func": "error",
+    "no-script-url": "error",
+    
+    // Prevent raw object logging (encourage safe logger)
+    "no-restricted-syntax": [
+      "error",
+      {
+        "selector": "CallExpression[callee.object.name='console'][callee.property.name='log'] > ObjectExpression",
+        "message": "Use safeLog() instead of console.log() for objects that may contain PII"
+      }
+    ],
+    
+    // TypeScript rules (requires @typescript-eslint/eslint-plugin)
+    // TODO: Install @typescript-eslint/eslint-plugin to enable:
+    // "@typescript-eslint/no-explicit-any": "warn",
+    // "@typescript-eslint/no-unused-vars": ["warn", { "argsIgnorePattern": "^_", "varsIgnorePattern": "^_" }],
+    
+    // Best practices
+    "prefer-const": "error",
+    "no-var": "error",
+    "eqeqeq": ["error", "always"],
+    "curly": ["error", "all"],
+    
+    // Security-sensitive patterns
+    "no-restricted-imports": [
+      "error",
+      {
+        "patterns": [
+          {
+            "group": ["child_process", "fs", "path"],
+            "message": "Server-side modules should not be imported in client code"
+          }
+        ]
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": ["src/lib/**/*.js", "app/api/**/*.js"],
+      "rules": {
+        // Allow server-side modules in API routes and lib
+        "no-restricted-imports": "off"
+      }
+    }
+  ]
 }

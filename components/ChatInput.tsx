@@ -35,6 +35,7 @@ export default function ChatInput({
           onKeyPress={handleKeyPress}
           placeholder="Ask Alonso..."
           rows={1}
+          disabled={false} // Never disable the textarea itself
           style={{ backgroundColor: 'white', color: 'black' }}
           className="flex-1 resize-none rounded-xl border border-neutral-300 px-3 py-2 sm:px-4 sm:py-3 
                    bg-white text-black

@@ -25,8 +25,8 @@ export const DEFAULT_CONFIG = {
   provider: WEATHER_PROVIDERS.OPEN_METEO,
   fallbackProvider: WEATHER_PROVIDERS.OPEN_METEO,
   timeout: {
-    connect: 2000, // 2s
-    read: 3000     // 3s
+    connect: 1500, // 1.5s (tightened for faster fallback)
+    read: 2000     // 2s (tightened for faster fallback)
   },
   retries: {
     count: 2,

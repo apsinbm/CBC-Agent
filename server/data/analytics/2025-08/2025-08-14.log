@@ -1,0 +1,13 @@
+{"type":"SESSION_START","timestamp":"2025-08-14T03:03:42.159Z","data":{"userAgent":"web","platform":"chat","ipHash":"eff8e7ca506627fe","hour":0},"sessionId":"965e8075-330a-42b7-9401-83c8a17f3c13"}
+{"type":"USER_INTERACTION","timestamp":"2025-08-14T03:03:42.160Z","data":{"action":"chat_message","messageCount":2,"queryLength":2,"ipHash":"eff8e7ca506627fe","hour":0},"sessionId":"965e8075-330a-42b7-9401-83c8a17f3c13"}
+{"type":"CHAT_MESSAGE","timestamp":"2025-08-14T03:03:42.160Z","data":{"messageCount":2,"ipHash":"eff8e7ca506627fe","hour":0},"sessionId":"965e8075-330a-42b7-9401-83c8a17f3c13"}
+{"type":"SEARCH_QUERY","timestamp":"2025-08-14T03:03:42.178Z","data":{"resultCount":1,"hasResults":true,"ipHash":"eff8e7ca506627fe","queryHash":"8f434346648f6b96","hour":0},"sessionId":"965e8075-330a-42b7-9401-83c8a17f3c13"}
+{"type":"FAQ_HIT","timestamp":"2025-08-14T03:03:42.178Z","data":{"faqId":"tennis-dress-code","score":0.683772233983162,"ipHash":"eff8e7ca506627fe","hour":0},"sessionId":"965e8075-330a-42b7-9401-83c8a17f3c13"}
+{"type":"USER_INTERACTION","timestamp":"2025-08-14T03:03:50.509Z","data":{"action":"chat_message","messageCount":4,"queryLength":23,"ipHash":"eff8e7ca506627fe","hour":0},"sessionId":"965e8075-330a-42b7-9401-83c8a17f3c13"}
+{"type":"CHAT_MESSAGE","timestamp":"2025-08-14T03:03:50.510Z","data":{"messageCount":4,"ipHash":"eff8e7ca506627fe","hour":0},"sessionId":"965e8075-330a-42b7-9401-83c8a17f3c13"}
+{"type":"SEARCH_QUERY","timestamp":"2025-08-14T03:03:50.540Z","data":{"resultCount":1,"hasResults":true,"ipHash":"eff8e7ca506627fe","queryHash":"682ac5944b153fdb","hour":0},"sessionId":"965e8075-330a-42b7-9401-83c8a17f3c13"}
+{"type":"FAQ_MISS","timestamp":"2025-08-14T03:03:50.541Z","data":{"topScore":0.2603662190495458,"ipHash":"eff8e7ca506627fe","hour":0},"sessionId":"965e8075-330a-42b7-9401-83c8a17f3c13"}
+{"type":"USER_INTERACTION","timestamp":"2025-08-14T03:04:02.898Z","data":{"action":"chat_message","messageCount":6,"queryLength":19,"ipHash":"eff8e7ca506627fe","hour":0},"sessionId":"965e8075-330a-42b7-9401-83c8a17f3c13"}
+{"type":"CHAT_MESSAGE","timestamp":"2025-08-14T03:04:02.899Z","data":{"messageCount":6,"ipHash":"eff8e7ca506627fe","hour":0},"sessionId":"965e8075-330a-42b7-9401-83c8a17f3c13"}
+{"type":"SEARCH_QUERY","timestamp":"2025-08-14T03:04:02.915Z","data":{"resultCount":1,"hasResults":true,"ipHash":"eff8e7ca506627fe","queryHash":"2d3728e732373062","hour":0},"sessionId":"965e8075-330a-42b7-9401-83c8a17f3c13"}
+{"type":"FAQ_MISS","timestamp":"2025-08-14T03:04:02.915Z","data":{"topScore":0.3276169490841281,"ipHash":"eff8e7ca506627fe","hour":0},"sessionId":"965e8075-330a-42b7-9401-83c8a17f3c13"}

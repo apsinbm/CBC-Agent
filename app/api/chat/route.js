@@ -5,6 +5,13 @@ import { initFaqs, searchFaqs as searchFaqsNew, hotReloadInDev } from "@/src/lib
 import { logEvent } from "@/src/lib/analytics/logEvent";
 import { getSessionId, trackSession, trackPageView, trackInteraction, trackSearch, getSessionHeaders } from "@/src/lib/analytics/sessionManager";
 import weatherService, { WEATHER_UNITS } from "@/src/lib/weather";
+import { validateEnvironment } from "@/src/lib/validate-env";
+import { checkRateLimit, getRateLimitId } from "@/src/lib/rate-limiter";
+import { checkRateLimitTier } from "@/src/lib/rate-limit-tiers";
+import { checkModeration, validateConversation, hardenSystemPrompt, filterResponse } from "@/src/lib/prompt-moderation";
+import { maybeGetAlonsoSnippet } from "@/src/lib/alonso-persona";
+import { safeLog, createSafeLogObject } from "@/src/lib/pii-protection";
+import { validateRequest, withTimeout, TIMEOUT_LIMITS } from "@/src/lib/request-guards";
 import fs from "fs";
 import path from "path";
 import * as yaml from "js-yaml";
@@ -12,6 +19,13 @@ import * as yaml from "js-yaml";
 // Enable hot reload in development
 if (process.env.NODE_ENV === 'development') {
   hotReloadInDev();
+}
+
+// Validate environment on first load
+let envValidated = false;
+if (!envValidated) {
+  validateEnvironment();
+  envValidated = true;
 }
 
 function readText(relPath) {
@@ -115,7 +129,7 @@ async function getFromAnthropic({ system, messages }) {
           };
         }
       } catch (error) {
-        console.error('Tool execution error:', error);
+        safeLog('Tool Error', error.message);
         return { 
           provider: "anthropic", 
           model, 
@@ -236,7 +250,7 @@ async function loadAccommodationsData() {
     const fileContent = fs.readFileSync(accommodationsPath, 'utf-8');
     return yaml.load(fileContent);
   } catch (error) {
-    console.error('Failed to load accommodations data:', error);
+    safeLog('Accommodations Error', error.message);
     return null;
   }
 }
@@ -279,7 +293,7 @@ async function fetchClubWeather() {
       unit: '°C'
     };
   } catch (error) {
-    console.error('[Weather] Chat integration error:', error);
+    safeLog('Weather', 'Chat integration error:', error.message);
     return {
       success: false,
       error: error.message || 'fetch_failed'
@@ -316,7 +330,7 @@ async function fetchClubTime() {
       success: true 
     };
   } catch (error) {
-    console.error('Time fetch error:', error);
+    safeLog('Time', 'Fetch error:', error.message);
     // Return a basic fallback
     const now = new Date();
     return { 
@@ -332,9 +346,65 @@ async function fetchClubTime() {
 
 export async function POST(req) {
   try {
+    // Validate request size and structure
+    const validation = await validateRequest(req, 'chat');
+    if (!validation.valid) {
+      return new Response(JSON.stringify({ 
+        error: validation.error,
+        reply: "I apologize, but there seems to be an issue with your message. " + validation.error
+      }), {
+        status: 400,
+        headers: { "Content-Type": "application/json" }
+      });
+    }
+    // Use tiered rate limiting for chat
+    const tierCheck = checkRateLimitTier(req, 'chat');
+    if (!tierCheck.allowed) {
+      return new Response(JSON.stringify({
+        error: "Rate limit exceeded",
+        reply: tierCheck.message || "I need a moment to catch my breath! Please wait a few seconds before sending another message. 🦜",
+        retryAfter: tierCheck.retryAfter
+      }), {
+        status: 429,
+        headers: {
+          "Content-Type": "application/json",
+          "Retry-After": String(tierCheck.retryAfter),
+          "X-RateLimit-Limit": "10",
+          "X-RateLimit-Remaining": "0",
+          "X-RateLimit-Reset": String(Date.now() + tierCheck.retryAfter * 1000)
+        }
+      });
+    }
+    
     const { messages = [] } = await req.json();
+    
+    // Validate conversation for injection attempts
+    const conversationCheck = validateConversation(messages);
+    if (!conversationCheck.valid) {
+      return new Response(JSON.stringify({ 
+        error: "Invalid conversation",
+        reply: "I apologize, but there seems to be an issue with your message. Please try rephrasing your question about Coral Beach Club."
+      }), {
+        status: 400,
+        headers: { "Content-Type": "application/json" }
+      });
+    }
+    
     const lastMessage = messages[messages.length - 1];
     const userQuery = lastMessage?.content || '';
+    
+    // Check for prompt injection and moderation needs
+    const moderationCheck = checkModeration(userQuery);
+    if (moderationCheck.needsModeration && moderationCheck.action === 'block') {
+      safeLog('Moderation', 'Blocked message due to:', moderationCheck.action);
+      return new Response(JSON.stringify({ 
+        error: "Content moderation",
+        reply: moderationCheck.message
+      }), {
+        status: 400,
+        headers: { "Content-Type": "application/json" }
+      });
+    }
     
     // Get IP for analytics (hashed, never stored raw)
     const ip = req.headers.get('x-forwarded-for') || req.headers.get('x-real-ip') || 'unknown';
@@ -445,19 +515,24 @@ export async function POST(req) {
     const tennisPickleballKnowledge = readText("data/cbc_tennis_pickleball.md");
     const weddingServicesKnowledge = readText("data/cbc_wedding_services.md");
     
-    let system = `${systemPrompt}\n\nKnowledge Base:\n${knowledge}\n\n${diningKnowledge}\n\n${venuesEventsKnowledge}\n\n${activitiesKnowledge}\n\n${tennisPickleballKnowledge}\n\n${weddingServicesKnowledge}`;
+    // Harden system prompt against injection
+    const baseSystem = `${systemPrompt}\n\nKnowledge Base:\n${knowledge}\n\n${diningKnowledge}\n\n${venuesEventsKnowledge}\n\n${activitiesKnowledge}\n\n${tennisPickleballKnowledge}\n\n${weddingServicesKnowledge}`;
+    let system = hardenSystemPrompt(baseSystem);
     
     // ALWAYS fetch and inject current time (for context awareness)
     const timeData = await fetchClubTime();
     if (timeData.success) {
       system += `\n\n**CURRENT TIME AT THE CLUB**: ${timeData.time} on ${timeData.date}
 Note: You always have access to the current time. Reference it naturally when relevant to the conversation.`;
+    } else {
+      // Graceful fallback for time - still provide approximation without claiming live check
+      system += `\n\n**TIME STATUS**: Having a spot of trouble with the club clock—when asked about time, I'll give my best estimate based on Atlantic time (UTC-4/UTC-3 depending on daylight saving).`;
     }
     
     // ALWAYS fetch and inject current weather (for context awareness)
-    console.log('[Weather] Fetching current weather for context...');
+    // Weather fetch - no PII to log
     const weatherData = await fetchClubWeather();
-    console.log('[Weather] Data:', weatherData);
+    // Weather data retrieved - no PII
     
     if (weatherData.success) {
       const dataFreshness = weatherData.isStale 
@@ -473,7 +548,8 @@ Note: You always have access to the current time. Reference it naturally when re
 
 Note: You always have access to current weather conditions. Reference them naturally when relevant to the conversation (e.g., activity recommendations, clothing suggestions, outdoor dining, etc.). ${weatherData.isStale ? 'This is recent cached data.' : 'This is live real-time data.'}`;
     } else {
-      system += `\n\n**WEATHER STATUS**: Temporarily unavailable. You may share typical climate patterns for this time of year if asked.`;
+      // Graceful fallback message - no pretense of live checking
+      system += `\n\n**WEATHER STATUS**: It's quiet on the line—when I can't reach our weather service, I'll still share the latest typical conditions for this time of year if asked. The club enjoys Bermuda's subtropical climate year-round.`;
     }
     
     // Check if this is an accommodation query and load detailed data
@@ -491,10 +567,70 @@ You have access to detailed accommodation data to help guests understand their o
       }
     }
 
+    // Helper function to finalize response with Alonso snippet
+    const finalizeResponse = (responseText, provider, model) => {
+      // Prepare context for Alonso snippet logic
+      const isFirstTurn = messages.length <= 1;
+      const userMessage = messages[messages.length - 1]?.content || '';
+      const turnIndex = Math.floor(messages.length / 2); // Approximate turn index
+      
+      // Check if this is a critical task (form submission, etc.)
+      const isCriticalTask = (
+        responseText.includes('submitReservation') ||
+        responseText.includes('consent') ||
+        responseText.includes('Your reference number is') ||
+        userMessage.toLowerCase().includes('submit') ||
+        userMessage.toLowerCase().includes('confirm')
+      );
+      
+      // Check if response contains greeting patterns
+      const wasGreeting = (
+        responseText.includes('Hello') ||
+        responseText.includes('Hi ') ||
+        responseText.includes('Welcome') ||
+        responseText.includes('Good day')
+      );
+      
+      const context = {
+        userMessage,
+        isFirstTurn,
+        isCriticalTask,
+        turnIndex,
+        messageCount: messages.length,
+        isFormSubmission: isCriticalTask,
+        responseLength: responseText.length,
+        responseText: responseText,
+        wasGreeting,
+        topicsDetected: [] // Could be enhanced with topic detection
+      };
+      
+      // Get Alonso snippet (if environment allows)
+      const alonsoEnabled = process.env.ALONSO_PERSONA_ENABLED !== 'false'; // Default true
+      let finalText = responseText;
+      
+      if (alonsoEnabled) {
+        try {
+          const snippet = maybeGetAlonsoSnippet(sessionId, context);
+          if (snippet) {
+            // Append snippet with proper spacing
+            finalText = responseText + (responseText.endsWith('.') ? ' ' : '. ') + snippet;
+            // Filter final response for safety
+            finalText = filterResponse(finalText);
+          }
+        } catch (error) {
+          safeLog('Alonso', 'Error adding snippet:', error.message);
+          // Continue without snippet on error
+        }
+      }
+      
+      return { provider, model, reply: finalText };
+    };
+
     // Try Anthropic first, then OpenAI
     try {
       const a = await getFromAnthropic({ system, messages });
-      return new Response(JSON.stringify({ provider: a.provider, model: a.model, reply: a.text }), {
+      const finalResponse = finalizeResponse(a.text, a.provider, a.model);
+      return new Response(JSON.stringify(finalResponse), {
         status: 200, headers: { 
           "Content-Type": "application/json",
           ...getSessionHeaders(sessionId)
@@ -502,7 +638,8 @@ You have access to detailed accommodation data to help guests understand their o
       });
     } catch (_) {
       const o = await getFromOpenAI({ system, messages });
-      return new Response(JSON.stringify({ provider: o.provider, model: o.model, reply: o.text }), {
+      const finalResponse = finalizeResponse(o.text, o.provider, o.model);
+      return new Response(JSON.stringify(finalResponse), {
         status: 200, headers: { 
           "Content-Type": "application/json",
           ...getSessionHeaders(sessionId)
@@ -510,7 +647,7 @@ You have access to detailed accommodation data to help guests understand their o
       });
     }
   } catch (err) {
-    console.error(err);
+    safeLog('API Error', err.message || 'Unknown error');
     return new Response(JSON.stringify({ error: "Server error", detail: String(err?.message || err) }), {
       status: 500, headers: { "Content-Type": "application/json" },
     });

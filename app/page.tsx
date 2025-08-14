@@ -221,11 +221,11 @@ export default function Home() {
     <main className="flex min-h-screen bg-gradient-to-br from-cbc-sand/20 to-neutral-50">
       <div className="container mx-auto max-w-6xl p-2 sm:p-4">
         <div className="flex flex-col h-[100vh] sm:h-[calc(100vh-2rem)] bg-white sm:rounded-2xl shadow-xl overflow-hidden">
-          <header className="bg-gradient-to-r from-cbc-blue to-blue-700 text-white py-0.5 px-3 sm:py-0.5 sm:px-6">
+          <header className="bg-gradient-to-r from-cbc-blue to-blue-700 text-white py-[1.8px] px-3 sm:py-[1.8px] sm:px-6">
             <div className="flex justify-between items-center">
               <div className="min-w-0 flex-1">
-                <h1 className="text-white font-bold text-[17.6px] sm:text-[19.8px] lg:text-[22px] truncate">Coral Beach & Tennis Club</h1>
-                <p className="text-white text-[13.2px] sm:text-[15.4px] opacity-90 font-semibold truncate">Guest Assistant Alonso at your service</p>
+                <h1 className="text-white font-bold text-[19.4px] sm:text-[21.8px] lg:text-[24.2px] truncate">Coral Beach & Tennis Club</h1>
+                <p className="text-white text-[14.5px] sm:text-[16.9px] opacity-90 font-semibold truncate">Guest Assistant Alonso at your service</p>
               </div>
               <a 
                 href="https://www.coralbeachclub.com/" 
@@ -237,7 +237,7 @@ export default function Home() {
                 <img 
                   src="/Bird-CBC2.png" 
                   alt="CBC Logo" 
-                  className="h-[45.4px] sm:h-[64.8px] w-auto object-contain hover:opacity-90 transition-opacity"
+                  className="h-[40.9px] sm:h-[58.3px] w-auto object-contain hover:opacity-90 transition-opacity"
                 />
               </a>
             </div>
