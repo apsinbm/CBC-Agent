@@ -1,11 +1,5 @@
 # Activities at Coral Beach & Tennis Club
 
-**TL;DR:**
-- Beach: Quarter-mile pink sand beach with water sports and service 10 AM - 6 PM
-- Spa: Full-service spa open 9 AM - 6 PM daily, advance booking recommended
-- Fitness: 24/7 gym access for members, yoga classes, personal training
-- Activities: Garden tours 10 AM daily, putting green, croquet, shopping outlets
-
 Our 26-acre oceanfront property offers a wide range of activities for members and guests—from beach days and water fun to racquet sports, fitness, gardens, and family games.
 
 ## Beach & Swimming

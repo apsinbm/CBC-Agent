@@ -5,7 +5,6 @@ const nextConfig = {
   env: {
     // Only expose non-sensitive config to client
     NEXT_PUBLIC_CLAUDE_API_MODEL: process.env.CLAUDE_API_MODEL,
-    NEXT_PUBLIC_CLAUDE_CLI_MODEL: process.env.CLAUDE_CLI_MODEL,
   },
   // Disable Next.js dev indicators
   devIndicators: {

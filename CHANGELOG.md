@@ -1,5 +1,101 @@
 # Changelog
 
+## [2025-08-15] - Cloud Deployment Readiness
+
+### Added
+
+#### Phase 1: Cloud-Ready Infrastructure
+- **Deployment Configurations**: Created `deployment/` folder with Vercel (`vercel.json`) and Netlify (`netlify.toml`) deployment configs
+- **Feature Flag System**: Implemented TypeScript-based feature flag management in `src/lib/feature-flags.ts`
+  - Zero breaking changes pattern: all cloud features default to `false`
+  - Feature flags: `FEATURE_EMAIL_NOTIFICATIONS`, `FEATURE_CALENDAR_INGEST`, `FEATURE_ANALYTICS`
+  - Comprehensive configuration validation with detailed warnings
+- **Health Monitoring**: Created `/api/_health` endpoint for comprehensive system monitoring
+  - LLM provider status, feature flag status, service readiness checks
+  - Response time monitoring, overall system health calculation
+  - PII-safe status reporting (no secrets exposed)
+- **Environment Configuration**: Expanded `.env.example` with 25+ cloud-specific variables
+  - Email provider configurations (SMTP, SendGrid, Mailgun)
+  - Feature flag templates with safety documentation
+  - Calendar ingestion and analytics configuration templates
+- **Enhanced Environment Validation**: Updated `src/lib/validate-env.js` with feature flag validation
+  - Conditional validation (only validates when features enabled)
+  - Provider-specific configuration checks
+  - Production safety warnings for misconfigured features
+- **Deployment Documentation**: Added comprehensive "Staging Deploy" section to README
+  - Step-by-step Vercel and Netlify deployment instructions
+  - Feature flag configuration guide, health check usage
+  - Deployment checklists for staging and production
+
+#### Phase 2: Email Notification System
+- **Multi-Provider Email Service**: Transformed `src/lib/email.ts` into enterprise-grade service
+  - Support for SMTP, SendGrid, Mailgun with automatic failover
+  - Feature-flag controlled activation (`FEATURE_EMAIL_NOTIFICATIONS`)
+  - Dry-run mode for staging safety (`EMAIL_DRY_RUN=true`)
+  - PII-safe logging throughout all email operations
+- **Enhanced Email Templates**: Professional HTML templates for all 6 intake types
+  - Rich formatting with emoji headers, color-coded sections
+  - Structured layouts: guest info, booking details, special requests
+  - Support for: dining, tennis, courts-lawn-sports, spa, wedding, plan-your-stay
+- **Intake Integration**: Updated all intake endpoints for new email system
+  - `/api/intake/route.ts` and `/api/intake/reservation/route.ts` enhanced
+  - Replaced legacy email functions with `notifyReception()`
+  - Comprehensive error handling without workflow disruption
+- **Email Health & Testing**: Created dedicated email service endpoints
+  - `/api/email/health` - Email service health monitoring and configuration status
+  - `/api/email/test` - Safe email testing for development/staging environments
+  - Security restrictions: development-only or dry-run mode required
+
+#### New API Endpoints
+- `/api/_health` - System health monitoring
+- `/api/email/health` - Email service health check  
+- `/api/email/test` - Email configuration testing
+
+#### New Configuration Options
+```bash
+# Feature Flags
+FEATURE_EMAIL_NOTIFICATIONS=false
+FEATURE_CALENDAR_INGEST=false  
+FEATURE_ANALYTICS=false
+
+# Email Service
+EMAIL_PROVIDER=smtp                    # smtp|sendgrid|mailgun
+RECEPTION_EMAILS=reception@coralbeach.bm
+EMAIL_DRY_RUN=true                    # Staging safety
+EMAIL_SUBJECT_PREFIX=[CBC Concierge]   # Email branding
+EMAIL_SEND_GUEST_COPY=false           # Guest confirmations
+
+# Provider Credentials
+SENDGRID_API_KEY=your_key
+MAILGUN_API_KEY=your_key
+MAILGUN_DOMAIN=your_domain
+```
+
+### Technical Details
+
+**Cloud Infrastructure Files**:
+- `deployment/vercel.json` - Vercel deployment with security headers, Node.js 18
+- `deployment/netlify.toml` - Netlify deployment with Next.js plugin
+- `deployment/env.example` - Comprehensive cloud environment template
+
+**Feature Flag System**:
+- `src/lib/feature-flags.ts` - TypeScript feature flag management
+- Enhanced `src/lib/validate-env.js` - Feature flag validation
+
+**Email System**:
+- Enhanced `src/lib/email.ts` - Multi-provider email service with failover
+- Updated intake endpoints: `app/api/intake/route.ts`, `app/api/intake/reservation/route.ts`
+- New health/testing: `app/api/email/health/route.ts`, `app/api/email/test/route.ts`
+
+**Health Monitoring**:
+- `app/api/_health/route.ts` - Comprehensive system health endpoint
+
+### Documentation
+
+- **DEVELOPMENT_HISTORY.md**: Comprehensive development timeline and technical architecture
+- **README.md**: Enhanced with cloud deployment section, feature flag documentation
+- **Deployment guides**: Step-by-step instructions for Vercel and Netlify
+
 ## [2025-08-13] - Major Enhancements & Fixes
 
 ### Added

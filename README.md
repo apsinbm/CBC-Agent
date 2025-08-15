@@ -104,10 +104,56 @@ CBC-Agent/
 - `npm run start` - Start production server
 - `npm run lint` - Run ESLint
 
+## Cloud Features 🚀
+
+CBC-Agent is cloud-ready with enterprise-grade features controlled by feature flags:
+
+### New API Endpoints
+
+- **`/api/_health`** - Comprehensive system health monitoring
+- **`/api/email/health`** - Email service status and configuration check  
+- **`/api/email/test`** - Safe email template testing (development/staging only)
+
+### Feature Flags
+
+All cloud features are disabled by default to ensure zero breaking changes:
+
+```bash
+FEATURE_EMAIL_NOTIFICATIONS=false    # Email notifications for intake submissions
+FEATURE_CALENDAR_INGEST=false       # Calendar content ingestion (future)
+FEATURE_ANALYTICS=false             # Enhanced analytics (future)
+```
+
+### Email Notification System
+
+Multi-provider email service with professional templates:
+
+- **Providers**: SMTP, SendGrid, Mailgun with automatic failover
+- **Templates**: Rich HTML formatting for all 6 intake types  
+- **Safety**: Dry-run mode for staging environments
+- **Monitoring**: Dedicated health checks and testing endpoints
+
+**Configuration Example**:
+```bash
+FEATURE_EMAIL_NOTIFICATIONS=true
+EMAIL_PROVIDER=sendgrid
+RECEPTION_EMAILS=reception@coralbeach.bm,concierge@coralbeach.bm
+EMAIL_DRY_RUN=true  # Safe for staging
+```
+
+### Health Monitoring
+
+Real-time system status with operational visibility:
+
+```bash
+curl https://your-domain.vercel.app/api/_health
+# Returns: system status, feature flags, LLM readiness, service health
+```
+
 ## Technologies Used
 
 - **Next.js 15** - React framework with App Router
-- **TypeScript** - Type safety and interfaces
+- **TypeScript** - Type safety and interfaces (cloud features)
 - **Tailwind CSS** - Styling with custom CBC color scheme
 - **Anthropic Claude 3.5 Sonnet** - Primary AI provider
 - **OpenAI GPT-4o-mini** - Fallback AI provider
@@ -215,6 +261,178 @@ ALONSO_PERSONA_ENABLED=true
 EMAIL_DRY_RUN=false # Enable actual email delivery
 ```
 
+## Staging Deploy
+
+CBC-Agent is ready for cloud deployment with feature flags for gradual rollout. All new cloud features are disabled by default to ensure zero breaking changes.
+
+### Deployment Platforms
+
+#### Vercel Deployment (Recommended)
+
+1. **Prerequisites**
+   ```bash
+   # Install Vercel CLI (optional)
+   npm i -g vercel
+   ```
+
+2. **Repository Setup**
+   - Push your code to GitHub/GitLab
+   - Connect repository to [Vercel dashboard](https://vercel.com)
+
+3. **Build Configuration**
+   - Next.js 15 with App Router is auto-detected
+   - Uses configuration from `deployment/vercel.json`
+   - Node.js 18 runtime with optimized build settings
+
+4. **Environment Variables Setup**
+   In Vercel dashboard → Settings → Environment Variables:
+   ```bash
+   # Required Core Variables
+   ANTHROPIC_API_KEY=sk-ant-api03-...
+   CLAUDE_API_MODEL=claude-3-5-sonnet-20240620
+   NEXT_PUBLIC_URL=https://your-project.vercel.app
+   NODE_ENV=production
+   
+   # Feature Flags (enable as needed)
+   FEATURE_EMAIL_NOTIFICATIONS=false
+   FEATURE_CALENDAR_INGEST=false  
+   FEATURE_ANALYTICS=false
+   
+   # Email Configuration (if notifications enabled)
+   EMAIL_PROVIDER=sendgrid
+   SENDGRID_API_KEY=your_sendgrid_key
+   RECEPTION_EMAILS=reception@coralbeach.bm
+   EMAIL_DRY_RUN=true  # Safe for staging
+   ```
+
+5. **Deploy**
+   ```bash
+   # Automatic deployment on git push
+   git push origin main
+   
+   # Or manual deployment via CLI
+   vercel --prod
+   ```
+
+#### Netlify Deployment
+
+1. **Repository Setup**
+   - Connect repository to [Netlify dashboard](https://netlify.com)
+
+2. **Build Configuration**
+   - Uses settings from `deployment/netlify.toml`
+   - Build command: `npm run build`
+   - Publish directory: `.next`
+
+3. **Environment Variables**
+   In Netlify dashboard → Site settings → Environment variables:
+   ```bash
+   # Same variables as Vercel above
+   ANTHROPIC_API_KEY=sk-ant-api03-...
+   NEXT_PUBLIC_URL=https://your-site.netlify.app
+   # ... (rest same as Vercel)
+   ```
+
+### Feature Flag Configuration
+
+Enable cloud features gradually by setting these environment variables:
+
+#### Email Notifications
+```bash
+FEATURE_EMAIL_NOTIFICATIONS=true
+EMAIL_PROVIDER=sendgrid|smtp|mailgun
+RECEPTION_EMAILS=reception@coralbeach.bm,concierge@coralbeach.bm
+EMAIL_DRY_RUN=true  # Set false when ready for production
+```
+
+#### Calendar Ingestion (Future)
+```bash
+FEATURE_CALENDAR_INGEST=true
+CALENDAR_INGEST_MODE=manual
+KB_PATH=data/cbc_knowledge.md
+CALENDAR_BACKUP_DIR=server/data/calendar
+```
+
+#### Analytics (Future)
+```bash
+FEATURE_ANALYTICS=true
+ANALYTICS_PROVIDER=plausible|posthog|rudderstack
+ANALYTICS_DSN=your_analytics_dsn
+ANALYTICS_PII_REDACTION=true
+```
+
+### Health Check & Monitoring
+
+#### Health Endpoint
+```bash
+curl https://your-domain.vercel.app/api/_health
+```
+
+**Expected Response:**
+```json
+{
+  "status": "healthy",
+  "version": "1.0.0",
+  "features": {
+    "email_notifications": false,
+    "calendar_ingest": false,
+    "analytics": false,
+    "cloud_features_active": false
+  },
+  "llm": {
+    "primary_ready": true,
+    "fallback_ready": true
+  },
+  "services": {
+    "weather": { "ready": true },
+    "email": { "enabled": false }
+  }
+}
+```
+
+#### Environment Validation
+The system validates configuration on startup and reports warnings for:
+- Missing required environment variables for enabled features
+- Invalid provider configurations
+- Feature flags enabled without required credentials
+
+#### Deployment Checklist
+
+**Pre-deployment:**
+- [ ] Set `ANTHROPIC_API_KEY` in deployment platform
+- [ ] Configure `NEXT_PUBLIC_URL` with your domain
+- [ ] Set `EMAIL_DRY_RUN=true` for staging safety
+- [ ] Review feature flags (start with all `false`)
+
+**Post-deployment:**
+- [ ] Test health endpoint: `/api/_health`
+- [ ] Verify chat functionality: `/`
+- [ ] Check environment validation warnings in logs
+- [ ] Test form submissions (if email enabled)
+
+**For Production:**
+- [ ] Set `EMAIL_DRY_RUN=false` when ready
+- [ ] Enable desired feature flags
+- [ ] Configure production email provider
+- [ ] Set up monitoring/analytics
+
+### Troubleshooting
+
+**Build Failures:**
+- Check environment variables are set in deployment platform
+- Verify Node.js version (requires 18+)
+- Review build logs for TypeScript errors
+
+**Runtime Issues:**
+- Check `/api/_health` for service status
+- Review server logs for validation warnings
+- Verify API keys have correct permissions
+
+**Feature Issues:**
+- Ensure required environment variables are set for enabled features
+- Check feature flag syntax (must be `true`, not `True` or `1`)
+- Review email/analytics provider configuration
+
 ### Running with Email Dry Run
 
 Set `EMAIL_DRY_RUN=true` to log email operations without sending:
@@ -284,10 +502,13 @@ See `SECURITY_NOTES.md` for detailed security operational guidance including:
 
 The following environment variables are configured in `.env.local`:
 
-- `ANTHROPIC_API_KEY` - Your Anthropic API key
-- `OPENAI_API_KEY` - Your OpenAI API key (fallback)
-- `CLAUDE_API_MODEL` - Claude model for chat (claude-3-5-sonnet-20240620)
-- `CLAUDE_CLI_MODEL` - Claude model for code agents (claude-4.1)
+- `ANTHROPIC_API_KEY` - Your Anthropic API key (required)
+- `CLAUDE_API_MODEL` - Primary Claude model (claude-3-5-sonnet-20240620)
+- `OPENAI_API_KEY` - OpenAI API key for fallback (optional but recommended)
+- `OPENAI_FALLBACK_MODEL` - OpenAI fallback model (gpt-4o-mini)
+- `PRIMARY_PROVIDER` - Primary LLM provider (anthropic)
+- `FALLBACK_PROVIDER` - Fallback LLM provider (openai)
+- `FALLBACK_ENABLED` - Enable/disable fallback system (true)
 
 ## Development Notes
 

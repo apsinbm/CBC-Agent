@@ -1,11 +1,5 @@
 # Tennis & Pickleball — Coral Beach & Tennis Club
 
-**TL;DR:**
-- Tennis: 8 Har-Tru clay courts (4 lit), 90% white/cream dress code required
-- Pickleball: 4 hard courts, any sports attire acceptable  
-- Shop: Mon-Fri 8:30 AM - 4 PM, Sat 9 AM - 12 PM | +1 (441) 239-7216
-- Programs: Year-round clinics, private lessons, junior development
-
 ## Overview
 - **Tennis**: 8 championship Har-Tru clay courts, daily maintenance, new fencing, added shade areas
 - **Pickleball**: 4 hard courts

@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { sendIntakeEmail } from '@/src/lib/email'
+import { notifyReception } from '@/src/lib/email'
 import { saveIntake } from '@/src/lib/storage'
+import { safeLog } from '@/src/lib/pii-protection'
 
 // Type definitions for different intake types
 interface BaseIntake {
@@ -30,6 +31,18 @@ interface TennisIntake extends BaseIntake {
   notes?: string
 }
 
+interface CourtsLawnSportsIntake extends BaseIntake {
+  memberNumber?: string
+  sportType: string
+  requestType: string
+  players: number
+  preferredDate: string
+  preferredTime: string
+  preferredSurface?: string
+  proPreference?: string
+  notes?: string
+}
+
 interface SpaIntake extends BaseIntake {
   treatmentType: string
   duration?: string
@@ -50,10 +63,10 @@ interface WeddingIntake extends BaseIntake {
   vision?: string
 }
 
-type IntakePayload = DiningIntake | TennisIntake | SpaIntake | WeddingIntake
+type IntakePayload = DiningIntake | TennisIntake | CourtsLawnSportsIntake | SpaIntake | WeddingIntake
 
 interface IntakeRequest {
-  type: 'dining' | 'tennis' | 'spa' | 'wedding' | 'plan-your-stay'
+  type: 'dining' | 'tennis' | 'courts-lawn-sports' | 'spa' | 'wedding' | 'plan-your-stay'
   payload: IntakePayload | any
 }
 
@@ -89,6 +102,15 @@ function isDiningIntake(type: string, payload: any): payload is DiningIntake {
 
 function isTennisIntake(type: string, payload: any): payload is TennisIntake {
   return type === 'tennis' && 
+    payload.requestType && 
+    payload.preferredDate && 
+    payload.preferredTime &&
+    typeof payload.players === 'number'
+}
+
+function isCourtsLawnSportsIntake(type: string, payload: any): payload is CourtsLawnSportsIntake {
+  return type === 'courts-lawn-sports' && 
+    payload.sportType &&
     payload.requestType && 
     payload.preferredDate && 
     payload.preferredTime &&
@@ -156,13 +178,6 @@ function generateSubject(type: string, payload: any): string {
   }
 }
 
-// Redact sensitive info for logging
-function redactForLogging(data: any): any {
-  const redacted = { ...data }
-  if (redacted.email) redacted.email = redacted.email.substring(0, 3) + '***'
-  if (redacted.phone) redacted.phone = '***'
-  return redacted
-}
 
 export async function POST(req: NextRequest) {
   try {
@@ -223,6 +238,15 @@ export async function POST(req: NextRequest) {
       }
     }
     
+    if (isCourtsLawnSportsIntake(type, payload)) {
+      if (payload.players < 1 || payload.players > 8) {
+        errors.push('Number of players must be between 1 and 8')
+      }
+      if (!validateText(payload.notes)) {
+        errors.push('Notes text is too long')
+      }
+    }
+    
     if (isSpaIntake(type, payload)) {
       if (!validateText(payload.accessibilityRequests)) {
         errors.push('Special requests text is too long')
@@ -263,25 +287,26 @@ export async function POST(req: NextRequest) {
     // Save to storage
     await saveIntake(intakeData)
     
-    // Log (redacted version)
-    console.info('New intake submission:', {
+    // Log (PII-safe version)
+    safeLog('Intake Submission', 'New submission:', {
       id: intakeId,
       type,
-      payload: redactForLogging(payload),
       timestamp: intakeData.createdAt,
+      payload
     })
     
-    // Send email
+    // Send email notification
     let emailSent = false
     try {
       const subject = generateSubject(type, payload)
-      emailSent = await sendIntakeEmail({
+      emailSent = await notifyReception({
         type,
         subject,
         data: intakeData,
+        sendGuestCopy: true
       })
     } catch (emailError) {
-      console.error('Email error:', emailError)
+      safeLog('Intake Email', 'Email notification failed:', emailError.message)
       // Don't fail the request if email fails
     }
     
@@ -295,7 +320,7 @@ export async function POST(req: NextRequest) {
     })
     
   } catch (error) {
-    console.error('Intake error:', error)
+    safeLog('Intake Error', 'Request processing failed:', error.message)
     return NextResponse.json(
       { ok: false, message: 'An error occurred. Please try again.' },
       { status: 500 }

@@ -462,3 +462,132 @@ categories:
         a: "Reservations: reservations@coralbeach.bm, Spa: spa@coralbeach.bm, Tennis: tennis@coralbeach.bm."
         tags: ["email", "contact", "reservations", "spa", "tennis"]
         updatedAt: "2025-08-13"
+
+  - id: "children-families"
+    title: "Children & Families"
+    faqs:
+      - id: "children-welcome"
+        q: "Are children welcome at the club?"
+        a: "Yes! We welcome children and families. Special children's activities are available, and we offer family-friendly dining options like Tuesday Beach BBQ & Sunday Family Night."
+        tags: ["children", "kids", "families", "family-friendly", "activities"]
+        updatedAt: "2025-08-14"
+        
+      - id: "babysitting-services"
+        q: "Do you offer babysitting services?"
+        a: "Babysitting services can be arranged through the front desk. Please contact them at +1 (441) 239-7201 to discuss availability and arrangements."
+        tags: ["babysitting", "childcare", "services", "families"]
+        updatedAt: "2025-08-14"
+        
+      - id: "children-pool-rules"
+        q: "Are there any pool rules for children?"
+        a: "Children must be supervised by parents or guardians at all times while using the pool and beach areas. We provide a safe, family-friendly environment."
+        tags: ["children", "pool rules", "safety", "supervision", "beach"]
+        updatedAt: "2025-08-14"
+        
+      - id: "family-cottages"
+        q: "Which cottages are best for families?"
+        a: "High Tidings (4 bedrooms) and Wheelhouse (3-4 bedrooms) are ideal for larger families. Surfsong (3-5 bedrooms) offers ocean views and flexible configurations."
+        tags: ["family cottages", "accommodations", "high tidings", "wheelhouse", "surfsong"]
+        updatedAt: "2025-08-14"
+
+  - id: "activities-recreation"
+    title: "Activities & Recreation"
+    faqs:
+      - id: "garden-tours"
+        q: "Are garden tours available?"
+        a: "Yes! Garden walking tours are offered daily at 10:00 AM with our landscapers. Our 26-acre grounds feature beautiful sub-tropical gardens."
+        tags: ["garden tours", "landscaping", "grounds", "walking", "nature"]
+        updatedAt: "2025-08-14"
+        
+      - id: "beach-services"
+        q: "What beach services are available?"
+        a: "Beach service operates from 10:00 AM to 6:00 PM in season, providing loungers, umbrellas, and towels. The Frozen Hut bar serves refreshments from 11:00 AM."
+        tags: ["beach services", "loungers", "umbrellas", "towels", "frozen hut"]
+        updatedAt: "2025-08-14"
+        
+      - id: "water-sports"
+        q: "What water sports equipment is available?"
+        a: "We provide snorkeling gear, and beach activities include beach tennis, volleyball, and bocce ball. Water sports equipment varies by season."
+        tags: ["water sports", "snorkeling", "beach tennis", "volleyball", "equipment"]
+        updatedAt: "2025-08-14"
+        
+      - id: "library-reading"
+        q: "Is there a library or reading area?"
+        a: "Yes, the Main Lounge provides comfortable seating areas for reading with beautiful ocean views. It's a peaceful spot to relax with a book."
+        tags: ["library", "reading", "main lounge", "quiet areas", "relaxation"]
+        updatedAt: "2025-08-14"
+        
+      - id: "shopping-outlets"
+        q: "What shopping is available at the club?"
+        a: "We have four shopping outlets: Beach Office, Boutique, Island Shop, and Tennis Shop, offering clothing, accessories, and sports equipment."
+        tags: ["shopping", "boutique", "tennis shop", "island shop", "retail"]
+        updatedAt: "2025-08-14"
+
+  - id: "wifi-technology"
+    title: "WiFi & Technology"
+    faqs:
+      - id: "wifi-availability"
+        q: "Is WiFi available throughout the property?"
+        a: "Yes, complimentary WiFi is available throughout the club including all guest rooms, cottages, suites, and common areas."
+        tags: ["wifi", "internet", "complimentary", "technology", "connectivity"]
+        updatedAt: "2025-08-14"
+        
+      - id: "club-app"
+        q: "Is there a club app?"
+        a: "Yes! The club app allows you to make dining reservations, view menus, and access club information. Ask the front desk for app download instructions."
+        tags: ["app", "mobile app", "reservations", "technology", "digital"]
+        updatedAt: "2025-08-14"
+        
+      - id: "charging-stations"
+        q: "Are there charging stations for devices?"
+        a: "All rooms and suites have power outlets for device charging. Additional charging areas are available in the Main Lounge and other public spaces."
+        tags: ["charging", "power outlets", "devices", "phones", "technology"]
+        updatedAt: "2025-08-14"
+
+  - id: "concierge-services"
+    title: "Concierge & Guest Services"
+    faqs:
+      - id: "island-recommendations"
+        q: "Can you recommend things to do around Bermuda?"
+        a: "Our front desk team provides excellent local recommendations for attractions, tours, shopping, and activities throughout Bermuda. Contact them at +1 (441) 239-7201."
+        tags: ["concierge", "island activities", "recommendations", "tours", "sightseeing"]
+        updatedAt: "2025-08-14"
+        
+      - id: "laundry-services"
+        q: "Are laundry services available?"
+        a: "Yes, laundry and dry cleaning services are available. Most cottages also have washers and dryers for your convenience."
+        tags: ["laundry", "dry cleaning", "washing machines", "cottages", "services"]
+        updatedAt: "2025-08-14"
+        
+      - id: "newspaper-delivery"
+        q: "Can I get newspapers delivered?"
+        a: "Local and international newspapers can be arranged through the front desk. The Royal Gazette (local) and other publications are available."
+        tags: ["newspapers", "royal gazette", "delivery", "news", "media"]
+        updatedAt: "2025-08-14"
+        
+      - id: "luggage-assistance"
+        q: "Is luggage assistance available?"
+        a: "Yes, the front desk provides luggage assistance for arrivals and departures. They can also arrange luggage storage if needed."
+        tags: ["luggage", "assistance", "storage", "arrival", "departure"]
+        updatedAt: "2025-08-14"
+
+  - id: "special-occasions"
+    title: "Special Occasions & Celebrations"
+    faqs:
+      - id: "anniversary-celebrations"
+        q: "Can you help arrange anniversary celebrations?"
+        a: "Absolutely! Our team can arrange special dining experiences, room decorations, and celebration packages. Contact the front desk to plan your special occasion."
+        tags: ["anniversary", "celebrations", "special occasions", "romance", "packages"]
+        updatedAt: "2025-08-14"
+        
+      - id: "birthday-parties"
+        q: "Can you host birthday celebrations?"
+        a: "Yes! We can arrange birthday celebrations in our dining venues or private spaces. Our events team can help plan the perfect celebration."
+        tags: ["birthday", "parties", "celebrations", "events", "private dining"]
+        updatedAt: "2025-08-14"
+        
+      - id: "private-dining"
+        q: "Is private dining available?"
+        a: "Yes, we offer private dining experiences in various locations including The Cave (wine cellar), Main Lounge, and terrace settings."
+        tags: ["private dining", "the cave", "wine cellar", "intimate dining", "special meals"]
+        updatedAt: "2025-08-14"

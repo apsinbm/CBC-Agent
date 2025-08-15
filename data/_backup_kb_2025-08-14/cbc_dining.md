@@ -1,11 +1,5 @@
 # Dining at Coral Beach & Tennis Club
 
-**TL;DR:**
-- 3 dining venues: Coral Room (elegant), Beach Terrace (casual), Frozen Hut (beach bar)
-- Dress code: Resort attire, no denim; jackets for men Thu/Sat evenings
-- Reservations via app or Front Desk: +1 (441) 239-7201
-- Special weekly events: Tuesday BBQ, Thursday Seafood Buffet, Sunday Family Night
-
 The Coral Beach & Tennis Club offers three incredible restaurants, all with exceptional ocean views. From relaxed beachside lunches served to your lounger to elegant dinners on Longtail Terrace, there's an option for every occasion.
 
 ## Overview

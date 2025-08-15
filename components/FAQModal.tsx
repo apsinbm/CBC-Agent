@@ -201,7 +201,8 @@ export default function FAQModal({ isOpen, onClose }: FAQModalProps) {
               placeholder="Search all FAQs..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="faq-search-input w-full pl-10 pr-4 py-3 rounded-lg text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-white/50 bg-white/20"
+              className="faq-search-input w-full pl-10 pr-4 py-3 rounded-lg transition-all duration-200"
+              autoComplete="off"
             />
           </div>
         </div>

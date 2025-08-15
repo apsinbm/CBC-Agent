@@ -1,0 +1,204 @@
+# CBC Knowledge Base Index
+# LastUpdated: 2025-08-14
+# Purpose: Topic-based index for selective KB loading
+
+topics:
+  accommodations:
+    sections:
+      - id: rooms-overview
+        title: "Guest Rooms & Suites Overview"
+        summary: "30 guest rooms in clubhouse wings, 5 spacious suites, all with ocean views and private terraces"
+        source: "cbc_knowledge.md#accommodations"
+      - id: cottages
+        title: "Private Cottages"
+        summary: "9 individually designed cottages from 1-5 bedrooms with unique features, kitchens, and privacy"
+        source: "cbc_knowledge.md#cottages"
+      - id: booking-policies
+        title: "Booking & Policies"
+        summary: "Reservations, cancellation policies, member benefits, taxes and fees"
+        source: "cbc_knowledge.md#booking-policies"
+        
+  dining:
+    sections:
+      - id: dining-venues
+        title: "Dining Venues"
+        summary: "Coral Room & Longtail Terrace (elegant), Beach Terrace (casual), Frozen Hut (beach bar)"
+        source: "cbc_dining.md#dining-venues"
+      - id: dining-hours
+        title: "Dining Hours & Service"
+        summary: "Breakfast, lunch, dinner hours, afternoon tea, room service times"
+        source: "cbc_dining.md#hours-service"
+      - id: dining-dress-code
+        title: "Dining Dress Code"
+        summary: "Resort attire required, no denim, jackets for gentlemen Thursday/Saturday evenings"
+        source: "cbc_dining.md#dress-code"
+      - id: special-dining-events
+        title: "Special Dining Events"
+        summary: "Tuesday BBQ, Thursday Seafood Buffet, Sunday Family Night, Monthly Curry Night"
+        source: "cbc_dining.md#special-events"
+        
+  spa:
+    sections:
+      - id: spa-services
+        title: "Spa Services & Treatments"
+        summary: "European facials, massages, body wraps, salon services, wellness programs"
+        source: "cbc_activities.md#spa-wellness"
+      - id: spa-hours
+        title: "Spa Hours & Booking"
+        summary: "Open 9 AM - 6 PM daily, advance booking recommended"
+        source: "cbc_activities.md#spa-hours"
+      - id: spa-specials
+        title: "Spa Specials & Packages"
+        summary: "Seasonal specials, package deals, wellness programs"
+        source: "cbc_activities.md#spa-specials"
+        
+  tennis:
+    sections:
+      - id: tennis-facilities
+        title: "Tennis Facilities"
+        summary: "8 Har-Tru clay courts, 4 with lights for evening play"
+        source: "cbc_tennis_pickleball.md#tennis-facilities"
+      - id: tennis-dress-code
+        title: "Tennis Dress Code"
+        summary: "90% white or cream required, clay court appropriate soles mandatory"
+        source: "cbc_tennis_pickleball.md#tennis-dress-code"
+      - id: tennis-programs
+        title: "Tennis Programs & Lessons"
+        summary: "Year-round clinics, private lessons, junior programs, adult workshops"
+        source: "cbc_tennis_pickleball.md#tennis-programs"
+      - id: tennis-booking
+        title: "Court Booking & Fees"
+        summary: "Book through Tennis Shop, guest fees, member benefits"
+        source: "cbc_tennis_pickleball.md#booking-fees"
+        
+  pickleball:
+    sections:
+      - id: pickleball-facilities
+        title: "Pickleball Courts"
+        summary: "4 hard courts dedicated to pickleball, equipment available"
+        source: "cbc_tennis_pickleball.md#pickleball"
+      - id: pickleball-rules
+        title: "Pickleball Rules & Attire"
+        summary: "Any respectful sports attire acceptable, equipment at Tennis Shop"
+        source: "cbc_tennis_pickleball.md#pickleball-rules"
+        
+  squash:
+    sections:
+      - id: squash-facilities
+        title: "Squash Courts"
+        summary: "2 international squash courts, non-marking soles required"
+        source: "cbc_tennis_pickleball.md#squash"
+      - id: squash-booking
+        title: "Squash Booking & Equipment"
+        summary: "Book through Tennis Shop, equipment available for rental"
+        source: "cbc_tennis_pickleball.md#squash-booking"
+        
+  activities:
+    sections:
+      - id: beach-activities
+        title: "Beach & Water Activities"
+        summary: "Private pink sand beach, water sports, snorkeling, beach games"
+        source: "cbc_activities.md#beach-activities"
+      - id: garden-tours
+        title: "Garden & Nature Tours"
+        summary: "Daily garden tours at 10 AM, 26 acres of sub-tropical grounds"
+        source: "cbc_activities.md#garden-tours"
+      - id: fitness-facilities
+        title: "Fitness & Wellness"
+        summary: "24/7 fitness center, yoga classes, personal training"
+        source: "cbc_activities.md#fitness"
+      - id: lawn-sports
+        title: "Lawn Sports"
+        summary: "Croquet pitch, bocce, 18-hole putting green"
+        source: "cbc_activities.md#lawn-sports"
+      - id: shopping
+        title: "Shopping Outlets"
+        summary: "Beach Office, Boutique, Island Shop, Tennis Shop"
+        source: "cbc_activities.md#shopping"
+        
+  weddings:
+    sections:
+      - id: wedding-venues
+        title: "Wedding Venues"
+        summary: "Wedding Lawn (300 guests), Longtail Terrace, Beach ceremonies, intimate spaces"
+        source: "cbc_wedding_services.md#venues"
+      - id: wedding-packages
+        title: "Wedding Packages & Services"
+        summary: "Complete planning, catering, setup, coordination services"
+        source: "cbc_wedding_services.md#packages"
+      - id: wedding-capacity
+        title: "Venue Capacities & Site Fees"
+        summary: "40-400 guest capacities, site fees $600-$3,000, member sponsorship required"
+        source: "cbc_wedding_services.md#capacity-fees"
+      - id: wedding-contact
+        title: "Wedding Coordinator"
+        summary: "Valerie Mesto - vmesto@coralbeach.bm, +1 (441) 239-7202"
+        source: "cbc_wedding_services.md#contact"
+        
+  venues:
+    sections:
+      - id: event-spaces
+        title: "Event Spaces"
+        summary: "Main Lounge, Longtail Terrace, Beach Terrace, Wedding Lawn, Boardroom"
+        source: "cbc_venues_events.md#spaces"
+      - id: private-dining
+        title: "Private Dining Options"
+        summary: "The Cave wine cellar, Main Lounge, terrace settings for intimate events"
+        source: "cbc_venues_events.md#private-dining"
+      - id: corporate-events
+        title: "Corporate Events"
+        summary: "Meeting spaces, AV equipment, catering services, team building"
+        source: "cbc_venues_events.md#corporate"
+        
+  bermuda-basics:
+    sections:
+      - id: location
+        title: "Location & Access"
+        summary: "34 South Road, Paget Parish, 26 acres on South Shore"
+        source: "cbc_knowledge.md#location-access"
+      - id: climate
+        title: "Climate & Seasons"
+        summary: "Peak season May-October, mild winters, hurricane season info"
+        source: "cbc_knowledge.md#weather-seasons"
+      - id: transportation
+        title: "Transportation Options"
+        summary: "Airport transfers, taxis, scooters, no rental cars available"
+        source: "cbc_knowledge.md#transportation"
+      - id: heritage
+        title: "Club Heritage"
+        summary: "Est. 1948, Smith family land since 1624, historic architecture"
+        source: "cbc_knowledge.md#heritage"
+        
+  policies-hours:
+    sections:
+      - id: operating-hours
+        title: "Core Operating Hours"
+        summary: "Front desk 7AM-11PM, various department hours"
+        source: "cbc_knowledge.md#hours"
+      - id: check-in-out
+        title: "Check-in/Check-out Policies"
+        summary: "Flexible check-in, 12 PM checkout, late checkout options"
+        source: "cbc_knowledge.md#check-policies"
+      - id: payment-policies
+        title: "Payment & Cancellation"
+        summary: "Credit cards accepted, cancellation policies, member benefits"
+        source: "cbc_knowledge.md#payment-cancellation"
+      - id: guest-policies
+        title: "Guest Access & Fees"
+        summary: "Member introduction required, guest card fees, reciprocal clubs"
+        source: "cbc_knowledge.md#guest-policies"
+        
+  contact:
+    sections:
+      - id: main-contacts
+        title: "Primary Contact Numbers"
+        summary: "Main, Front Desk, Reservations, Spa, Tennis Shop numbers"
+        source: "cbc_knowledge.md#contacts"
+      - id: email-contacts
+        title: "Department Emails"
+        summary: "Reservations, Spa, Tennis, Wedding coordinator emails"
+        source: "cbc_knowledge.md#emails"
+      - id: management
+        title: "Management Contacts"
+        summary: "Club Manager Nik Bhola, department heads"
+        source: "cbc_knowledge.md#management"

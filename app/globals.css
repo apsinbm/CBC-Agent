@@ -92,16 +92,39 @@ div[style*="bottom: 24px"][style*="left: 24px"],
   overflow: hidden !important;
 }
 
-/* FAQ Search Input Specific Styling */
+/* FAQ Search Input Specific Styling - High specificity to override other rules */
 .faq-search-input {
+  background-color: rgba(255, 255, 255, 0.2) !important;
   color: white !important;
+  caret-color: white !important;
+  -webkit-text-fill-color: white !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
 }
 
 .faq-search-input::placeholder {
   color: rgba(255, 255, 255, 0.7) !important;
+  -webkit-text-fill-color: rgba(255, 255, 255, 0.7) !important;
+  opacity: 1 !important;
 }
 
 .faq-search-input:focus {
+  background-color: rgba(255, 255, 255, 0.25) !important;
+  color: white !important;
+  caret-color: white !important;
+  -webkit-text-fill-color: white !important;
+  border: 1px solid rgba(255, 255, 255, 0.5) !important;
+  outline: 2px solid rgba(255, 255, 255, 0.3) !important;
+  outline-offset: 0px;
+}
+
+/* Override autofill for FAQ search */
+.faq-search-input:-webkit-autofill,
+.faq-search-input:-webkit-autofill:hover,
+.faq-search-input:-webkit-autofill:focus,
+.faq-search-input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px rgba(255, 255, 255, 0.2) inset !important;
+  -webkit-text-fill-color: white !important;
+  background-color: transparent !important;
   color: white !important;
 }
 
@@ -154,11 +177,11 @@ div[style*="bottom: 24px"][style*="left: 24px"],
     opacity: 1 !important;
   }
   
-  /* Autofill override */
-  input:-webkit-autofill,
-  input:-webkit-autofill:hover,
-  input:-webkit-autofill:focus,
-  input:-webkit-autofill:active,
+  /* Autofill override - exclude FAQ search */
+  input:not(.faq-search-input):-webkit-autofill,
+  input:not(.faq-search-input):-webkit-autofill:hover,
+  input:not(.faq-search-input):-webkit-autofill:focus,
+  input:not(.faq-search-input):-webkit-autofill:active,
   textarea:-webkit-autofill,
   select:-webkit-autofill {
     -webkit-box-shadow: 0 0 0 1000px white inset !important;
@@ -183,9 +206,16 @@ div[style*="bottom: 24px"][style*="left: 24px"],
     padding-right: 2.5rem !important;
   }
   
-  /* Prevent dark mode color scheme */
-  input, textarea, select {
+  /* Prevent dark mode color scheme - exclude FAQ search */
+  input:not(.faq-search-input), 
+  textarea:not(.faq-search-input), 
+  select:not(.faq-search-input) {
     color-scheme: light !important;
+  }
+  
+  /* FAQ search needs its own color scheme */
+  .faq-search-input {
+    color-scheme: dark !important;
   }
   
   /* Override any Tailwind dark: modifiers */

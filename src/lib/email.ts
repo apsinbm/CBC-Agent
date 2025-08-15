@@ -1,4 +1,6 @@
 import nodemailer from 'nodemailer'
+import { isEmailNotificationsEnabled } from './feature-flags'
+import { safeLog, createSafeLogObject } from './pii-protection'
 
 interface EmailOptions {
   to: string
@@ -45,7 +47,7 @@ async function sendViaSMTP(options: EmailOptions): Promise<boolean> {
 
     return true
   } catch (error) {
-    console.error('SMTP send failed:', error)
+    safeLog('Email SMTP', 'Send failed:', error.message)
     return false
   }
 }
@@ -78,7 +80,42 @@ async function sendViaSendGrid(options: EmailOptions): Promise<boolean> {
     await sgMail.send(msg)
     return true
   } catch (error) {
-    console.error('SendGrid send failed:', error)
+    safeLog('Email SendGrid', 'Send failed:', error.message)
+    return false
+  }
+}
+
+// Mailgun integration
+async function sendViaMailgun(options: EmailOptions): Promise<boolean> {
+  if (!process.env.MAILGUN_API_KEY || !process.env.MAILGUN_DOMAIN) {
+    return false
+  }
+
+  try {
+    const mailgun = await import('mailgun-js').then(m => m.default).catch(() => null)
+    if (!mailgun) return false
+    
+    const mg = mailgun({
+      apiKey: process.env.MAILGUN_API_KEY,
+      domain: process.env.MAILGUN_DOMAIN
+    })
+
+    const mailgunOptions = {
+      from: process.env.EMAIL_FROM || process.env.SMTP_USER || 'noreply@coralbeach.bm',
+      to: options.to,
+      subject: options.subject,
+      text: options.text,
+      html: options.html,
+      attachment: options.attachments?.map(att => ({
+        data: att.content,
+        filename: att.filename
+      }))
+    }
+
+    await mg.messages().send(mailgunOptions)
+    return true
+  } catch (error) {
+    safeLog('Email Mailgun', 'Send failed:', error.message)
     return false
   }
 }
@@ -102,7 +139,7 @@ async function sendViaAWSSES(options: EmailOptions): Promise<boolean> {
     const ses = new AWS.SES({ apiVersion: '2010-12-01' })
 
     const params = {
-      Source: process.env.SMTP_USER || 'noreply@coralbeach.bm',
+      Source: process.env.EMAIL_FROM || process.env.SMTP_USER || 'noreply@coralbeach.bm',
       Destination: {
         ToAddresses: [options.to],
       },
@@ -124,29 +161,58 @@ async function sendViaAWSSES(options: EmailOptions): Promise<boolean> {
     await ses.sendEmail(params).promise()
     return true
   } catch (error) {
-    console.error('AWS SES send failed:', error)
+    safeLog('Email AWS SES', 'Send failed:', error.message)
     return false
   }
 }
 
 export async function sendEmail(options: EmailOptions): Promise<boolean> {
-  // Try primary SMTP
-  if (await sendViaSMTP(options)) {
-    return true
+  const provider = process.env.EMAIL_PROVIDER?.toLowerCase() || 'smtp'
+  
+  // Try specified provider first
+  let success = false
+  
+  switch (provider) {
+    case 'smtp':
+      success = await sendViaSMTP(options)
+      break
+    case 'sendgrid':
+      success = await sendViaSendGrid(options)
+      break
+    case 'mailgun':
+      success = await sendViaMailgun(options)
+      break
+    case 'aws':
+    case 'ses':
+      success = await sendViaAWSSES(options)
+      break
+    default:
+      safeLog('Email', `Unknown provider: ${provider}, falling back to SMTP`)
+      success = await sendViaSMTP(options)
   }
-
-  // Try SendGrid
-  if (await sendViaSendGrid(options)) {
-    return true
+  
+  // If primary provider failed, try fallbacks
+  if (!success) {
+    safeLog('Email', `Primary provider ${provider} failed, trying fallbacks`)
+    
+    if (provider !== 'smtp' && await sendViaSMTP(options)) {
+      return true
+    }
+    if (provider !== 'sendgrid' && await sendViaSendGrid(options)) {
+      return true
+    }
+    if (provider !== 'mailgun' && await sendViaMailgun(options)) {
+      return true
+    }
+    if (provider !== 'aws' && provider !== 'ses' && await sendViaAWSSES(options)) {
+      return true
+    }
+    
+    safeLog('Email', 'All email providers failed')
+    return false
   }
-
-  // Try AWS SES
-  if (await sendViaAWSSES(options)) {
-    return true
-  }
-
-  console.error('All email providers failed')
-  return false
+  
+  return true
 }
 
 export function generateFrontDeskEmail(data: any): EmailOptions {
@@ -342,13 +408,50 @@ The Coral Beach & Tennis Club Team
   }
 }
 
-export async function sendIntakeEmail(options: IntakeEmailOptions): Promise<boolean> {
-  const frontDeskEmail = process.env.FRONTDESK_EMAIL || process.env.FRONT_DESK_EMAIL || 'frontdesk@coralbeach.bm'
-  const { type, subject, data } = options
+/**
+ * Enhanced email notification system with feature flag support
+ * 
+ * @param {Object} options - Email options
+ * @param {string} options.type - Intake type (dining, spa, tennis, etc.)
+ * @param {string} options.subject - Email subject
+ * @param {Object} options.data - Form submission data
+ * @param {boolean} options.sendGuestCopy - Whether to send confirmation to guest
+ * @returns {Promise<boolean>} - Success status
+ */
+export async function notifyReception(options: {
+  type: string;
+  subject: string;
+  data: any;
+  sendGuestCopy?: boolean;
+}): Promise<boolean> {
+  // Check if email notifications are enabled
+  if (!isEmailNotificationsEnabled()) {
+    safeLog('Email Notifications', 'Feature disabled, skipping email send')
+    return true // Return success when disabled to not break workflows
+  }
+  
+  const { type, subject, data, sendGuestCopy = false } = options
   const { payload } = data
   
+  // Check for dry run mode
+  const isDryRun = process.env.EMAIL_DRY_RUN === 'true'
+  
+  if (isDryRun) {
+    safeLog('Email Dry Run', 'Would send emails:', {
+      type,
+      subject,
+      recipients: getReceptionEmails(),
+      guestEmail: sendGuestCopy ? payload.email : 'not sending',
+      data: createSafeLogObject(payload)
+    })
+    return true
+  }
+  
   // Generate email content based on type
-  let emailContent = generateIntakeEmailContent(type, payload)
+  const emailContent = generateIntakeEmailContent(type, payload)
+  
+  const subjectPrefix = process.env.EMAIL_SUBJECT_PREFIX || '[CBC Concierge] '
+  const fullSubject = subjectPrefix + subject
   
   const text = `
 ${subject}
@@ -384,32 +487,96 @@ User Timezone: ${payload.timezone || 'Unknown'}
 </html>
 `
 
-  // Send to front desk
-  const frontDeskEmailSent = await sendEmail({
-    to: frontDeskEmail,
-    subject,
-    text,
-    html,
-    attachments: [{
-      filename: `intake-${data.id}.json`,
-      content: JSON.stringify(data, null, 2),
-    }],
-  })
+  const receptionEmails = getReceptionEmails()
+  const bccEmails = process.env.EMAIL_BCC ? process.env.EMAIL_BCC.split(',').map(e => e.trim()) : []
   
-  // Send confirmation to guest
-  const guestEmailSent = await sendEmail({
-    to: payload.email,
-    subject: `Confirmation: ${subject}`,
-    text: `Thank you for your submission. We'll be in touch soon.\n\n${text}`,
-    html: `
-      <h2>Thank you for your submission</h2>
-      <p>We've received your request and will be in touch soon.</p>
-      <hr>
-      ${html}
-    `,
-  })
+  let receptionEmailSent = false
   
-  return frontDeskEmailSent || guestEmailSent
+  // Send to each reception email address
+  for (const email of receptionEmails) {
+    const success = await sendEmail({
+      to: email,
+      subject: fullSubject,
+      text,
+      html,
+      attachments: [{
+        filename: `intake-${data.id}.json`,
+        content: JSON.stringify(data, null, 2),
+      }],
+    })
+    
+    if (success) {
+      receptionEmailSent = true
+      safeLog('Email Reception', `Sent to ${email.split('@')[0]}@***`)
+    } else {
+      safeLog('Email Reception', `Failed to send to ${email.split('@')[0]}@***`)
+    }
+  }
+  
+  // Send BCC copies if configured
+  for (const email of bccEmails) {
+    const success = await sendEmail({
+      to: email,
+      subject: `[BCC] ${fullSubject}`,
+      text,
+      html,
+    })
+    
+    if (success) {
+      safeLog('Email BCC', `Sent to ${email.split('@')[0]}@***`)
+    }
+  }
+  
+  // Send confirmation to guest if enabled
+  let guestEmailSent = false
+  if (sendGuestCopy || process.env.EMAIL_SEND_GUEST_COPY === 'true') {
+    guestEmailSent = await sendEmail({
+      to: payload.email,
+      subject: `Confirmation: ${subject}`,
+      text: `Thank you for your submission. We'll be in touch soon.\n\n${text}`,
+      html: `
+        <h2>Thank you for your submission</h2>
+        <p>We've received your request and will be in touch soon.</p>
+        <hr>
+        ${html}
+      `,
+    })
+    
+    if (guestEmailSent) {
+      safeLog('Email Guest', `Confirmation sent to ${payload.email?.split('@')[0]}@***`)
+    } else {
+      safeLog('Email Guest', `Failed to send confirmation to ${payload.email?.split('@')[0]}@***`)
+    }
+  }
+  
+  return receptionEmailSent || guestEmailSent
+}
+
+/**
+ * Get reception email addresses from configuration
+ * @returns {string[]} Array of email addresses
+ */
+function getReceptionEmails(): string[] {
+  const receptionEmails = process.env.RECEPTION_EMAILS || 
+                         process.env.FRONTDESK_EMAIL || 
+                         process.env.FRONT_DESK_EMAIL || 
+                         'frontdesk@coralbeach.bm'
+  
+  return receptionEmails.split(',').map(email => email.trim()).filter(email => email.length > 0)
+}
+
+/**
+ * Legacy function for backward compatibility
+ */
+export async function sendIntakeEmail(options: IntakeEmailOptions): Promise<boolean> {
+  safeLog('Email', 'Using legacy sendIntakeEmail, consider migrating to notifyReception')
+  
+  return notifyReception({
+    type: options.type,
+    subject: options.subject,
+    data: options.data,
+    sendGuestCopy: true
+  })
 }
 
 function generateIntakeEmailContent(type: string, payload: any): { text: string; html: string } {
@@ -417,31 +584,51 @@ function generateIntakeEmailContent(type: string, payload: any): { text: string;
     case 'dining':
       return {
         text: `
-Dining Reservation Request
-Name: ${payload.fullName}
-Email: ${payload.email}
-Phone: ${payload.phone || 'Not provided'}
-Member/Room Number: ${payload.memberRoomNumber || 'Not provided'}
-Party Size: ${payload.partySize}
-Restaurant: ${payload.restaurant}
-Meal: ${payload.meal}
-Date: ${payload.date}
-Time: ${payload.time}
-Special Requests: ${payload.specialRequests || 'None'}
+=== DINING RESERVATION REQUEST ===
+
+GUEST INFORMATION:
+• Name: ${payload.fullName}
+• Email: ${payload.email}
+• Phone: ${payload.phone || 'Not provided'}
+• Member/Room Number: ${payload.memberRoomNumber || 'Not provided'}
+
+RESERVATION DETAILS:
+• Restaurant: ${payload.restaurant}
+• Meal Service: ${payload.meal}
+• Party Size: ${payload.partySize} ${payload.partySize === 1 ? 'guest' : 'guests'}
+• Preferred Date: ${payload.date}
+• Preferred Time: ${payload.time}
+
+${payload.specialRequests ? `SPECIAL REQUESTS:\n${payload.specialRequests}` : 'No special requests'}
+
+=== END REQUEST ===
 `,
         html: `
 <div class="section">
-  <h3>Dining Reservation Request</h3>
-  <p><span class="label">Name:</span> ${payload.fullName}</p>
-  <p><span class="label">Email:</span> ${payload.email}</p>
-  <p><span class="label">Phone:</span> ${payload.phone || 'Not provided'}</p>
-  <p><span class="label">Member/Room Number:</span> ${payload.memberRoomNumber || 'Not provided'}</p>
-  <p><span class="label">Party Size:</span> ${payload.partySize}</p>
-  <p><span class="label">Restaurant:</span> ${payload.restaurant}</p>
-  <p><span class="label">Meal:</span> ${payload.meal}</p>
-  <p><span class="label">Date:</span> ${payload.date}</p>
-  <p><span class="label">Time:</span> ${payload.time}</p>
-  <p><span class="label">Special Requests:</span> ${payload.specialRequests || 'None'}</p>
+  <h3>🍽️ Dining Reservation Request</h3>
+  
+  <div style="margin-bottom: 15px;">
+    <h4 style="color: #004d7a; margin-bottom: 8px;">Guest Information</h4>
+    <p><span class="label">Name:</span> ${payload.fullName}</p>
+    <p><span class="label">Email:</span> ${payload.email}</p>
+    <p><span class="label">Phone:</span> ${payload.phone || 'Not provided'}</p>
+    <p><span class="label">Member/Room Number:</span> ${payload.memberRoomNumber || 'Not provided'}</p>
+  </div>
+  
+  <div style="margin-bottom: 15px;">
+    <h4 style="color: #004d7a; margin-bottom: 8px;">Reservation Details</h4>
+    <p><span class="label">Restaurant:</span> <strong>${payload.restaurant}</strong></p>
+    <p><span class="label">Meal Service:</span> ${payload.meal}</p>
+    <p><span class="label">Party Size:</span> ${payload.partySize} ${payload.partySize === 1 ? 'guest' : 'guests'}</p>
+    <p><span class="label">Preferred Date:</span> <strong>${payload.date}</strong></p>
+    <p><span class="label">Preferred Time:</span> <strong>${payload.time}</strong></p>
+  </div>
+  
+  ${payload.specialRequests ? `
+  <div style="margin-bottom: 15px;">
+    <h4 style="color: #004d7a; margin-bottom: 8px;">Special Requests</h4>
+    <p style="background: #f8f9fa; padding: 10px; border-left: 3px solid #004d7a;">${payload.specialRequests}</p>
+  </div>` : ''}
 </div>
 `
       }
@@ -572,6 +759,96 @@ Vision/Notes: ${payload.vision || 'None'}
   <p><span class="label">Working with Planner:</span> ${payload.hasPlanner || 'Not specified'}</p>
   <p><span class="label">Planner Name:</span> ${payload.plannerName || 'N/A'}</p>
   <p><span class="label">Vision/Notes:</span> ${payload.vision || 'None'}</p>
+</div>
+`
+      }
+      
+    case 'plan-your-stay':
+      return {
+        text: `
+Reservation Inquiry
+Name: ${payload.fullName}
+Email: ${payload.email}
+Phone: ${payload.phone || 'Not provided'}
+From: ${payload.countryCity || 'Not provided'}
+
+Booking Question/Context:
+${payload.bookingQuestion || 'Not provided'}
+
+Interests:
+${payload.interests && payload.interests.length > 0 ? payload.interests.join(', ') : 'Not specified'}
+${payload.otherInterest ? `\\nOther: ${payload.otherInterest}` : ''}
+
+Dates & Party:
+- Planning Status: ${payload.planningMode === 'certain' ? 'Has specific dates' : 'Still exploring options'}
+- Arrival: ${payload.arrivalDate || '(not specified)'}
+- Departure: ${payload.departureDate || '(not specified)'}
+- Number of Guests: ${payload.numberOfGuests}
+- Party Breakdown: ${payload.partyBreakdown || 'Not provided'}
+
+Accommodation & Preferences:
+- Preference: ${payload.accommodationPreference || 'No preference'}
+- Budget: ${payload.budgetRange || 'Not specified'}
+
+Flight Information:
+${payload.airlineInfo || 'Not provided'}
+
+Member Status:
+${payload.memberStatus || 'Not provided'}
+
+Special Requests:
+${payload.specialRequests || 'None'}
+`,
+        html: `
+<div class="section">
+  <h3>Reservation Inquiry</h3>
+  <p><span class="label">Name:</span> ${payload.fullName}</p>
+  <p><span class="label">Email:</span> ${payload.email}</p>
+  <p><span class="label">Phone:</span> ${payload.phone || 'Not provided'}</p>
+  <p><span class="label">From:</span> ${payload.countryCity || 'Not provided'}</p>
+</div>
+
+${payload.bookingQuestion ? `
+<div class="section">
+  <h3>Booking Question/Context</h3>
+  <p>${payload.bookingQuestion}</p>
+</div>` : ''}
+
+${payload.interests && payload.interests.length > 0 ? `
+<div class="section">
+  <h3>Areas of Interest</h3>
+  <p>${payload.interests.join(', ')}</p>
+  ${payload.otherInterest ? `<p><span class="label">Other:</span> ${payload.otherInterest}</p>` : ''}
+</div>` : ''}
+
+<div class="section">
+  <h3>Dates & Party</h3>
+  <p><span class="label">Planning Status:</span> ${payload.planningMode === 'certain' ? 'Has specific dates' : 'Still exploring options'}</p>
+  <p><span class="label">Arrival:</span> ${payload.arrivalDate || '(not specified)'}</p>
+  <p><span class="label">Departure:</span> ${payload.departureDate || '(not specified)'}</p>
+  <p><span class="label">Number of Guests:</span> ${payload.numberOfGuests}</p>
+  <p><span class="label">Party Breakdown:</span> ${payload.partyBreakdown || 'Not provided'}</p>
+</div>
+
+<div class="section">
+  <h3>Accommodation & Preferences</h3>
+  <p><span class="label">Preference:</span> ${payload.accommodationPreference || 'No preference'}</p>
+  <p><span class="label">Budget:</span> ${payload.budgetRange || 'Not specified'}</p>
+</div>
+
+<div class="section">
+  <h3>Flight Information</h3>
+  <p>${payload.airlineInfo || 'Not provided'}</p>
+</div>
+
+<div class="section">
+  <h3>Member Status</h3>
+  <p>${payload.memberStatus || 'Not provided'}</p>
+</div>
+
+<div class="section">
+  <h3>Special Requests</h3>
+  <p>${payload.specialRequests || 'None'}</p>
 </div>
 `
       }

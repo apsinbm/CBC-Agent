@@ -72,6 +72,38 @@ function normalizeQuery(query: string): string {
   return normalized;
 }
 
+// Find exact or very high confidence matches
+function findExactMatches(index: FlatFAQ[], normalizedQuery: string): SearchHit[] {
+  const queryWords = normalizedQuery.split(' ').filter(w => w.length > 2);
+  const matches: SearchHit[] = [];
+  
+  for (const faq of index) {
+    const questionWords = normalizeQuery(faq.q).split(' ');
+    const tagWords = faq.tags.flatMap(tag => normalizeQuery(tag).split(' '));
+    
+    // Check for exact question match
+    if (normalizeQuery(faq.q) === normalizedQuery) {
+      matches.push({ ...faq, score: 0.0 });
+      continue;
+    }
+    
+    // Check for high word overlap (70%+ of query words found)
+    let matchingWords = 0;
+    for (const word of queryWords) {
+      if (questionWords.includes(word) || tagWords.includes(word)) {
+        matchingWords++;
+      }
+    }
+    
+    if (queryWords.length > 0 && matchingWords / queryWords.length >= 0.7) {
+      matches.push({ ...faq, score: 0.1 - (matchingWords / queryWords.length) * 0.05 });
+    }
+  }
+  
+  // Sort by score (lower is better)
+  return matches.sort((a, b) => (a.score || 0) - (b.score || 0));
+}
+
 // Load and parse FAQs from YAML
 async function loadFAQs(): Promise<FlatFAQ[]> {
   try {
@@ -137,15 +169,17 @@ export async function initFaqs(): Promise<void> {
       return;
     }
     
-    // Configure Fuse.js for fuzzy search
+    // Configure Fuse.js for fuzzy search with enhanced settings
     const fuseOptions: Fuse.IFuseOptions<FlatFAQ> = {
       includeScore: true,
-      threshold: 0.6,  // More permissive threshold
-      distance: 100,
+      threshold: 0.4,  // More precise threshold for better matches
+      distance: 80,    // Reduced distance for better relevance
       minMatchCharLength: 2,
+      ignoreLocation: true,  // Don't penalize matches at different positions
+      findAllMatches: true,  // Include all matches
       keys: [
-        { name: 'q', weight: 0.65 },
-        { name: 'tags', weight: 0.25 },
+        { name: 'q', weight: 0.70 },       // Increased question weight
+        { name: 'tags', weight: 0.20 },    // Tags are important
         { name: 'categoryTitle', weight: 0.10 },
       ],
     };
@@ -159,7 +193,7 @@ export async function initFaqs(): Promise<void> {
   }
 }
 
-// Search FAQs
+// Search FAQs with enhanced relevance
 export function searchFaqs(query: string, topN: number = 1): { hits: SearchHit[] } {
   const state = globalThis.__CBC_FAQ_STATE!;
   
@@ -168,27 +202,42 @@ export function searchFaqs(query: string, topN: number = 1): { hits: SearchHit[]
   }
   
   const normalized = normalizeQuery(query);
-  const results = state.fuse.search(normalized, { limit: topN * 2 }); // Get extra for tie-breaking
+  
+  // First, check for exact matches or high-confidence matches
+  const exactMatches = findExactMatches(state.index, normalized);
+  if (exactMatches.length > 0) {
+    return { hits: exactMatches.slice(0, topN) };
+  }
+  
+  // Then do fuzzy search
+  const results = state.fuse.search(normalized, { limit: Math.max(topN * 3, 10) }); // Get more for better selection
   
   if (results.length === 0) {
     return { hits: [] };
   }
   
-  // Process results and handle ties
-  const hits: SearchHit[] = results.map(result => ({
-    ...result.item,
-    score: result.score,
-  }));
+  // Process results with enhanced scoring
+  const hits: SearchHit[] = results
+    .map(result => ({
+      ...result.item,
+      score: result.score,
+    }))
+    .filter(hit => (hit.score || 0) < 0.8); // Filter out very poor matches
   
-  // If multiple hits tie within 0.02 score, prefer more tag overlap or shorter answer
+  if (hits.length === 0) {
+    return { hits: [] };
+  }
+  
+  // Enhanced tie-breaking: consider multiple factors
   if (hits.length > 1) {
     const topScore = hits[0].score || 0;
-    const tied = hits.filter(h => Math.abs((h.score || 0) - topScore) < 0.02);
+    const tied = hits.filter(h => Math.abs((h.score || 0) - topScore) < 0.03); // Slightly wider tie margin
     
     if (tied.length > 1) {
-      // Sort by tag overlap with query, then by answer length
+      // Enhanced sorting: tag overlap, question length, then answer length
       const queryTokens = new Set(normalized.split(' '));
       tied.sort((a, b) => {
+        // 1. Tag overlap (higher is better)
         const aTagOverlap = a.tags.filter(t => 
           t.split(' ').some(word => queryTokens.has(word.toLowerCase()))
         ).length;
@@ -200,7 +249,13 @@ export function searchFaqs(query: string, topN: number = 1): { hits: SearchHit[]
           return bTagOverlap - aTagOverlap; // More overlap is better
         }
         
-        return a.a.length - b.a.length; // Shorter is better
+        // 2. Question length (shorter questions often more specific)
+        if (Math.abs(a.q.length - b.q.length) > 20) {
+          return a.q.length - b.q.length;
+        }
+        
+        // 3. Answer length (shorter is usually better for quick answers)
+        return a.a.length - b.a.length;
       });
       
       // Replace the original order with the tie-broken order

@@ -9,6 +9,8 @@ const ALLOWED_DOMAINS = [
   'api.openweathermap.org',
   'api.weather.gov',
   'api.weatherapi.com',
+  'api.open-meteo.com',           // Open-Meteo weather API
+  'marine-api.open-meteo.com',    // Open-Meteo marine API for SST
   
   // Bermuda news (if needed for features)
   'www.royalgazette.com',

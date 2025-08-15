@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { saveReservation, generateReservationId, hashIP } from '@/src/lib/storage'
-import { sendEmail, generateFrontDeskEmail, generateGuestConfirmationEmail } from '@/src/lib/email'
+import { notifyReception } from '@/src/lib/email'
+import { safeLog } from '@/src/lib/pii-protection'
 
 // Rate limiting store (in-memory for dev, use Redis in production)
 const rateLimitStore = new Map<string, { count: number; resetAt: number }>()
@@ -206,20 +207,30 @@ export async function POST(req: NextRequest) {
     // Save to file system
     await saveReservation(reservationData)
     
-    // Send emails (don't fail if email fails)
+    // Send email notification (don't fail if email fails)
     let emailSent = false
     try {
-      const frontDeskEmail = generateFrontDeskEmail(reservationData)
-      const guestEmail = generateGuestConfirmationEmail(reservationData)
+      const subject = `New Reservation Inquiry – ${reservationData.arrivalDate || 'Flexible Dates'} – ${reservationData.fullName}`
       
-      const [frontDeskSent, guestSent] = await Promise.all([
-        sendEmail(frontDeskEmail),
-        sendEmail(guestEmail),
-      ])
+      // Prepare data for notifyReception
+      const intakeData = {
+        id: reservationId,
+        type: 'plan-your-stay',
+        payload: reservationData,
+        createdAt: now,
+        ipHash,
+        userAgent: req.headers.get('user-agent') || 'unknown'
+      }
       
-      emailSent = frontDeskSent || guestSent
+      emailSent = await notifyReception({
+        type: 'plan-your-stay',
+        subject,
+        data: intakeData,
+        sendGuestCopy: true
+      })
+      
     } catch (emailError) {
-      console.error('Email error:', emailError)
+      safeLog('Reservation Email', 'Email notification failed:', emailError.message)
     }
     
     // TODO: Write to Airtable/Sheets if configured
@@ -242,7 +253,7 @@ export async function POST(req: NextRequest) {
     })
     
   } catch (error) {
-    console.error('Reservation error:', error)
+    safeLog('Reservation Error', 'Request processing failed:', error.message)
     return NextResponse.json(
       { ok: false, message: 'An error occurred. Please try again.' },
       { status: 500 }
