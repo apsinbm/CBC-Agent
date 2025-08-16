@@ -1052,6 +1052,7 @@ export async function POST(req) {
     
     // Check if this is a time query and handle it directly (AFTER hours check)
     if (detectTimeQuery(messages)) {
+      const userMessage = messages[messages.length - 1]?.content || '';
       const timeData = await fetchClubTime();
       let timeReply;
       
@@ -1059,7 +1060,7 @@ export async function POST(req) {
         timeReply = `Here at the Club it's ${timeData.time} on ${timeData.date}`;
         
         // Add coordinated suggestion (prevents stacking with other systems)
-        const suggestion = getCoordinatedSuggestion(message, timeReply, timeData, null, null);
+        const suggestion = getCoordinatedSuggestion(userMessage, timeReply, timeData, null, null);
         timeReply += ` - ${suggestion}`;
       } else {
         timeReply = "I'm having a spot of trouble with the club clock right now. Let me give you my best estimate based on Atlantic time—it should be around the current local time for Bermuda. While you're here, would you like to know about our current activities and amenities?";
@@ -1117,6 +1118,7 @@ export async function POST(req) {
     
     // Check if this is a weather query and handle it directly
     if (detectWeatherQuery(messages)) {
+      const userMessage = messages[messages.length - 1]?.content || '';
       const weatherData = await fetchClubWeather();
       let weatherReply;
       
@@ -1125,7 +1127,7 @@ export async function POST(req) {
         weatherReply = `Here are the ${dataFreshness} conditions at Coral Beach & Tennis Club: ${weatherData.temperature}°C (${weatherData.temperatureF}°F), ${weatherData.description}. Humidity is ${weatherData.humidity}% with winds at ${weatherData.windSpeed} km/h from the ${weatherData.windDirection}.`;
         
         // Add coordinated suggestion (prevents stacking with other systems)
-        const suggestion = getCoordinatedSuggestion(message, weatherReply, null, weatherData, null);
+        const suggestion = getCoordinatedSuggestion(userMessage, weatherReply, null, weatherData, null);
         weatherReply += ` ${suggestion}`;
       } else {
         weatherReply = "I'm having trouble reaching our weather service right now, but I can tell you that the Club enjoys Bermuda's lovely subtropical climate year-round. Our indoor amenities like the spa, dining rooms, and Main Lounge are always comfortable and welcoming. Would you like to know more about our facilities?";
@@ -1535,9 +1537,16 @@ You have access to detailed accommodation data to help guests understand their o
       },
     });
   } catch (err) {
-    safeLog('API Error', err.message || 'Unknown error');
-    return new Response(JSON.stringify({ error: "Server error", detail: String(err?.message || err) }), {
-      status: 500, headers: { "Content-Type": "application/json" },
+    // Safely extract error information
+    const errorMessage = err?.message || err?.toString() || 'Unknown error';
+    safeLog('API Error', errorMessage);
+    
+    return new Response(JSON.stringify({ 
+      error: "I apologize, but I encountered an error. Please try again.",
+      reply: "I apologize, but I encountered an error. Please try again."
+    }), {
+      status: 500, 
+      headers: { "Content-Type": "application/json" },
     });
   }
 }
