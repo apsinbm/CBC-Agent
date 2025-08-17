@@ -193,10 +193,15 @@ export default function Home() {
       renderProgressively(assistantMessage.id, data.reply)
     } catch (error) {
       console.error('Error sending message:', error)
+      console.error('Error details:', {
+        name: error.name,
+        message: error.message,
+        stack: error.stack
+      })
       const errorMessage: Message = {
         id: (Date.now() + 1).toString(),
         role: 'assistant',
-        content: 'I apologize, but I encountered an error. Please try again.',
+        content: `I apologize, but I encountered an error. Please try again. (Debug: ${error.message})`,
         isRendering: true,
         visibleContent: '',
       }

@@ -32,11 +32,9 @@ const nextConfig = {
     position: 'bottom-right',
   },
   
-  // Optimize for production
+  // Optimize for production - temporarily keep console logs for debugging
   compiler: {
-    removeConsole: process.env.NODE_ENV === 'production' ? {
-      exclude: ['error', 'warn'],
-    } : false,
+    removeConsole: false, // Temporarily disabled for production debugging
   },
   
   experimental: {
@@ -96,7 +94,7 @@ const nextConfig = {
           },
           {
             key: 'Content-Security-Policy',
-            value: "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' https://api.anthropic.com https://api.openai.com https://worldtimeapi.org https://api.open-meteo.com; frame-ancestors 'none';"
+            value: "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' https://api.anthropic.com https://api.openai.com https://worldtimeapi.org https://api.open-meteo.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self';"
           }
         ],
       },
