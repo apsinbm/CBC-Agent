@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { saveReservation, generateReservationId, hashIP } from '@/src/lib/storage'
-import { notifyReception } from '@/src/lib/email'
 import { safeLog } from '@/src/lib/pii-protection'
 
 // Rate limiting store (in-memory for dev, use Redis in production)
@@ -222,15 +221,17 @@ export async function POST(req: NextRequest) {
         userAgent: req.headers.get('user-agent') || 'unknown'
       }
       
-      emailSent = await notifyReception({
+      // Dynamic import of email module
+      const { notifyReception } = await import('@/src/lib/email').catch(() => ({ notifyReception: null }))
+      emailSent = notifyReception ? await notifyReception({
         type: 'plan-your-stay',
         subject,
         data: intakeData,
         sendGuestCopy: true
-      })
+      }) : false
       
     } catch (emailError) {
-      safeLog('Reservation Email', 'Email notification failed:', emailError.message)
+      safeLog('Reservation Email', 'Email notification failed:', emailError instanceof Error ? emailError.message : 'Unknown error')
     }
     
     // TODO: Write to Airtable/Sheets if configured
@@ -253,7 +254,7 @@ export async function POST(req: NextRequest) {
     })
     
   } catch (error) {
-    safeLog('Reservation Error', 'Request processing failed:', error.message)
+    safeLog('Reservation Error', 'Request processing failed:', error instanceof Error ? error.message : 'Unknown error')
     return NextResponse.json(
       { ok: false, message: 'An error occurred. Please try again.' },
       { status: 500 }

@@ -47,7 +47,7 @@ async function sendViaSMTP(options: EmailOptions): Promise<boolean> {
 
     return true
   } catch (error) {
-    safeLog('Email SMTP', 'Send failed:', error.message)
+    safeLog('Email SMTP', 'Send failed:', error instanceof Error ? error.message : 'Unknown error')
     return false
   }
 }
@@ -59,7 +59,15 @@ async function sendViaSendGrid(options: EmailOptions): Promise<boolean> {
   }
 
   try {
-    const sgMail = await import('@sendgrid/mail').then(m => m.default).catch(() => null)
+    // Dynamic import with fallback
+    let sgMail: any = null
+    try {
+      const module = await import('@sendgrid/mail' as any)
+      sgMail = module.default || module
+    } catch {
+      safeLog('Email SendGrid', 'Module not installed - skipping')
+      return false
+    }
     if (!sgMail) return false
     sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 
@@ -80,7 +88,7 @@ async function sendViaSendGrid(options: EmailOptions): Promise<boolean> {
     await sgMail.send(msg)
     return true
   } catch (error) {
-    safeLog('Email SendGrid', 'Send failed:', error.message)
+    safeLog('Email SendGrid', 'Send failed:', error instanceof Error ? error.message : 'Unknown error')
     return false
   }
 }
@@ -92,7 +100,15 @@ async function sendViaMailgun(options: EmailOptions): Promise<boolean> {
   }
 
   try {
-    const mailgun = await import('mailgun-js').then(m => m.default).catch(() => null)
+    // Dynamic import with fallback
+    let mailgun: any = null
+    try {
+      const module = await import('mailgun-js' as any)
+      mailgun = module.default || module
+    } catch {
+      safeLog('Email Mailgun', 'Module not installed - skipping')
+      return false
+    }
     if (!mailgun) return false
     
     const mg = mailgun({
@@ -115,7 +131,7 @@ async function sendViaMailgun(options: EmailOptions): Promise<boolean> {
     await mg.messages().send(mailgunOptions)
     return true
   } catch (error) {
-    safeLog('Email Mailgun', 'Send failed:', error.message)
+    safeLog('Email Mailgun', 'Send failed:', error instanceof Error ? error.message : 'Unknown error')
     return false
   }
 }
@@ -127,7 +143,15 @@ async function sendViaAWSSES(options: EmailOptions): Promise<boolean> {
   }
 
   try {
-    const AWS = await import('aws-sdk').then(m => m.default).catch(() => null)
+    // Dynamic import with fallback
+    let AWS: any = null
+    try {
+      const module = await import('aws-sdk' as any)
+      AWS = module.default || module
+    } catch {
+      safeLog('Email AWS SES', 'Module not installed - skipping')
+      return false
+    }
     if (!AWS) return false
     
     AWS.config.update({
@@ -161,7 +185,7 @@ async function sendViaAWSSES(options: EmailOptions): Promise<boolean> {
     await ses.sendEmail(params).promise()
     return true
   } catch (error) {
-    safeLog('Email AWS SES', 'Send failed:', error.message)
+    safeLog('Email AWS SES', 'Send failed:', error instanceof Error ? error.message : 'Unknown error')
     return false
   }
 }

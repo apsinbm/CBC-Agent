@@ -1,0 +1,11 @@
+{"type":"SESSION_START","timestamp":"2025-08-15T11:24:51.694Z","data":{"userAgent":"web","platform":"chat","ipHash":"eff8e7ca506627fe","hour":8},"sessionId":"966b216a-3857-4bac-aa03-56240e00ac7c"}
+{"type":"USER_INTERACTION","timestamp":"2025-08-15T11:24:51.694Z","data":{"action":"chat_message","messageCount":2,"queryLength":2,"ipHash":"eff8e7ca506627fe","hour":8},"sessionId":"966b216a-3857-4bac-aa03-56240e00ac7c"}
+{"type":"CHAT_MESSAGE","timestamp":"2025-08-15T11:24:51.694Z","data":{"messageCount":2,"ipHash":"eff8e7ca506627fe","hour":8},"sessionId":"966b216a-3857-4bac-aa03-56240e00ac7c"}
+{"type":"USER_INTERACTION","timestamp":"2025-08-15T11:25:18.920Z","data":{"action":"chat_message","messageCount":4,"queryLength":20,"ipHash":"eff8e7ca506627fe","hour":8},"sessionId":"966b216a-3857-4bac-aa03-56240e00ac7c"}
+{"type":"CHAT_MESSAGE","timestamp":"2025-08-15T11:25:18.921Z","data":{"messageCount":4,"ipHash":"eff8e7ca506627fe","hour":8},"sessionId":"966b216a-3857-4bac-aa03-56240e00ac7c"}
+{"type":"USER_INTERACTION","timestamp":"2025-08-15T11:25:29.694Z","data":{"action":"chat_message","messageCount":6,"queryLength":20,"ipHash":"eff8e7ca506627fe","hour":8},"sessionId":"966b216a-3857-4bac-aa03-56240e00ac7c"}
+{"type":"CHAT_MESSAGE","timestamp":"2025-08-15T11:25:29.695Z","data":{"messageCount":6,"ipHash":"eff8e7ca506627fe","hour":8},"sessionId":"966b216a-3857-4bac-aa03-56240e00ac7c"}
+{"type":"USER_INTERACTION","timestamp":"2025-08-15T11:26:16.298Z","data":{"action":"chat_message","messageCount":8,"queryLength":32,"ipHash":"eff8e7ca506627fe","hour":8},"sessionId":"966b216a-3857-4bac-aa03-56240e00ac7c"}
+{"type":"CHAT_MESSAGE","timestamp":"2025-08-15T11:26:16.298Z","data":{"messageCount":8,"ipHash":"eff8e7ca506627fe","hour":8},"sessionId":"966b216a-3857-4bac-aa03-56240e00ac7c"}
+{"type":"SEARCH_QUERY","timestamp":"2025-08-15T11:26:16.342Z","data":{"resultCount":1,"hasResults":true,"ipHash":"eff8e7ca506627fe","queryHash":"6637ad50e3b20ea7","hour":8},"sessionId":"966b216a-3857-4bac-aa03-56240e00ac7c"}
+{"type":"FAQ_MISS","timestamp":"2025-08-15T11:26:16.342Z","data":{"topScore":0.3208126311769909,"ipHash":"eff8e7ca506627fe","hour":8},"sessionId":"966b216a-3857-4bac-aa03-56240e00ac7c"}

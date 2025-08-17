@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { notifyReception } from '@/src/lib/email'
 import { saveIntake } from '@/src/lib/storage'
 import { safeLog } from '@/src/lib/pii-protection'
 
@@ -233,7 +232,7 @@ export async function POST(req: NextRequest) {
       if (payload.players < 1 || payload.players > 8) {
         errors.push('Number of players must be between 1 and 8')
       }
-      if (!validateText(payload.notes)) {
+      if (payload.notes && !validateText(payload.notes)) {
         errors.push('Notes text is too long')
       }
     }
@@ -242,19 +241,19 @@ export async function POST(req: NextRequest) {
       if (payload.players < 1 || payload.players > 8) {
         errors.push('Number of players must be between 1 and 8')
       }
-      if (!validateText(payload.notes)) {
+      if (payload.notes && !validateText(payload.notes)) {
         errors.push('Notes text is too long')
       }
     }
     
     if (isSpaIntake(type, payload)) {
-      if (!validateText(payload.accessibilityRequests)) {
+      if (payload.accessibilityRequests && !validateText(payload.accessibilityRequests)) {
         errors.push('Special requests text is too long')
       }
     }
     
     if (isWeddingIntake(type, payload)) {
-      if (!validateText(payload.vision)) {
+      if (payload.vision && !validateText(payload.vision)) {
         errors.push('Vision text is too long')
       }
     }
@@ -299,14 +298,16 @@ export async function POST(req: NextRequest) {
     let emailSent = false
     try {
       const subject = generateSubject(type, payload)
-      emailSent = await notifyReception({
+      // Dynamic import of email module
+      const { notifyReception } = await import('@/src/lib/email').catch(() => ({ notifyReception: null }))
+      emailSent = notifyReception ? await notifyReception({
         type,
         subject,
         data: intakeData,
         sendGuestCopy: true
-      })
+      }) : false
     } catch (emailError) {
-      safeLog('Intake Email', 'Email notification failed:', emailError.message)
+      safeLog('Intake Email', 'Email notification failed:', emailError instanceof Error ? emailError.message : 'Unknown error')
       // Don't fail the request if email fails
     }
     
@@ -320,7 +321,7 @@ export async function POST(req: NextRequest) {
     })
     
   } catch (error) {
-    safeLog('Intake Error', 'Request processing failed:', error.message)
+    safeLog('Intake Error', 'Request processing failed:', error instanceof Error ? error.message : 'Unknown error')
     return NextResponse.json(
       { ok: false, message: 'An error occurred. Please try again.' },
       { status: 500 }

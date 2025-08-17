@@ -107,7 +107,7 @@ export async function GET(request: NextRequest) {
     });
     
   } catch (error) {
-    safeLog('Email Health Check Error', error.message);
+    safeLog('Email Health Check Error', error instanceof Error ? error.message : 'Unknown error');
     
     return NextResponse.json({
       status: 'error',

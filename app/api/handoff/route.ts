@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { sendEmail } from '@/src/lib/email';
 import { logEvent } from '@/src/lib/analytics/logEvent';
 
 export async function POST(request: NextRequest) {
@@ -73,12 +72,15 @@ export async function POST(request: NextRequest) {
     // Send email to reception
     const frontDeskEmail = process.env.FRONT_DESK_EMAIL || 'frontdesk@coralbeach.bm';
     
-    const emailSent = await sendEmail({
+    // Dynamic import of email module
+    const { sendEmail } = await import('@/src/lib/email').catch(() => ({ sendEmail: null }));
+    
+    const emailSent = sendEmail ? await sendEmail({
       to: frontDeskEmail,
       subject: emailSubject,
       html: emailBody,
       text: emailBody.replace(/<[^>]*>/g, '') // Strip HTML for text version
-    });
+    }) : false;
     
     // Log email result
     await logEvent('EMAIL_SENT', {

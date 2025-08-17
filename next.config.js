@@ -1,30 +1,67 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  compress: true,
+  poweredByHeader: false,
+  eslint: {
+    // Disable ESLint during production builds
+    ignoreDuringBuilds: true,
+  },
+  
+  // Configure webpack to ignore missing optional dependencies
+  webpack: (config, { isServer }) => {
+    if (isServer) {
+      config.externals = [...(config.externals || []), {
+        '@sendgrid/mail': '@sendgrid/mail',
+        'mailgun-js': 'mailgun-js',
+        'aws-sdk': 'aws-sdk',
+      }];
+    }
+    return config;
+  },
+  
   // DO NOT expose API keys to client - removed ANTHROPIC_API_KEY
   env: {
     // Only expose non-sensitive config to client
     NEXT_PUBLIC_CLAUDE_API_MODEL: process.env.CLAUDE_API_MODEL,
+    NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_URL || 'https://coralbeach.vercel.app',
   },
+  
   // Disable Next.js dev indicators
   devIndicators: {
     position: 'bottom-right',
   },
-  // Optimize for mobile and cross-browser compatibility
+  
+  // Optimize for production
   compiler: {
-    removeConsole: process.env.NODE_ENV === 'production',
+    removeConsole: process.env.NODE_ENV === 'production' ? {
+      exclude: ['error', 'warn'],
+    } : false,
   },
+  
   experimental: {
     optimizeCss: true,
+    webVitalsAttribution: ['CLS', 'LCP', 'FCP', 'FID', 'TTFB'],
   },
+  
+  // Performance optimizations
+  onDemandEntries: {
+    maxInactiveAge: 60 * 1000,
+    pagesBufferLength: 5,
+  },
+  
   // Add browser polyfills for older browsers
   transpilePackages: [],
+  
   // Image optimization
   images: {
     formats: ['image/avif', 'image/webp'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     minimumCacheTTL: 60,
+    dangerouslyAllowSVG: true,
+    contentDispositionType: 'attachment',
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
   // Security headers and caching
   async headers() {

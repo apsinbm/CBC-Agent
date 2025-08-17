@@ -150,7 +150,7 @@ export function validateFeatureConfiguration(): string[] {
  * Get feature flag status for health checks
  * Returns sanitized status (no sensitive information)
  */
-export function getFeatureHealthStatus(): { [key: string]: boolean | string } {
+export function getFeatureHealthStatus(): { [key: string]: boolean | string | number } {
   const config = getAllFeatureFlags();
   const warnings = validateFeatureConfiguration();
   

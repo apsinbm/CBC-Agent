@@ -6,7 +6,7 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import { getFeatureHealthStatus, getAllFeatureFlags } from '@/src/lib/feature-flags';
+import { getAllFeatureFlags } from '@/src/lib/feature-flags';
 import { safeLog } from '@/src/lib/pii-protection';
 import packageJson from '@/package.json';
 
@@ -88,7 +88,7 @@ export async function GET(request: NextRequest) {
     });
     
   } catch (error) {
-    safeLog('Health Check Error', error.message);
+    safeLog('Health Check Error', error instanceof Error ? error.message : 'Unknown error');
     
     return NextResponse.json({
       status: 'error',

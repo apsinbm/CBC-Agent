@@ -1,4 +1,4 @@
-import Fuse from 'fuse.js';
+import Fuse, { IFuseOptions } from 'fuse.js';
 import * as yaml from 'js-yaml';
 import * as fs from 'fs/promises';
 import * as path from 'path';
@@ -170,7 +170,7 @@ export async function initFaqs(): Promise<void> {
     }
     
     // Configure Fuse.js for fuzzy search with enhanced settings
-    const fuseOptions: Fuse.IFuseOptions<FlatFAQ> = {
+    const fuseOptions: IFuseOptions<FlatFAQ> = {
       includeScore: true,
       threshold: 0.4,  // More precise threshold for better matches
       distance: 80,    // Reduced distance for better relevance

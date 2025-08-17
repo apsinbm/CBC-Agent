@@ -15,7 +15,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import * as yaml from 'js-yaml';
-import * as elasticlunr from 'elasticlunr';
+const elasticlunr = require('elasticlunr');
 
 // FAQ types
 export interface FAQ {
@@ -93,7 +93,7 @@ export function initializeFAQIndex(): void {
   const data = loadFAQData();
   
   // Create elasticlunr index
-  faqIndex = elasticlunr(function() {
+  faqIndex = elasticlunr(function(this: any) {
     this.addField('q');
     this.addField('a');
     this.addField('tags');

@@ -1,0 +1,263 @@
+/* Mobile and Cross-Browser Optimizations for CBC-Agent */
+
+/* Responsive breakpoints aligned with Tailwind defaults */
+/* Mobile: 0-639px, Tablet: 640-1023px, Desktop: 1024px+ */
+
+/* Base mobile-first styles */
+/* Prevent iOS zoom on input focus */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="number"],
+input[type="search"],
+input[type="password"],
+textarea,
+select {
+  font-size: 16px !important; /* Prevents zoom on iOS */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+/* Smooth scrolling with momentum on mobile */
+.chat-container,
+.message-container,
+.scrollable-content {
+  -webkit-overflow-scrolling: touch;
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+}
+
+/* Safe area insets for notched devices (iPhone X+) */
+.app-container {
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* Tap highlight color for better UX */
+button,
+a,
+.clickable {
+  -webkit-tap-highlight-color: rgba(0, 117, 94, 0.1);
+}
+
+/* Prevent text size adjustment on orientation change */
+html {
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* Mobile-specific chat interface optimizations */
+@media (max-width: 639px) {
+  /* Full-height chat on mobile */
+  .chat-wrapper {
+    height: 100vh;
+    height: 100dvh; /* Dynamic viewport height for mobile browsers */
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Fixed input at bottom with safe area */
+  .chat-input-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding-bottom: max(env(safe-area-inset-bottom), 8px);
+    background: white;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    z-index: 50;
+  }
+  
+  /* Adjust chat messages for fixed input */
+  .chat-messages {
+    padding-bottom: calc(80px + env(safe-area-inset-bottom));
+  }
+  
+  /* Larger touch targets for mobile */
+  button,
+  .button,
+  .touchable {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Responsive text sizing */
+  .message-text {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  
+  /* Optimize modal for mobile */
+  .modal-content {
+    max-height: calc(100vh - 40px);
+    max-height: calc(100dvh - 40px);
+    margin: 20px;
+    width: calc(100% - 40px);
+  }
+}
+
+/* Tablet optimizations */
+@media (min-width: 640px) and (max-width: 1023px) {
+  .chat-wrapper {
+    max-width: 768px;
+    margin: 0 auto;
+  }
+  
+  .modal-content {
+    max-width: 600px;
+    margin: 40px auto;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .message-user {
+    border: 2px solid currentColor;
+  }
+  
+  .message-assistant {
+    border: 2px solid currentColor;
+  }
+  
+  button:focus {
+    outline: 3px solid currentColor;
+    outline-offset: 2px;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: 18 18 18;
+    --foreground: 245 245 245;
+  }
+  
+  .chat-container {
+    background-color: rgb(var(--background));
+    color: rgb(var(--foreground));
+  }
+}
+
+/* Print styles */
+@media print {
+  .no-print,
+  .chat-input-container,
+  button,
+  .modal {
+    display: none !important;
+  }
+  
+  .chat-messages {
+    padding: 0;
+    max-height: none;
+  }
+}
+
+/* Browser-specific fixes */
+
+/* Safari fixes */
+@supports (-webkit-touch-callout: none) {
+  /* Fix for Safari's 100vh issue */
+  .full-height {
+    height: -webkit-fill-available;
+  }
+  
+  /* Fix for Safari input zoom */
+  input,
+  textarea {
+    transform: scale(1);
+  }
+}
+
+/* Firefox fixes */
+@-moz-document url-prefix() {
+  /* Firefox scrollbar styling */
+  .scrollable-content {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+  }
+}
+
+/* Edge and IE11 fallbacks */
+@supports (-ms-ime-align: auto) {
+  /* Edge-specific styles */
+  .chat-container {
+    overflow-y: auto;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+  }
+}
+
+/* Keyboard navigation improvements */
+.focus-visible:focus {
+  outline: 2px solid #00755e;
+  outline-offset: 2px;
+}
+
+*:focus:not(.focus-visible) {
+  outline: none;
+}
+
+/* Loading states for slow connections */
+.loading-skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.05) 25%,
+    rgba(0, 0, 0, 0.1) 50%,
+    rgba(0, 0, 0, 0.05) 75%
+  );
+  background-size: 200% 100%;
+  animation: loading 1.5s ease-in-out infinite;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Touch-friendly form elements */
+@media (pointer: coarse) {
+  input[type="checkbox"],
+  input[type="radio"] {
+    min-width: 24px;
+    min-height: 24px;
+  }
+  
+  select {
+    min-height: 44px;
+    padding-right: 40px;
+  }
+}
+
+/* Landscape orientation adjustments */
+@media (orientation: landscape) and (max-height: 500px) {
+  .chat-header {
+    padding: 8px 16px;
+  }
+  
+  .chat-input-container {
+    padding: 8px;
+  }
+  
+  .message-text {
+    font-size: 14px;
+  }
+}

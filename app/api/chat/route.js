@@ -49,6 +49,19 @@ if (!envValidated) {
   envValidated = true;
 }
 
+// Session-based FAQ tracking to prevent repetitive answers
+const sessionFAQHistory = new Map();
+
+// Clean up old FAQ history periodically (every 30 minutes)
+setInterval(() => {
+  const now = Date.now();
+  for (const [sessionId, data] of sessionFAQHistory.entries()) {
+    if (now - data.lastAccess > 2 * 60 * 60 * 1000) { // 2 hours
+      sessionFAQHistory.delete(sessionId);
+    }
+  }
+}, 30 * 60 * 1000);
+
 function readText(relPath) {
   return fs.readFileSync(path.join(process.cwd(), relPath), "utf-8");
 }
@@ -260,6 +273,25 @@ function detectHoursQuery(messages) {
   if (!lastMessage || lastMessage.role !== 'user') return false;
   
   const content = String(lastMessage.content || '').toLowerCase();
+  
+  // Check if this is referencing something specific from conversation
+  // If user says "the X you mentioned", it's not a generic hours query
+  if (content.includes('you mentioned') || content.includes('you said') || 
+      content.includes('you told') || content.includes('the tennis courts you')) {
+    return false;  // Let the main LLM handle contextual references
+  }
+  
+  // Check if there's clear context from previous messages
+  if (messages.length > 2) {
+    const previousAssistant = messages[messages.length - 2];
+    if (previousAssistant?.role === 'assistant' && previousAssistant.content) {
+      // If the previous message mentioned specific facilities, this might be a follow-up
+      if (previousAssistant.content.includes('tennis courts') && 
+          content.includes('open now')) {
+        return false; // This is a contextual follow-up, not a generic hours query
+      }
+    }
+  }
   
   // Hours-intent patterns (these should outrank time queries)
   const hoursPatterns = [
@@ -873,12 +905,49 @@ export async function POST(req) {
     const userQuery = lastMessage?.content || '';
     
     // Check for cached response first (for common queries)
-    const cachedResponse = getCachedResponse(userQuery);
+    // But update dynamic content like time and weather
+    let cachedResponse = getCachedResponse(userQuery);
     if (cachedResponse) {
+      try {
+        // Update dynamic elements in cached responses
+        const currentTime = await fetchClubTime();
+        const currentWeather = await fetchClubWeather();
+        
+        if (currentTime.success) {
+          // Update any time references in the cached response
+          cachedResponse = cachedResponse.replace(
+            /\d{1,2}:\d{2}\s*[AP]M/gi,
+            currentTime.time
+          );
+          // Update date references
+          cachedResponse = cachedResponse.replace(
+            /(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday),?\s+(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+\d{1,2}/gi,
+            currentTime.date
+          );
+        }
+        
+        if (currentWeather.success) {
+          // Update temperature references (both C and F)
+          cachedResponse = cachedResponse.replace(
+            /\d{1,2}°C\s*\(\d{1,3}°F\)/g,
+            `${currentWeather.temperature}°C (${currentWeather.temperatureF}°F)`
+          );
+        }
+        
+        // Add a subtle indicator that this is updated cached content
+        if (cachedResponse.includes('time') || cachedResponse.includes('weather')) {
+          safeLog('Cache', 'Served cached response with updated dynamic content');
+        }
+      } catch (updateError) {
+        safeLog('Cache', 'Error updating dynamic content in cache:', updateError.message);
+        // Continue with original cached response
+      }
+      
       return new Response(JSON.stringify({ 
         provider: "anthropic",
         model: getClaudeModel(),
-        reply: cachedResponse
+        reply: cachedResponse,
+        cached: true  // Indicate this was cached
       }), {
         status: 200,
         headers: { "Content-Type": "application/json" }
@@ -1148,13 +1217,41 @@ export async function POST(req) {
       });
     }
     
+    // Check if this is a contextual affirmative response (should skip FAQ)
+    function isContextualAffirmation(currentMessage, previousBotMessage) {
+      if (!currentMessage || !previousBotMessage) return false;
+      
+      const affirmatives = ['yes', 'yeah', 'sure', 'ok', 'okay', 'please', 'yep', 'absolutely', 'definitely', 'of course'];
+      const normalized = currentMessage.toLowerCase().trim();
+      
+      // Check if the message is a simple affirmative
+      if (!affirmatives.includes(normalized)) return false;
+      
+      // Check if the previous bot message contained a suggestion or offer
+      const suggestionKeywords = [
+        'shall i', 'should i', 'would you like', 'can i', 'may i',
+        'want me to', 'interested in', 'how about', 'what about',
+        'provide', 'show', 'tell', 'help with', 'dining hours', 'menu',
+        'activities', 'facilities', 'reservations', 'book', 'schedule'
+      ];
+      
+      const prevLower = previousBotMessage.toLowerCase();
+      return suggestionKeywords.some(keyword => prevLower.includes(keyword));
+    }
+    
+    // Get the previous bot message if available
+    const previousBotMessage = messages.length >= 2 ? 
+      messages[messages.length - 2]?.content || '' : '';
+    const isContextualResponse = isContextualAffirmation(userQuery, previousBotMessage);
+    
     // New FAQ interception logic using Fuse.js
     const FAQ_ENABLED = process.env.FAQ_ENABLED !== 'false'; // Default true
     const FAQ_MIN_SCORE = parseFloat(process.env.FAQ_MIN_SCORE || '0.68');
     const FAQ_RETURN_TOP = parseInt(process.env.FAQ_RETURN_TOP || '1', 10);
     const FAQ_SHOW_BADGE = process.env.FAQ_SHOW_BADGE === 'true';
     
-    if (FAQ_ENABLED) {
+    // Skip FAQ if this is a contextual response to a previous suggestion
+    if (FAQ_ENABLED && !isContextualResponse) {
       // Initialize FAQs if needed
       await initFaqs();
       
@@ -1173,16 +1270,51 @@ export async function POST(req) {
         // High confidence - return FAQ directly
         // Check if Fuse score is low enough (lower = better match)
         if (fuseScore <= FAQ_MIN_SCORE) {
+          // Initialize session FAQ history if needed
+          if (!sessionFAQHistory.has(sessionId)) {
+            sessionFAQHistory.set(sessionId, {
+              answeredFAQs: new Set(),
+              faqCounts: new Map(),
+              lastAccess: Date.now()
+            });
+          }
+          
+          const sessionFAQs = sessionFAQHistory.get(sessionId);
+          sessionFAQs.lastAccess = Date.now();
+          
+          // Check if we've already answered this FAQ
+          let faqAnswer = best.a;
+          const answerCount = sessionFAQs.faqCounts.get(best.id) || 0;
+          
+          if (answerCount > 0) {
+            // Vary the response for repeated questions
+            const variations = [
+              `As I mentioned earlier, ${faqAnswer}`,
+              `To reiterate, ${faqAnswer}`,
+              `Just to confirm what I said before - ${faqAnswer}`,
+              `${faqAnswer} Is there something specific about this you'd like to know more about?`
+            ];
+            
+            // Use a different variation each time
+            const variationIndex = Math.min(answerCount - 1, variations.length - 1);
+            faqAnswer = variations[variationIndex];
+          }
+          
+          // Track this FAQ as answered
+          sessionFAQs.answeredFAQs.add(best.id);
+          sessionFAQs.faqCounts.set(best.id, answerCount + 1);
+          
           await logEvent('FAQ_HIT', { 
             faqId: best.id, 
-            score: 1 - fuseScore  // Convert to confidence for logging
+            score: 1 - fuseScore,  // Convert to confidence for logging
+            repeatCount: answerCount
           }, { sessionId, ip });
           
           const prefix = FAQ_SHOW_BADGE ? '(From FAQs) ' : '';
           const faqResponse = {
             provider: "faq",
             model: "direct",
-            reply: `${prefix}${best.a}`,
+            reply: `${prefix}${faqAnswer}`,
             mode: 'faq'
           };
           
@@ -1273,6 +1405,72 @@ Note: You always have access to current weather conditions. Reference them natur
       system += `\n\n**WEATHER STATUS**: It's quiet on the line—when I can't reach our weather service, I'll still share the latest typical conditions for this time of year if asked. The club enjoys Bermuda's subtropical climate year-round.`;
     }
     
+    // ENHANCED CONTEXT MEMORY - Safely inject conversation history into system prompt
+    try {
+      const memory = getRelevantContext(sessionId, userQuery);
+      
+      if (memory.hasContext && memory.relevantExchanges.length > 0) {
+        system += `\n\n**CONVERSATION CONTEXT FROM THIS SESSION:**\n`;
+        system += `Guest Name: ${memory.guestName || 'Not provided yet'}\n`;
+        system += `Topics Previously Discussed: ${memory.allTopics?.join(', ') || 'None'}\n\n`;
+        
+        // Add relevant past exchanges to reinforce memory
+        if (memory.relevantExchanges.length > 0) {
+          system += `Recent Relevant Exchanges:\n`;
+          memory.relevantExchanges.forEach((exchange, i) => {
+            const turnsAgo = exchange.turnsAgo || 0;
+            system += `${i + 1}. [${turnsAgo} turns ago] Guest asked about: ${exchange.sharedContexts.join(', ')}\n`;
+            system += `   Your response included: "${exchange.assistantResponse.substring(0, 150)}..."\n\n`;
+          });
+          system += `\nIMPORTANT: Build upon this prior context. Reference previous answers naturally when relevant. Don't repeat exact information already provided unless specifically asked.\n`;
+        }
+        
+        // Add explicit context tracking for key facts mentioned
+        const conversationFacts = [];
+        messages.forEach((msg, idx) => {
+          if (msg.role === 'assistant' && msg.content) {
+            // Extract key facts from previous assistant responses
+            if (msg.content.includes('8 Har-Tru clay tennis courts') || msg.content.includes('8 tennis courts')) {
+              conversationFacts.push('You told the guest we have 8 Har-Tru clay tennis courts');
+            }
+            if (msg.content.match(/\d{1,2}:\d{2}\s*[AP]M/)) {
+              const timeMatch = msg.content.match(/\d{1,2}:\d{2}\s*[AP]M/)[0];
+              conversationFacts.push(`You mentioned the time is ${timeMatch}`);
+            }
+            if (msg.content.includes('°C') && msg.content.includes('°F')) {
+              const tempMatch = msg.content.match(/(\d+)°C\s*\((\d+)°F\)/);
+              if (tempMatch) {
+                conversationFacts.push(`You mentioned the temperature is ${tempMatch[1]}°C (${tempMatch[2]}°F)`);
+              }
+            }
+          }
+        });
+        
+        if (conversationFacts.length > 0) {
+          system += `\n**KEY FACTS YOU'VE ALREADY SHARED IN THIS CONVERSATION:**\n`;
+          conversationFacts.forEach(fact => {
+            system += `- ${fact}\n`;
+          });
+          system += `\nWhen the guest references "the [thing] you mentioned" or asks follow-up questions, ALWAYS refer back to these specific facts you've already shared.\n`;
+        }
+        
+        // Add persistent facts from this session
+        if (timeData.success || weatherData.success) {
+          system += `\n**SESSION FACTS TO MAINTAIN CONSISTENCY:**\n`;
+          if (timeData.success) {
+            system += `- You've already mentioned the time is ${timeData.time}\n`;
+          }
+          if (weatherData.success) {
+            system += `- You've already mentioned the weather is ${weatherData.temperature}°C, ${weatherData.description}\n`;
+          }
+          system += `Reference these consistently throughout the conversation.\n`;
+        }
+      }
+    } catch (memoryError) {
+      safeLog('Memory Context', 'Error loading conversation memory:', memoryError.message);
+      // Continue without memory enhancement rather than crash
+    }
+
     // Check if this is an accommodation query and load detailed data
     if (detectAccommodationQuery(messages)) {
       const accommodationsData = await loadAccommodationsData();

@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Import mobile and cross-browser optimizations */
+@import './mobile-optimizations.css';
+
 @layer base {
   html {
     @apply scroll-smooth;
