@@ -10,7 +10,9 @@ const config: Config = {
     extend: {
       colors: {
         'cbc-blue': '#4b96b0',        // Official Coral Beach teal from website
-        'cbc-blue-dark': '#3a7c94',  // Darker shade for gradients
+        'cbc-blue-light': '#7bb3c4',  // Light pastel blue-green
+        'cbc-blue-lighter': '#a8d0dc', // Very light pastel blue-green
+        'cbc-blue-dark': '#3a7c94',   // Darker shade for gradients
         'cbc-sand': '#F5E6D3',
         'cbc-coral': '#FF6B6B',
       },

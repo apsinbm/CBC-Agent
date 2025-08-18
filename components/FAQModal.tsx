@@ -181,7 +181,7 @@ export default function FAQModal({ isOpen, onClose }: FAQModalProps) {
       <div className="absolute inset-x-4 inset-y-4 md:inset-x-auto md:inset-y-auto md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:w-[90%] md:max-w-5xl md:h-[85vh] bg-white rounded-2xl shadow-2xl flex flex-col overflow-hidden">
         
         {/* Header */}
-        <div className="bg-gradient-to-r from-cbc-blue to-cbc-blue-dark text-white p-4 md:p-6">
+        <div className="bg-gradient-to-r from-cbc-blue-light to-cbc-blue text-white p-4 md:p-6">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-xl md:text-2xl font-bold">Frequently Asked Questions</h2>
             <button
@@ -208,34 +208,53 @@ export default function FAQModal({ isOpen, onClose }: FAQModalProps) {
         </div>
         
         <div className="flex flex-1 overflow-hidden">
-          {/* Category Sidebar (Desktop) / Horizontal Scroll (Mobile) */}
+          {/* Category Sidebar (Desktop) / Dropdown (Mobile) */}
           {!searchQuery && (
             <div className={`${isMobile ? 'w-full border-b' : 'w-64 border-r flex flex-col'} border-gray-200 bg-gray-50`}>
-              <div className={`${isMobile ? 'flex overflow-x-auto p-2' : 'flex-1 overflow-y-auto p-4'}`}>
-                {categories.map(category => (
-                  <button
-                    key={category.id}
-                    onClick={() => setSelectedCategory(category.id)}
-                    className={`
-                      ${isMobile ? 'flex-shrink-0 px-4 py-2 mr-2' : 'w-full px-4 py-3 mb-2'}
-                      flex items-center gap-3 rounded-lg transition-colors text-left
-                      ${selectedCategory === category.id 
-                        ? 'bg-cbc-blue text-white' 
-                        : 'hover:bg-gray-200 text-gray-700'}
-                    `}
+              {isMobile ? (
+                /* Mobile: Dropdown Category Selector */
+                <div className="p-4">
+                  <label htmlFor="category-select" className="block text-sm font-medium text-gray-700 mb-2">
+                    Select Category
+                  </label>
+                  <select
+                    id="category-select"
+                    value={selectedCategory || ''}
+                    onChange={(e) => setSelectedCategory(e.target.value)}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue-light bg-white text-gray-900"
                   >
-                    <span className="text-xl">{iconMap[category.icon] || '📋'}</span>
-                    <span className={`font-medium ${isMobile ? 'whitespace-nowrap' : ''}`}>
-                      {category.title}
-                    </span>
-                  </button>
-                ))}
-              </div>
+                    {categories.map(category => (
+                      <option key={category.id} value={category.id}>
+                        {iconMap[category.icon] || '📋'} {category.title}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              ) : (
+                /* Desktop: Sidebar Categories */
+                <div className="flex-1 overflow-y-auto p-4">
+                  {categories.map(category => (
+                    <button
+                      key={category.id}
+                      onClick={() => setSelectedCategory(category.id)}
+                      className={`
+                        w-full px-4 py-3 mb-2 flex items-center gap-3 rounded-lg transition-colors text-left
+                        ${selectedCategory === category.id 
+                          ? 'bg-cbc-blue text-white' 
+                          : 'hover:bg-gray-200 text-gray-700'}
+                      `}
+                    >
+                      <span className="text-xl">{iconMap[category.icon] || '📋'}</span>
+                      <span className="font-medium">{category.title}</span>
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
           )}
           
           {/* FAQ Content */}
-          <div className="flex-1 overflow-y-auto p-4 md:p-6">
+          <div className="flex-1 overflow-y-auto p-3 md:p-6">
             {loading ? (
               <div className="flex items-center justify-center h-full">
                 <div className="text-gray-500">Loading FAQs...</div>
@@ -258,15 +277,19 @@ export default function FAQModal({ isOpen, onClose }: FAQModalProps) {
                   <div
                     key={item.id}
                     id={item.id}
-                    className="border border-gray-200 rounded-lg overflow-hidden"
+                    className="border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow"
                   >
                     <button
                       onClick={() => toggleExpanded(item.id)}
-                      className="w-full px-4 py-4 flex items-center justify-between hover:bg-gray-50 transition-colors text-left"
+                      className={`
+                        w-full px-3 py-4 md:px-4 md:py-4 flex items-center justify-between 
+                        hover:bg-cbc-blue-lighter/20 transition-colors text-left
+                        ${expandedItems.has(item.id) ? 'bg-cbc-blue-lighter/10' : ''}
+                      `}
                       aria-expanded={expandedItems.has(item.id)}
                       aria-controls={`answer-${item.id}`}
                     >
-                      <span className="font-medium text-gray-900 pr-4">
+                      <span className={`font-medium text-gray-900 pr-3 md:pr-4 ${isMobile ? 'text-sm leading-5' : ''}`}>
                         {item.question}
                       </span>
                       {expandedItems.has(item.id) ? (
@@ -279,24 +302,35 @@ export default function FAQModal({ isOpen, onClose }: FAQModalProps) {
                     {expandedItems.has(item.id) && (
                       <div
                         id={`answer-${item.id}`}
-                        className="px-4 pb-4 border-t border-gray-100"
+                        className="px-3 pb-4 md:px-4 md:pb-4 border-t border-cbc-blue-lighter/30 bg-cbc-blue-lighter/5"
                       >
-                        <div className="pt-3 flex justify-between items-start gap-4">
+                        <div className="pt-3">
                           <div 
-                            className="prose prose-sm max-w-none text-gray-700"
+                            className={`prose max-w-none text-gray-700 mb-3 ${isMobile ? 'prose-sm text-sm leading-6' : 'prose-sm'}`}
                             dangerouslySetInnerHTML={{ __html: item.answerHtml }}
                           />
-                          <button
-                            onClick={() => copyAnswer(item)}
-                            className="flex-shrink-0 p-2 hover:bg-gray-100 rounded-lg transition-colors"
-                            aria-label="Copy answer"
-                          >
-                            {copiedId === item.id ? (
-                              <Check className="w-4 h-4 text-green-600" />
-                            ) : (
-                              <Copy className="w-4 h-4 text-gray-500" />
-                            )}
-                          </button>
+                          <div className={`${isMobile ? 'flex justify-center' : 'flex justify-end'}`}>
+                            <button
+                              onClick={() => copyAnswer(item)}
+                              className={`
+                                ${isMobile ? 'px-4 py-2 text-sm' : 'p-2'} 
+                                hover:bg-gray-100 rounded-lg transition-colors flex items-center gap-2
+                              `}
+                              aria-label="Copy answer"
+                            >
+                              {copiedId === item.id ? (
+                                <>
+                                  <Check className="w-4 h-4 text-green-600" />
+                                  {isMobile && <span className="text-green-600 font-medium">Copied!</span>}
+                                </>
+                              ) : (
+                                <>
+                                  <Copy className="w-4 h-4 text-gray-500" />
+                                  {isMobile && <span className="text-gray-600">Copy Answer</span>}
+                                </>
+                              )}
+                            </button>
+                          </div>
                         </div>
                       </div>
                     )}
