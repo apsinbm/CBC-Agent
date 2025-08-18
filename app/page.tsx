@@ -230,7 +230,7 @@ export default function Home() {
             <div className="flex justify-between items-center">
               <div className="min-w-0 flex-1">
                 <h1 className="text-white font-bold text-[19.4px] sm:text-[21.8px] lg:text-[24.2px] truncate">Coral Beach & Tennis Club</h1>
-                <p className="text-white text-[14.5px] sm:text-[16.9px] opacity-90 font-semibold truncate">Guest Assistant Alonso at your service</p>
+                <p className="text-white text-[12px] sm:text-[16.9px] opacity-90 font-semibold truncate">Guest Assistant Alonso at your service</p>
               </div>
               <a 
                 href="https://www.coralbeachclub.com/" 

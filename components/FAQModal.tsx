@@ -89,7 +89,8 @@ export default function FAQModal({ isOpen, onClose }: FAQModalProps) {
         .then(data => {
           if (data.faqs && Array.isArray(data.faqs)) {
             setCategories(data.faqs)
-            if (data.faqs.length > 0 && !selectedCategory) {
+            // Always set the first category if no category is selected
+            if (data.faqs.length > 0) {
               setSelectedCategory(data.faqs[0].id)
             }
             
@@ -221,8 +222,11 @@ export default function FAQModal({ isOpen, onClose }: FAQModalProps) {
                     id="category-select"
                     value={selectedCategory || ''}
                     onChange={(e) => setSelectedCategory(e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue-light bg-white text-gray-900"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cbc-blue-light bg-white text-gray-900 text-base"
                   >
+                    {!selectedCategory && (
+                      <option value="">Choose a category...</option>
+                    )}
                     {categories.map(category => (
                       <option key={category.id} value={category.id}>
                         {iconMap[category.icon] || '📋'} {category.title}
