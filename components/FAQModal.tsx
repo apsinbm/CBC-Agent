@@ -88,31 +88,16 @@ export default function FAQModal({ isOpen, onClose }: FAQModalProps) {
         .then(res => res.json())
         .then(data => {
           if (data.faqs && Array.isArray(data.faqs)) {
-            // Transform simple FAQ array into categorized structure
-            const transformedFAQs: FAQItem[] = data.faqs.map((faq: any, index: number) => ({
-              id: `faq-${index}`,
-              question: faq.question,
-              answer: faq.answer,
-              answerHtml: faq.answer
-            }))
-            
-            // Create a single "General" category containing all FAQs
-            const generalCategory: FAQCategory = {
-              id: 'general',
-              title: 'General Questions',
-              icon: 'question-circle',
-              order: 1,
-              items: transformedFAQs
+            setCategories(data.faqs)
+            if (data.faqs.length > 0 && !selectedCategory) {
+              setSelectedCategory(data.faqs[0].id)
             }
-            
-            setCategories([generalCategory])
-            setSelectedCategory('general')
             
             // Check for deep link
             const hash = window.location.hash
             if (hash.startsWith('#faq=')) {
               const faqId = hash.substring(5)
-              handleDeepLink(faqId, [generalCategory])
+              handleDeepLink(faqId, data.faqs)
             }
           }
           setLoading(false)
