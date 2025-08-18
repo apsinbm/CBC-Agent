@@ -211,7 +211,7 @@ export default function FAQModal({ isOpen, onClose }: FAQModalProps) {
           {/* Category Sidebar (Desktop) / Horizontal Scroll (Mobile) */}
           {!searchQuery && (
             <div className={`${isMobile ? 'w-full border-b' : 'w-64 border-r'} border-gray-200 bg-gray-50`}>
-              <div className={`${isMobile ? 'flex overflow-x-auto p-2' : 'p-4'}`}>
+              <div className={`${isMobile ? 'flex overflow-x-auto p-2' : 'overflow-y-auto h-full p-4'}`}>
                 {categories.map(category => (
                   <button
                     key={category.id}
