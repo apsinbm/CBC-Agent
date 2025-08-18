@@ -210,8 +210,8 @@ export default function FAQModal({ isOpen, onClose }: FAQModalProps) {
         <div className="flex flex-1 overflow-hidden">
           {/* Category Sidebar (Desktop) / Horizontal Scroll (Mobile) */}
           {!searchQuery && (
-            <div className={`${isMobile ? 'w-full border-b' : 'w-64 border-r'} border-gray-200 bg-gray-50`}>
-              <div className={`${isMobile ? 'flex overflow-x-auto p-2' : 'overflow-y-auto h-full p-4'}`}>
+            <div className={`${isMobile ? 'w-full border-b' : 'w-64 border-r flex flex-col'} border-gray-200 bg-gray-50`}>
+              <div className={`${isMobile ? 'flex overflow-x-auto p-2' : 'flex-1 overflow-y-auto p-4'}`}>
                 {categories.map(category => (
                   <button
                     key={category.id}
