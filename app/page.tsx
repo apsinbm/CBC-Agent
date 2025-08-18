@@ -226,7 +226,7 @@ export default function Home() {
     <main className="flex min-h-screen bg-gradient-to-br from-cbc-sand/20 to-neutral-50">
       <div className="container mx-auto max-w-6xl p-2 sm:p-4">
         <div className="flex flex-col h-[100vh] sm:h-[calc(100vh-2rem)] bg-white sm:rounded-2xl shadow-xl overflow-hidden">
-          <header className="bg-gradient-to-r from-cbc-blue to-blue-700 text-white py-[1.8px] px-3 sm:py-[1.8px] sm:px-6">
+          <header className="bg-gradient-to-r from-cbc-blue to-cbc-blue-dark text-white py-[1.8px] px-3 sm:py-[1.8px] sm:px-6">
             <div className="flex justify-between items-center">
               <div className="min-w-0 flex-1">
                 <h1 className="text-white font-bold text-[19.4px] sm:text-[21.8px] lg:text-[24.2px] truncate">Coral Beach & Tennis Club</h1>

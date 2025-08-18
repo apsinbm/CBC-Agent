@@ -52,7 +52,7 @@ export default function ChatInput({
           aria-disabled={disabled || !value.trim()}
           className="px-4 py-2 sm:px-6 sm:py-3 bg-cbc-blue text-white rounded-xl font-medium
                    text-sm sm:text-base
-                   hover:bg-blue-700 active:bg-blue-800 transition-colors duration-200
+                   hover:bg-cbc-blue-dark active:bg-cbc-blue-dark transition-colors duration-200
                    disabled:opacity-50 disabled:cursor-not-allowed
                    focus:outline-none focus:ring-2 focus:ring-cbc-blue/20
                    touch-manipulation"

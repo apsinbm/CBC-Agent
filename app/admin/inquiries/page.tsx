@@ -175,7 +175,7 @@ export default function AdminInquiries() {
             )}
             <button
               type="submit"
-              className="w-full px-4 py-2 bg-cbc-blue text-white rounded-lg hover:bg-blue-700"
+              className="w-full px-4 py-2 bg-cbc-blue text-white rounded-lg hover:bg-cbc-blue-dark"
             >
               Login
             </button>

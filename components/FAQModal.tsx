@@ -181,7 +181,7 @@ export default function FAQModal({ isOpen, onClose }: FAQModalProps) {
       <div className="absolute inset-x-4 inset-y-4 md:inset-x-auto md:inset-y-auto md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:w-[90%] md:max-w-5xl md:h-[85vh] bg-white rounded-2xl shadow-2xl flex flex-col overflow-hidden">
         
         {/* Header */}
-        <div className="bg-gradient-to-r from-cbc-blue to-blue-700 text-white p-4 md:p-6">
+        <div className="bg-gradient-to-r from-cbc-blue to-cbc-blue-dark text-white p-4 md:p-6">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-xl md:text-2xl font-bold">Frequently Asked Questions</h2>
             <button

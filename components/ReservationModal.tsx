@@ -600,7 +600,7 @@ export default function ReservationModal({ isOpen, onClose }: ReservationModalPr
                 {step < 6 ? (
                   <button
                     onClick={nextStep}
-                    className="ml-auto px-3 py-2 sm:px-4 sm:py-2 bg-cbc-blue text-white rounded-lg hover:bg-blue-700 active:bg-blue-800 text-sm sm:text-base touch-manipulation"
+                    className="ml-auto px-3 py-2 sm:px-4 sm:py-2 bg-cbc-blue text-white rounded-lg hover:bg-cbc-blue-dark active:bg-cbc-blue-dark text-sm sm:text-base touch-manipulation"
                   >
                     Next
                   </button>
@@ -608,7 +608,7 @@ export default function ReservationModal({ isOpen, onClose }: ReservationModalPr
                   <button
                     onClick={handleSubmit}
                     disabled={isSubmitting || !formData.consent}
-                    className="ml-auto px-3 py-2 sm:px-4 sm:py-2 bg-cbc-blue text-white rounded-lg hover:bg-blue-700 active:bg-blue-800 disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base touch-manipulation"
+                    className="ml-auto px-3 py-2 sm:px-4 sm:py-2 bg-cbc-blue text-white rounded-lg hover:bg-cbc-blue-dark active:bg-cbc-blue-dark disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base touch-manipulation"
                   >
                     {isSubmitting ? 'Submitting...' : 'Submit Inquiry'}
                   </button>
@@ -632,7 +632,7 @@ export default function ReservationModal({ isOpen, onClose }: ReservationModalPr
               </p>
               <button
                 onClick={onClose}
-                className="px-4 py-2 bg-cbc-blue text-white rounded-lg hover:bg-blue-700"
+                className="px-4 py-2 bg-cbc-blue text-white rounded-lg hover:bg-cbc-blue-dark"
               >
                 Close
               </button>

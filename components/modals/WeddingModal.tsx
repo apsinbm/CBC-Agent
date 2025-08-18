@@ -360,7 +360,7 @@ export default function WeddingModal({ isOpen, onClose }: WeddingModalProps) {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="px-4 py-2 bg-cbc-blue text-white rounded-lg hover:bg-blue-700 active:bg-blue-800 disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base touch-manipulation"
+            className="px-4 py-2 bg-cbc-blue text-white rounded-lg hover:bg-cbc-blue-dark active:bg-cbc-blue-dark disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base touch-manipulation"
           >
             {isSubmitting ? 'Submitting...' : 'Submit Enquiry'}
           </button>
