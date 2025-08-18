@@ -208,7 +208,7 @@ export default function FAQModal({ isOpen, onClose }: FAQModalProps) {
           </div>
         </div>
         
-        <div className="flex flex-1 overflow-hidden">
+        <div className="flex flex-col md:flex-row flex-1 overflow-hidden">
           {/* Category Sidebar (Desktop) / Dropdown (Mobile) */}
           {!searchQuery && (
             <div className={`${isMobile ? 'w-full border-b' : 'w-64 border-r flex flex-col'} border-gray-200 bg-gray-50`}>
@@ -216,7 +216,7 @@ export default function FAQModal({ isOpen, onClose }: FAQModalProps) {
                 /* Mobile: Dropdown Category Selector */
                 <div className="p-4">
                   <label htmlFor="category-select" className="block text-sm font-medium text-gray-700 mb-2">
-                    Select Category
+                    Select a category from the dropdown menu
                   </label>
                   <select
                     id="category-select"
@@ -265,8 +265,12 @@ export default function FAQModal({ isOpen, onClose }: FAQModalProps) {
               </div>
             ) : displayItems.length === 0 ? (
               <div className="flex items-center justify-center h-full">
-                <div className="text-gray-500">
-                  {searchQuery ? 'No FAQs found matching your search.' : 'No FAQs available in this category.'}
+                <div className="text-gray-500 text-center px-4">
+                  {searchQuery 
+                    ? 'No FAQs found matching your search.' 
+                    : isMobile 
+                      ? 'Please select a category from the dropdown menu above to view FAQs.'
+                      : 'No FAQs available in this category.'}
                 </div>
               </div>
             ) : (
