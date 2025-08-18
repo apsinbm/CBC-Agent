@@ -24,7 +24,7 @@ A: We have 2 international-standard squash courts. Any respectful sports attire 
 
 A: Book courts through:
 - The "Book Courts & Lawn Sports" button in this app
-- Front desk: +1 (441) 239-7201
+- Front desk: +1 (441) 236-2233
 - Tennis Shop: +1 (441) 239-7216
 - Email: tennis@coralbeach.bm
 

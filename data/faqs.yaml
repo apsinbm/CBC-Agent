@@ -26,7 +26,7 @@ categories:
       
       - id: "reciprocal-clubs"
         q: "Which reciprocal clubs have agreements with Coral Beach?"
-        a: "We maintain reciprocal agreements with select private clubs worldwide. Please contact the front desk at +1 (441) 239-7201 for specific reciprocal club information and to verify your club's status."
+        a: "We maintain reciprocal agreements with select private clubs worldwide. Please contact the front desk at +1 (441) 236-2233 for specific reciprocal club information and to verify your club's status."
         tags: ["reciprocal", "partner clubs", "agreements", "international"]
         updatedAt: "2025-08-13"
       
@@ -56,7 +56,7 @@ categories:
       
       - id: "lost-and-found"
         q: "Where is lost and found?"
-        a: "Lost and found items are kept at the front desk. Contact them at +1 (441) 239-7201 or visit in person."
+        a: "Lost and found items are kept at the front desk. Contact them at +1 (441) 236-2233 or visit in person."
         tags: ["lost and found", "missing items", "front desk"]
         updatedAt: "2025-08-13"
 
@@ -113,7 +113,7 @@ categories:
       
       - id: "reservation-contact"
         q: "How do I make a reservation?"
-        a: "For reservations, email reservations@coralbeach.bm or call our toll-free number 888-300-7349. You can also contact the front desk at +1 (441) 239-7201."
+        a: "For reservations, email reservations@coralbeach.bm or call our toll-free number 888-300-7349. You can also contact the front desk at +1 (441) 236-2233."
         tags: ["reservations", "booking", "contact", "email", "phone"]
         updatedAt: "2025-08-13"
 
@@ -164,7 +164,7 @@ categories:
       
       - id: "dining-reservations"
         q: "How do I make dining reservations?"
-        a: "Dining reservations can be made via the club app or by contacting the front desk at +1 (441) 239-7201."
+        a: "Dining reservations can be made via the club app or by contacting the front desk at +1 (441) 236-2233."
         tags: ["reservations", "dining", "booking", "restaurant"]
         updatedAt: "2025-08-13"
       
@@ -221,7 +221,7 @@ categories:
       
       - id: "court-booking"
         q: "How do I book courts?"
-        a: "Book courts through this chatbot by selecting 'Book Courts & Lawn Sports', contact the front desk at +1 (441) 239-7201, or the Tennis Shop at +1 (441) 239-7216."
+        a: "Book courts through this chatbot by selecting 'Book Courts & Lawn Sports', contact the front desk at +1 (441) 236-2233, or the Tennis Shop at +1 (441) 239-7216."
         tags: ["booking", "reservations", "courts", "tennis", "sports"]
         updatedAt: "2025-08-13"
       
@@ -453,7 +453,7 @@ categories:
       
       - id: "contact-numbers"
         q: "What are the main contact numbers?"
-        a: "Main: +1 (441) 236-2233, Front Desk: +1 (441) 239-7201, Toll Free: 888-300-7349, Spa: +1 (441) 239-7222, Tennis Shop: +1 (441) 239-7216."
+        a: "Main/Front Desk: +1 (441) 236-2233, Toll Free: 888-300-7349, Spa: +1 (441) 239-7222, Tennis Shop: +1 (441) 239-7216."
         tags: ["phone numbers", "contact", "telephone", "front desk", "spa", "tennis"]
         updatedAt: "2025-08-13"
       
@@ -474,7 +474,7 @@ categories:
         
       - id: "babysitting-services"
         q: "Do you offer babysitting services?"
-        a: "Babysitting services can be arranged through the front desk. Please contact them at +1 (441) 239-7201 to discuss availability and arrangements."
+        a: "Babysitting services can be arranged through the front desk. Please contact them at +1 (441) 236-2233 to discuss availability and arrangements."
         tags: ["babysitting", "childcare", "services", "families"]
         updatedAt: "2025-08-14"
         
@@ -549,7 +549,7 @@ categories:
     faqs:
       - id: "island-recommendations"
         q: "Can you recommend things to do around Bermuda?"
-        a: "Our front desk team provides excellent local recommendations for attractions, tours, shopping, and activities throughout Bermuda. Contact them at +1 (441) 239-7201."
+        a: "Our front desk team provides excellent local recommendations for attractions, tours, shopping, and activities throughout Bermuda. Contact them at +1 (441) 236-2233."
         tags: ["concierge", "island activities", "recommendations", "tours", "sightseeing"]
         updatedAt: "2025-08-14"
         

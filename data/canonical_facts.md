@@ -28,7 +28,7 @@
 
 ## Primary Contacts
 - **Main**: +1 (441) 236-2233
-- **Front Desk**: +1 (441) 239-7201
+- **Front Desk**: +1 (441) 236-2233
 - **Reservations**: reservations@coralbeach.bm | 888-300-7349
 - **Spa**: spa@coralbeach.bm | +1 (441) 239-7222
 - **Tennis Shop**: tennis@coralbeach.bm | +1 (441) 239-7216

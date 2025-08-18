@@ -70,7 +70,7 @@ All rooms include private baths, TV, Wi-Fi, and daily housekeeping.
 ### Booking & Policies
 
 **Reservations:**
-- Contact: reservations@coralbeach.bm or +1 (441) 239-7201
+- Contact: reservations@coralbeach.bm or +1 (441) 236-2233
 - Toll-free: 888-300-7349
 - Members: Online booking available for rooms/suites
 - Cottages: Contact Reservations directly for availability
@@ -98,7 +98,7 @@ All rooms include private baths, TV, Wi-Fi, and daily housekeeping.
 2. NEVER claim availability - always say "please check with Reservations for current availability"
 3. Help guests understand which accommodations might suit their needs based on party size and preferences
 4. Mention member priority and 15% discount when relevant
-5. Always provide Reservations contact: reservations@coralbeach.bm or +1 (441) 239-7201
+5. Always provide Reservations contact: reservations@coralbeach.bm or +1 (441) 236-2233
 6. For cottage inquiries, note flexible bedroom configurations are available
 7. Emphasize that all rates include daily breakfast
 
@@ -494,7 +494,7 @@ The Club offers a variety of courts, lawns sports, and recreational activities f
 
 **Club Phone Numbers**:
 - **Main**: +1 (441) 236-2233
-- **Front Desk Direct**: +1 (441) 239-7201
+- **Front Desk Direct**: +1 (441) 236-2233
 - **Toll Free**: 888-300-7349  
 - **Spa**: +1 (441) 239-7222
 - **Tennis Shop**: +1 (441) 239-7216

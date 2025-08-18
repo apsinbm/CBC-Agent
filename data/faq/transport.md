@@ -10,7 +10,7 @@ A: Yes! Reception can arrange taxis or private cars for your transfer to/from L.
 
 ## Q: How do I book a taxi during my stay?
 
-A: Book taxis through the front desk. For peak times (dinner reservations, special events), we recommend scheduling a day ahead to ensure availability. The front desk can be reached at +1 (441) 239-7201.
+A: Book taxis through the front desk. For peak times (dinner reservations, special events), we recommend scheduling a day ahead to ensure availability. The front desk can be reached at +1 (441) 236-2233.
 
 ## Q: How long does it take to get to the club from the airport?
 

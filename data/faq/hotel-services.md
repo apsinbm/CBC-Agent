@@ -6,7 +6,7 @@ order: 2
 
 ## Q: What are the front desk hours?
 
-A: The front desk is open from 7:00 AM to 11:00 PM daily. You can reach them at +1 (441) 239-7201. From your room, simply dial "206".
+A: The front desk is open from 7:00 AM to 11:00 PM daily. You can reach them at +1 (441) 236-2233. From your room, simply dial "206".
 
 ## Q: What are check-in and check-out times?
 
@@ -34,7 +34,7 @@ A: The main clubhouse and many facilities are accessible. Some of our historic c
 
 ## Q: Do you have a lost and found?
 
-A: Yes, the lost and found is managed by the front desk. If you've misplaced something during your stay, please contact them at +1 (441) 239-7201.
+A: Yes, the lost and found is managed by the front desk. If you've misplaced something during your stay, please contact them at +1 (441) 236-2233.
 
 ## Q: Can you store luggage?
 

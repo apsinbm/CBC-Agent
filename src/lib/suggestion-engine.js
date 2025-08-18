@@ -316,7 +316,7 @@ export function getProactiveServiceSuggestions(userMessage, responseText) {
         messageLower.includes('price') || messageLower.includes('reserv')) {
       return [
         "I can help you submit a detailed accommodation inquiry - would you like me to guide you through that process?",
-        "Shall I connect you directly with reservations at reservations@coralbeach.bm or +1 (441) 239-7201?"
+        "Shall I connect you directly with reservations at reservations@coralbeach.bm or +1 (441) 236-2233?"
       ];
     }
     
