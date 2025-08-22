@@ -155,21 +155,50 @@ Dining experiences range from formal dinners on the Longtail Terrace with ocean 
 ## Signature Weekly Events (Summer)
 - **Tuesday**: Family Beach BBQ & Bonfire (~6–9 PM)
 - **Thursday**: Seafood Buffet (6:30–9 PM)  
-- **Sunday**: Family Night (6:30–8:30 PM)
-- **Monthly**: Curry Night (last Wednesday, 6:30–8:30 PM)
+- **Sunday**: Family Night (6:30–9:00 PM)
+  - **Adults**: $60 per person (effective August 23, 2025)
+  - **Children (5-11)**: $40 per child
+  - **Children (4 and under)**: Complimentary
+  - **Service Charge**: 17% added to final bill
+- **Monthly**: Curry Night (last Tuesday, 6:30–8:30 PM)
 - **Special Events**: Holiday celebrations, wine tastings, themed dinners
 - **Manager's Cocktail Party**: ~6–7 PM
 > For exact times, use live Club Calendar helper.
 
+## Current Week at Coral Beach (August 22-24, 2025)
+
+### Friday, August 22
+- **Beach**: CLOSED
+- **Longtail Terrace Breakfast**: 7:30 AM - 10:00 AM
+- **Beach Terrace Lunch**: CLOSED
+- **Afternoon Tea**: 4:00 - 5:00 PM
+- **Beach Terrace Dinner**: CLOSED
+- **Longtail Terrace Dinner**: 6:30 - 9:00 PM (Spanish Night)
+
+### Saturday, August 23
+- **Beach**: OPEN
+- **Longtail Terrace Breakfast**: 7:30 AM - 10:00 AM
+- **Beach Terrace Lunch**: 12:00 noon - 3:00 PM
+- **Afternoon Tea**: 4:00 - 5:00 PM
+- **Beach Terrace Dinner**: 5:30 PM - 9:00 PM
+- **Longtail Terrace Dinner**: 6:30 - 9:00 PM
+
+### Sunday, August 24
+- **Beach**: OPEN
+- **Longtail Terrace Breakfast**: 7:30 AM - 10:00 AM
+- **Beach Terrace Lunch**: 12:00 noon - 3:00 PM
+- **Afternoon Tea**: 4:00 - 5:00 PM
+- **Family Night Dinner**: 6:30 - 9:00 PM on Longtail Terrace
+
 ## August at Coral Beach - Micro-Reply
 *For ultra-quick responses to "What's on tonight?" or "Any events today?"*
 
-"Tonight at Coral Beach, enjoy dinner on the terrace and our summer favourites — weekly events include the Tuesday Family Beach BBQ, Thursday Seafood Buffet, and Sunday Family Night, plus this month's specials like Fish & Chip Night (Aug 15), Taco Tuesday (Aug 19), Spanish Night (Aug 22) and Curry Night (Aug 27). Yoga runs mornings, beach service is 10–6, and our August spa special is available daily."
+"Tonight at Coral Beach, enjoy dinner on the terrace and our summer favourites — weekly events include the Tuesday Family Beach BBQ, Thursday Seafood Buffet, and Sunday Family Night, plus this month's specials like Spanish Night (Aug 22) and Curry Night (Aug 27). Yoga runs mornings, beach service is 10–6, and our August spa special is available daily."
 
 ## August at Coral Beach - Quick Summary
 *For immediate, friendly responses about current August activities*
 
-"This August, Coral Beach & Tennis Club is alive with summer traditions and special events. Most mornings start with yoga on the lawn from 9–10 am, followed by Beach Terrace lunch from noon to 3 pm and afternoon tea from 4–5 pm. Evenings bring a mix of elegant dining and relaxed family gatherings — from Tuesday Family Beach BBQs and Thursday Seafood Buffets to Sunday Family Nights. Special themed evenings this month include Fish & Chip Night on August 15, Taco Tuesday on the 19th, Spanish Night on the 22nd, and Curry Night on the 27th. On August 22nd, join our private snorkelling charter aboard the Wyuna. Beach services run daily from 10 am to 6 pm, with food from the Jolly Trolly noon to 3 pm and bar service 11 am to 5 pm. Our August spa special — a foot scrub, hand massage, and face/scalp massage — is $110, available 9 am to 5 pm daily. Advance booking is encouraged for dining, spa, and guest passes during peak times."
+"This August, Coral Beach & Tennis Club is alive with summer traditions and special events. Most mornings start with yoga on the lawn from 9–10 am, followed by Beach Terrace lunch from noon to 3 pm and afternoon tea from 4–5 pm. Evenings bring a mix of elegant dining and relaxed family gatherings — from Tuesday Family Beach BBQs and Thursday Seafood Buffets to Sunday Family Nights. Special themed evenings this month include Spanish Night on the 22nd and Curry Night on the 27th. Beach services run daily from 10 am to 6 pm, with food from the Jolly Trolly noon to 3 pm and bar service 11 am to 5 pm. Our August spa special — a foot scrub, hand massage, and face/scalp massage — is $110, available 9 am to 5 pm daily. Advance booking is encouraged for dining, spa, and guest passes during peak times."
 
 ## August Seasonal Highlights (Detailed)
 **Daily Activities**:
@@ -181,13 +210,12 @@ Dining experiences range from formal dinners on the Longtail Terrace with ocean 
 - **Beach Bar**: 11 AM–5 PM
 
 **August Themed Evenings**:
-- Fish & Chip Night (August 15)
-- Taco Tuesday (August 19)  
 - Spanish Night (August 22)
 - Curry Night (August 27)
 
 **Special August Events**:
-- **Snorkelling Charter**: Private trip aboard the Wyuna (August 22)
+- **Spanish Night**: Friday, August 22 on Longtail Terrace
+- **Curry Night**: Tuesday, August 27
 - **Weekly Traditions**: Tuesday Family Beach BBQ, Thursday Seafood Buffet, Sunday Family Night
 
 **August Spa Special**: 
@@ -522,7 +550,11 @@ Paget, Bermuda PG04
 ## Guest Access & Fees
 
 **Guest Card Fee**: $50.00 per person, per day
-**Restrictions**: None specified
+**Guest Policy**:
+- Maximum 3 unaccompanied guests per membership
+- 48-hour advance notice required via email for guest cards
+- Guest cards subject to availability
+- Outside food and beverages not permitted
 **Member Priority**: Members receive booking priority and 15% room rate discount
 
 ## Live Info Integrations
