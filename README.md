@@ -289,7 +289,7 @@ CBC-Agent is ready for cloud deployment with feature flags for gradual rollout. 
    ```bash
    # Required Core Variables
    ANTHROPIC_API_KEY=sk-ant-api03-...
-   CLAUDE_API_MODEL=claude-3-5-sonnet-20240620
+   CLAUDE_API_MODEL=claude-sonnet-4-20250514
    NEXT_PUBLIC_URL=https://your-project.vercel.app
    NODE_ENV=production
    
@@ -503,7 +503,7 @@ See `SECURITY_NOTES.md` for detailed security operational guidance including:
 The following environment variables are configured in `.env.local`:
 
 - `ANTHROPIC_API_KEY` - Your Anthropic API key (required)
-- `CLAUDE_API_MODEL` - Primary Claude model (claude-3-5-sonnet-20240620)
+- `CLAUDE_API_MODEL` - Primary Claude model (claude-sonnet-4-20250514)
 - `OPENAI_API_KEY` - OpenAI API key for fallback (optional but recommended)
 - `OPENAI_FALLBACK_MODEL` - OpenAI fallback model (gpt-4o-mini)
 - `PRIMARY_PROVIDER` - Primary LLM provider (anthropic)

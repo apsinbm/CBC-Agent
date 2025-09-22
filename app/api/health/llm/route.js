@@ -10,7 +10,7 @@ export async function GET(request) {
   try {
     // Check primary provider (Anthropic)
     const hasAnthropicKey = process.env.ANTHROPIC_API_KEY && process.env.ANTHROPIC_API_KEY.length > 10;
-    const claudeModel = process.env.CLAUDE_API_MODEL || 'claude-3-5-sonnet-20240620';
+    const claudeModel = process.env.CLAUDE_API_MODEL || 'claude-sonnet-4-20250514';
     
     // Check fallback provider (OpenAI)
     const hasOpenAIKey = process.env.OPENAI_API_KEY && process.env.OPENAI_API_KEY.length > 10;

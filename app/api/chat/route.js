@@ -54,7 +54,7 @@ export async function POST(req) {
         }));
 
         const completion = await anthropic.messages.create({
-          model: process.env.CLAUDE_API_MODEL || 'claude-3-5-sonnet-20240620',
+          model: process.env.CLAUDE_API_MODEL || 'claude-sonnet-4-20250514',
           max_tokens: 1024,
           system: enhancedSystemPrompt,
           messages: claudeMessages

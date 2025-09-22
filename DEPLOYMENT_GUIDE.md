@@ -54,7 +54,7 @@ NEXT_PUBLIC_URL=https://your-domain.vercel.app
 
 # LLM Providers (Required)
 ANTHROPIC_API_KEY=sk-ant-api03-xxxxx
-CLAUDE_API_MODEL=claude-3-5-sonnet-20240620
+CLAUDE_API_MODEL=claude-sonnet-4-20250514
 
 # Optional Fallback
 OPENAI_API_KEY=sk-xxxxx
