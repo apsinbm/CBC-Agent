@@ -140,10 +140,17 @@ function getSmartActivitySuggestions(userMessage, weatherData, currentTime) {
   const current = weatherData.current;
   const isRainy = current.condition.includes('rain') || current.condition.includes('storm');
   const windSpeed = parseInt(current.wind_speed.match(/(\d+)/)?.[1] || '0');
-  const isWindy = windSpeed > 25;
   const tempNum = parseInt(current.temp.match(/(\d+)/)?.[1] || '20');
   const isCold = tempNum < 18;
   const isHot = tempNum > 30;
+
+  // Activity-specific wind thresholds (km/h)
+  const windThresholds = {
+    tennis: 74,    // 40 knots - courts are sheltered
+    beach: 74,     // 40 knots - swimming and beach activities
+    golf: 74,      // 40 knots - golf activities
+    outdoor: 74    // 40 knots - all outdoor activities
+  };
 
 
   // Check forecast for planning ahead
@@ -165,19 +172,34 @@ function getSmartActivitySuggestions(userMessage, weatherData, currentTime) {
   // Activity-specific suggestions
   for (const [activity, isRequested] of Object.entries(activities)) {
     if (isRequested) {
-      if (activity === 'tennis' && (isRainy || isWindy || isCold)) {
-        const alternatives = ACTIVITY_ALTERNATIVES.tennis[isRainy ? 'rainy' : isWindy ? 'windy' : 'cold'];
-        suggestions += `\n\n**Tennis Alternative**: Due to current ${isRainy ? 'rainy' : isWindy ? 'windy' : 'cool'} conditions, I'd recommend our ${alternatives.slice(0, 2).join(' or ')} instead. Our squash court is excellent for racquet sports when weather doesn't cooperate!`;
+      // Check activity-specific wind conditions
+      const isActivityWindy = windSpeed > windThresholds[activity];
+
+      if (activity === 'tennis' && (isRainy || isActivityWindy || isCold)) {
+        const alternatives = ACTIVITY_ALTERNATIVES.tennis[isRainy ? 'rainy' : isActivityWindy ? 'windy' : 'cold'];
+        const condition = isRainy ? 'rainy' : isActivityWindy ? `very windy (${windSpeed} km/h)` : 'cool';
+        suggestions += `\n\n**Tennis Alternative**: Due to current ${condition} conditions, I'd recommend our ${alternatives.slice(0, 2).join(' or ')} instead. Our squash court is excellent for racquet sports when weather doesn't cooperate!`;
       }
 
-      if (activity === 'beach' && (isRainy || isCold || isWindy)) {
+      if (activity === 'beach' && (isRainy || isCold || windSpeed > windThresholds.beach)) {
+        const isBeachWindy = windSpeed > windThresholds.beach;
         const alternatives = ACTIVITY_ALTERNATIVES.beach[isRainy ? 'rainy' : isCold ? 'cold' : 'windy'];
-        suggestions += `\n\n**Beach Alternative**: With current conditions, you might prefer our ${alternatives.slice(0, 2).join(' or ')}. When conditions improve, our pink sand beach will be waiting!`;
+        const condition = isRainy ? 'rainy' : isCold ? 'cool' : `windy (${windSpeed} km/h)`;
+        suggestions += `\n\n**Beach Alternative**: With current ${condition} conditions, you might prefer our ${alternatives.slice(0, 2).join(' or ')}. When conditions improve, our pink sand beach will be waiting!`;
       }
 
-      if (activity === 'outdoor' && (isRainy || isWindy || isCold)) {
-        const alternatives = ACTIVITY_ALTERNATIVES.outdoor[isRainy ? 'rainy' : isWindy ? 'windy' : 'cold'];
-        suggestions += `\n\n**Indoor Options**: Given the current weather, I'd suggest our ${alternatives.slice(0, 2).join(' or ')} for a comfortable experience.`;
+      if (activity === 'golf' && (isRainy || windSpeed > windThresholds.golf || isCold)) {
+        const isGolfWindy = windSpeed > windThresholds.golf;
+        const alternatives = ACTIVITY_ALTERNATIVES.golf[isRainy ? 'rainy' : isGolfWindy ? 'windy' : 'cold'];
+        const condition = isRainy ? 'rainy' : isGolfWindy ? `windy (${windSpeed} km/h)` : 'cool';
+        suggestions += `\n\n**Golf Alternative**: Due to current ${condition} conditions, I'd recommend our ${alternatives.slice(0, 2).join(' or ')} instead.`;
+      }
+
+      if (activity === 'outdoor' && (isRainy || windSpeed > windThresholds.outdoor || isCold)) {
+        const isOutdoorWindy = windSpeed > windThresholds.outdoor;
+        const alternatives = ACTIVITY_ALTERNATIVES.outdoor[isRainy ? 'rainy' : isOutdoorWindy ? 'windy' : 'cold'];
+        const condition = isRainy ? 'rainy' : isOutdoorWindy ? `windy (${windSpeed} km/h)` : 'cool';
+        suggestions += `\n\n**Indoor Options**: Given the current ${condition} weather, I'd suggest our ${alternatives.slice(0, 2).join(' or ')} for a comfortable experience.`;
       }
     }
   }
