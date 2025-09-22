@@ -117,6 +117,43 @@ export function mapOpenMeteoResponse(data, units = WEATHER_UNITS.METRIC, isStale
   // Wind direction
   const windDirection = current.wind_direction_10m ? degreesToCardinal(current.wind_direction_10m) : 'variable';
   
+  // Map hourly forecast (next 24 hours)
+  const hourly = (data.hourly && data.hourly.time) ?
+    data.hourly.time.slice(0, 24).map((time, index) => {
+      const hourTemp = data.hourly.temperature_2m?.[index];
+      const hourCode = data.hourly.weather_code?.[index] || 0;
+      const hourCondition = weatherDescriptions[hourCode] || 'partly cloudy';
+
+      return {
+        time: time,
+        temp: formatTemperature(units === WEATHER_UNITS.IMPERIAL ?
+          convertTemperature(hourTemp, 'celsius', 'fahrenheit') : hourTemp, units),
+        condition: hourCondition,
+        rain_chance: hourCode >= 51 && hourCode <= 82 ? 'high' :
+                    hourCode >= 45 && hourCode <= 48 ? 'medium' : 'low'
+      };
+    }) : [];
+
+  // Map daily forecast
+  const daily = (data.daily && data.daily.time) ?
+    data.daily.time.map((time, index) => {
+      const maxTemp = data.daily.temperature_2m_max?.[index];
+      const minTemp = data.daily.temperature_2m_min?.[index];
+      const dayCode = data.daily.weather_code?.[index] || 0;
+      const dayCondition = weatherDescriptions[dayCode] || 'partly cloudy';
+
+      return {
+        date: time,
+        temp_max: formatTemperature(units === WEATHER_UNITS.IMPERIAL ?
+          convertTemperature(maxTemp, 'celsius', 'fahrenheit') : maxTemp, units),
+        temp_min: formatTemperature(units === WEATHER_UNITS.IMPERIAL ?
+          convertTemperature(minTemp, 'celsius', 'fahrenheit') : minTemp, units),
+        condition: dayCondition,
+        rain_chance: dayCode >= 51 && dayCode <= 82 ? 'high' :
+                    dayCode >= 45 && dayCode <= 48 ? 'medium' : 'low'
+      };
+    }) : [];
+
   return {
     current: {
       temp: formatTemperature(temp, units),
@@ -125,8 +162,8 @@ export function mapOpenMeteoResponse(data, units = WEATHER_UNITS.METRIC, isStale
       wind_speed: `${formatWindSpeed(windSpeed, units)} from the ${windDirection}`,
       condition: condition
     },
-    hourly: [], // TODO: Implement hourly forecast if needed
-    daily: [],  // TODO: Implement daily forecast if needed
+    hourly: hourly,
+    daily: daily,
     issued_at: new Date().toISOString(),
     provider: 'Open-Meteo',
     is_stale: isStale

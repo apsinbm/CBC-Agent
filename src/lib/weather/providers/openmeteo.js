@@ -25,14 +25,26 @@ export class OpenMeteoProvider {
       longitude: lon.toString(),
       current: [
         'temperature_2m',
-        'relative_humidity_2m', 
+        'relative_humidity_2m',
         'wind_speed_10m',
         'wind_direction_10m',
         'weather_code'
       ].join(','),
+      hourly: [
+        'temperature_2m',
+        'relative_humidity_2m',
+        'wind_speed_10m',
+        'weather_code'
+      ].join(','),
+      daily: [
+        'temperature_2m_max',
+        'temperature_2m_min',
+        'weather_code'
+      ].join(','),
       temperature_unit: 'celsius', // Always get Celsius, convert if needed
       wind_speed_unit: 'kmh',
-      timezone: 'America/Halifax' // Bermuda timezone
+      timezone: 'America/Halifax', // Bermuda timezone
+      forecast_days: '3' // 3-day forecast
     });
     
     const url = `${this.baseUrl}/forecast?${params.toString()}`;
